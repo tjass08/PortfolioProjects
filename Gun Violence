@@ -1,0 +1,174 @@
+SELECT *
+FROM GunViolence
+
+SELECT fatalities, weapon_type
+FROM GunViolence
+WHERE weapon_type NOT LIKE '%auto%' AND  weapon_type NOT LIKE '%rifle%'
+ORDER BY fatalities DESC
+
+
+SELECT SUM(fatalities) AS Total_Deaths, location, weapon_type, year
+FROM GunViolence
+WHERE weapon_type LIKE '%auto%' 
+GROUP BY location, weapon_type, year
+ORDER BY 1 DESC  
+
+SELECT COUNT(*),SUM(fatalities) AS total_deaths, location
+FROM GunViolence
+WHERE weapon_type NOT LIKE '%auto%'
+GROUP BY location, weapon_type
+
+SELECT SUM(fatalities)
+FROM GunViolence
+WHERE weapon_type NOT LIKE '%auto%' AND weapon_type NOT LIKE '%rifle%'
+
+SELECT SUM(fatalities)
+FROM GunViolence
+WHERE weapon_type NOT LIKE '%auto%' AND  weapon_type NOT LIKE '%rifle%' AND  weapon_type NOT LIKE '%shotgun%'
+
+
+SELECT fatalities, weapon_type
+FROM GunViolence
+WHERE weapon_type LIKE '%one shotg%' 
+
+SELECT SUM(fatalities)
+FROM GunViolence
+WHERE weapon_type LIKE '%pist%'
+
+
+
+-------------------------------------------------------------------------------------------------
+-- Total fatalities from weapons that were purchased illegally
+SELECT SUM(fatalities) AS FatalitiesFromIllegalGuns
+FROM GunViolence
+WHERE weapons_obtained_legally = 'no'
+
+
+-- Total fatalities from weapons that were purchased legally
+SELECT SUM(fatalities) AS FatalitiesFromLegalGuns
+FROM GunViolence
+WHERE weapons_obtained_legally = 'yes'
+GROUP BY weapons_obtained_legally
+
+
+
+-- Location where the most shooting cases were involved
+SELECT COUNT(*) AS GunViolenceCases, location
+FROM GunViolence
+WHERE location LIKE '%Californi%'
+GROUP BY Location
+
+-- Total Cases in California
+SELECT SUM(GunViolenceCases) AS TotalCasesInCalifornia
+FROM(
+SELECT COUNT(*) AS GunViolenceCases, location
+FROM GunViolence
+WHERE location LIKE '%Californi%'
+GROUP BY Location) s
+
+
+--Settings Where Shootings Occurred 
+SELECT COUNT(*) as TotalShootings, LTRIM(Location1) as Setting
+FROM GunViolence
+GROUP BY location1
+ORDER BY TotalShootings DESC
+
+--Showing the total cases of shooters per race
+SELECT COUNT(*) AS CasesPerRace, Race
+FROM GunViolence
+GROUP BY race
+ORDER BY CasesPerRace DESC
+
+
+--Gun Violence Cases with most fatalities
+SELECT MAX(Fatalities) AS TotalCaseFatalities, Location
+FROM GunViolence
+GROUP BY location
+ORDER BY TotalCaseFatalities DESC
+
+
+--Average Age of Shooter
+SELECT AVG(age_of_shooter) AS AverageAgeOfShooter
+FROM GunViolence
+
+--Oldest and Youngest Shooters
+SELECT MAX(age_of_shooter) AS OldestShooter, MIN(age_of_shooter) AS YoungestShooter
+FROM GunViolence
+
+SELECT age_of_shooter, location, summary, fatalities, weapon_type, weapons_obtained_legally, where_obtained
+FROM GunViolence
+ORDER BY age_of_shooter 
+
+-- Genders of Shooter
+
+--FEMALE:
+SELECT COUNT(gender) FemaleShooters
+FROM GunViolence
+WHERE gender LIKE '%f%'
+
+--MALE:
+SELECT COUNT(gender) AS MaleShooters
+FROM GunViolence
+WHERE gender NOT LIKE '%f%'
+
+
+
+--Cases Per Year
+SELECT year, COUNT(*) AS CasesPerYear
+FROM GunViolence
+GROUP BY year
+
+--Total Cases in 1980s
+SELECT SUM(CasesPerYear) AS TotalCasesIn80s
+FROM(
+	SELECT year, COUNT(*) AS CasesPerYear
+	FROM GunViolence
+	WHERE year >= 1980 AND year < 1990
+	GROUP BY year) s
+
+--- Total Cases in 1990s
+SELECT SUM(CasesPerYear) AS TotalCasesIn90s
+FROM(
+	SELECT year, COUNT(*) AS CasesPerYear
+	FROM GunViolence
+	WHERE year >= 1990 AND year < 2000
+	GROUP BY year) s
+
+--Total Cases in 2000s
+SELECT SUM(CasesPerYear) AS TotalCasesIn2000s
+FROM(
+	SELECT year, COUNT(*) AS CasesPerYear
+	FROM GunViolence
+	WHERE year >= 2000 AND year < 2010
+	GROUP BY year) s
+
+--Total Cases in 2010s
+SELECT SUM(CasesPerYear) AS TotalCasesIn2010s
+FROM(
+	SELECT year, COUNT(*) AS CasesPerYear
+	FROM GunViolence
+	WHERE year >= 2010 AND year < 2020
+	GROUP BY year) s
+
+--Total Cases in 2020s
+SELECT SUM(CasesPerYear) AS TotalCasesIn2020s_AsOfApril2023
+FROM(
+	SELECT year, COUNT(*) AS CasesPerYear
+	FROM GunViolence
+	WHERE year >= 2020 AND year < 2030
+	GROUP BY year) s
+
+	-----------------------------------------------------------------------------------------------------
+
+SELECT *
+FROM #temp_Cases
+
+
+
+SELECT *
+FROM GunViolence
+
+
+--Creating View to store data for later visualizations
+
+Create View
