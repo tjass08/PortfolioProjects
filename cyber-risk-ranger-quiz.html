@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's Your Defender Style? | IBA Cyber Risk Ranger</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --iba-navy:  #003b71;
+            --iba-cyan:  #00a7e1;
+            --bg:        #000d1f;
+            --bg-card:   #001530;
+            --bg-raised: #001e40;
+            --ink:       #e8f2ff;
+            --ink-dim:   #6b92b8;
+            --ink-faint: #2d4d6a;
+            --border:    rgba(0,167,225,0.1);
+            --border-h:  rgba(0,167,225,0.32);
+            --hunter:    #F59E0B;
+            --architect: #10B981;
+            --guardian:  #8B5CF6;
+            --commander: #F43F5E;
+            --ease-out:   cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-inout: cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            overflow-x: hidden;
+            background-image:
+                linear-gradient(rgba(0,167,225,0.022) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,167,225,0.022) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+
+        /* HEADER */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 14px 32px;
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(0,13,31,0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .header-pulse {
+            width: 8px; height: 8px;
+            background: var(--iba-cyan); border-radius: 50%;
+            box-shadow: 0 0 10px var(--iba-cyan);
+            animation: pulse 2.4s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%,100% { opacity: 1; transform: scale(1); }
+            50%      { opacity: 0.35; transform: scale(0.6); }
+        }
+        .header-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase; color: #fff;
+        }
+        .header-org {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; color: var(--ink-faint);
+        }
+
+        /* HERO */
+        .hero {
+            position: relative; min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; overflow: hidden; padding: 80px 24px;
+        }
+        #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .hero::after {
+            content: ''; position: absolute;
+            bottom: 0; left: 0; right: 0; height: 200px;
+            background: linear-gradient(to bottom, transparent, var(--bg));
+            pointer-events: none; z-index: 1;
+        }
+        .hero-scan {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,167,225,0.018) 50%, transparent 100%);
+            background-size: 100% 90px;
+            animation: scanMove 10s linear infinite;
+            pointer-events: none; z-index: 1;
+        }
+        @keyframes scanMove {
+            from { background-position: 0 -90px; }
+            to   { background-position: 0 110vh; }
+        }
+
+        /* HUD corners */
+        .hud-corner {
+            position: absolute; z-index: 2;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; color: var(--ink-faint);
+            line-height: 1.75; pointer-events: none;
+        }
+        .hud-tl { top: 90px; left: 32px; }
+        .hud-tr { top: 90px; right: 32px; text-align: right; }
+        .hud-bl { bottom: 220px; left: 32px; }
+        .hud-br { bottom: 220px; right: 32px; text-align: right; }
+        .hud-live {
+            color: #4ade80;
+            animation: hudblink 2s step-end infinite;
+        }
+        .hud-val { color: rgba(0,167,225,0.55); }
+        @keyframes hudblink { 0%,100%{opacity:.6} 50%{opacity:.15} }
+
+        .hero-content { position: relative; z-index: 3; max-width: 680px; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            border: 1px solid rgba(0,167,225,0.22);
+            background: rgba(0,167,225,0.05);
+            color: var(--iba-cyan);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; letter-spacing: 0.06em;
+            padding: 7px 16px; border-radius: 6px; margin-bottom: 32px;
+            animation: entryUp 0.65s var(--ease-out) 0.2s both;
+        }
+        .badge-dot {
+            width: 6px; height: 6px;
+            background: var(--iba-cyan); border-radius: 50%;
+            box-shadow: 0 0 8px var(--iba-cyan); flex-shrink: 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(36px, 6vw, 64px); font-weight: 800;
+            line-height: 1.06; letter-spacing: -0.03em; color: #fff;
+            text-wrap: balance; margin-bottom: 22px;
+            animation: entryUp 0.65s var(--ease-out) 0.35s both;
+        }
+        .hero-title em { font-style: normal; color: var(--iba-cyan); }
+        .hero-desc {
+            font-size: 17px; color: var(--ink-dim); line-height: 1.68;
+            max-width: 430px; margin: 0 auto 38px;
+            animation: entryUp 0.65s var(--ease-out) 0.5s both;
+        }
+        .btn-cta {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--iba-cyan); color: #00111f;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px; font-weight: 700;
+            padding: 15px 40px; border-radius: 8px; border: none;
+            cursor: pointer; letter-spacing: 0.02em; text-decoration: none;
+            transition: background 0.2s var(--ease-out),
+                        box-shadow 0.2s var(--ease-out),
+                        transform 0.15s var(--ease-out);
+            box-shadow: 0 0 32px rgba(0,167,225,0.28);
+            animation: entryUp 0.65s var(--ease-out) 0.65s both;
+        }
+        .btn-cta:hover { background: #18bcf5; box-shadow: 0 0 52px rgba(0,167,225,0.45); transform: translateY(-2px); }
+        .btn-cta:active { transform: scale(0.97); }
+        .btn-cta:focus-visible { outline: 2px solid var(--iba-cyan); outline-offset: 3px; }
+
+        .scroll-hint {
+            position: absolute; bottom: 36px; left: 50%;
+            transform: translateX(-50%); z-index: 3;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            color: var(--ink-faint);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+            animation: entryFade 1s var(--ease-out) 1.4s both;
+        }
+        .scroll-arrow {
+            width: 16px; height: 16px;
+            border-right: 1.5px solid currentColor;
+            border-bottom: 1.5px solid currentColor;
+            transform: rotate(45deg);
+            animation: scrollBounce 1.6s ease-in-out infinite;
+        }
+        @keyframes scrollBounce {
+            0%,100% { transform: rotate(45deg) translateY(0); }
+            50%      { transform: rotate(45deg) translateY(5px); }
+        }
+        @keyframes entryUp {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to   { opacity: 1; transform: translateY(0)    scale(1); }
+        }
+        @keyframes entryFade { from { opacity: 0; } to { opacity: 1; } }
+
+        /* ARCHETYPES */
+        .archetypes-section { padding: 100px 24px 80px; max-width: 1060px; margin: 0 auto; }
+        .section-header { margin-bottom: 52px; text-align: center; }
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(26px, 3.5vw, 40px); font-weight: 800;
+            letter-spacing: -0.025em; color: #fff;
+            text-wrap: balance; margin-bottom: 12px;
+        }
+        .section-sub {
+            font-size: 15px; color: var(--ink-dim); line-height: 1.65;
+            max-width: 460px; margin: 0 auto;
+        }
+
+        /* Bento asymmetric grid */
+        .archetype-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 52px;
+        }
+        .ac-hunter    { grid-column: span 2; }
+        .ac-architect { grid-column: span 1; }
+        .ac-guardian  { grid-column: span 1; }
+        .ac-commander { grid-column: span 2; }
+
+        .archetype-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px 26px;
+            position: relative; overflow: hidden;
+            opacity: 0;
+            transform: translateY(28px) scale(0.98);
+            transition: opacity 0.55s var(--ease-out),
+                        transform 0.55s var(--ease-out),
+                        border-color 0.2s,
+                        box-shadow 0.2s;
+        }
+        .archetype-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: var(--ac-color, var(--iba-cyan)); opacity: 0.7;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.45s var(--ease-out);
+        }
+        .archetype-card.visible { opacity: 1; transform: translateY(0) scale(1); }
+        .archetype-card.visible::before { transform: scaleX(1); }
+        .archetype-card:nth-child(2) { transition-delay: 0.07s; }
+        .archetype-card:nth-child(3) { transition-delay: 0.14s; }
+        .archetype-card:nth-child(4) { transition-delay: 0.21s; }
+        .archetype-card:hover { border-color: var(--ac-color, var(--border-h)); box-shadow: 0 8px 28px rgba(0,0,0,0.35); }
+
+        .ac-hunter    { --ac-color: var(--hunter); }
+        .ac-architect { --ac-color: var(--architect); }
+        .ac-guardian  { --ac-color: var(--guardian); }
+        .ac-commander { --ac-color: var(--commander); }
+
+        .ac-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 18px;
+        }
+        .ac-hunter   .ac-icon  { background: rgba(245,158,11,0.1); }
+        .ac-architect .ac-icon { background: rgba(16,185,129,0.1); }
+        .ac-guardian .ac-icon  { background: rgba(139,92,246,0.1); }
+        .ac-commander .ac-icon { background: rgba(244,63,94,0.1); }
+
+        .ac-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 17px; font-weight: 700;
+            letter-spacing: -0.01em; margin-bottom: 8px;
+            color: var(--ac-color);
+        }
+        .ac-blurb { font-size: 13px; color: var(--ink-dim); line-height: 1.62; }
+        .ac-hunter .ac-name, .ac-commander .ac-name { font-size: 19px; }
+        .ac-hunter .ac-blurb, .ac-commander .ac-blurb { font-size: 14px; }
+
+        .cta-row { text-align: center; }
+
+        /* QUIZ */
+        #quiz-section {
+            max-width: 580px; margin: 0 auto;
+            padding: 0 16px 120px; display: none;
+        }
+        #quiz-section.visible { display: block; }
+        .quiz-header { text-align: center; margin-bottom: 28px; }
+        .quiz-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; color: var(--iba-cyan);
+            letter-spacing: 0.08em; text-transform: uppercase;
+        }
+
+        .screen { display: none; }
+        .screen.active { display: block; animation: entryUp 0.3s var(--ease-out); }
+
+        .progress-wrap { margin-bottom: 18px; }
+        .progress-meta {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 10px;
+        }
+        .progress-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; color: var(--ink-faint); letter-spacing: 0.05em;
+        }
+        .progress-pct {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; color: var(--iba-cyan);
+        }
+        .progress-track {
+            background: rgba(255,255,255,0.04);
+            height: 2px; border-radius: 100px; position: relative;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, var(--iba-navy), var(--iba-cyan));
+            height: 100%; border-radius: 100px;
+            transition: width 0.5s var(--ease-out);
+            position: relative;
+        }
+        .progress-fill::after {
+            content: ''; position: absolute;
+            right: -1px; top: -2px;
+            width: 6px; height: 6px;
+            background: var(--iba-cyan); border-radius: 50%;
+            box-shadow: 0 0 10px var(--iba-cyan);
+        }
+
+        .question-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px; padding: 32px;
+            position: relative; overflow: hidden;
+        }
+        .question-card.entering { animation: qEnter 0.38s var(--ease-out); }
+        @keyframes qEnter {
+            from { opacity: 0; clip-path: inset(0 10% 0 0); transform: translateX(14px); }
+            to   { opacity: 1; clip-path: inset(0 0   0 0); transform: translateX(0); }
+        }
+        .q-scan {
+            position: absolute; left: 0; right: 0; top: -2px; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--iba-cyan), transparent);
+            animation: scanLine 0.55s var(--ease-out) forwards;
+            pointer-events: none; z-index: 5;
+        }
+        @keyframes scanLine {
+            from { top: -2px; opacity: 0.9; }
+            to   { top: 100%; opacity: 0; }
+        }
+
+        .question-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px; font-weight: 700;
+            letter-spacing: -0.01em; line-height: 1.42; color: #fff;
+            margin-bottom: 26px; min-height: 54px;
+        }
+        .q-cursor {
+            display: inline-block; width: 2px; height: 1em;
+            background: var(--iba-cyan); vertical-align: text-bottom;
+            margin-left: 1px;
+            animation: cursorBlink 0.7s step-end infinite;
+        }
+        .q-cursor.done { display: none; }
+        @keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        .options-list { display: flex; flex-direction: column; gap: 8px; }
+
+        .option-btn {
+            position: relative; display: flex; align-items: flex-start; gap: 14px;
+            text-align: left;
+            background: rgba(0,20,48,0.6);
+            border: 1px solid rgba(0,167,225,0.08);
+            border-radius: 10px; padding: 14px 16px;
+            cursor: pointer; overflow: hidden;
+            opacity: 0;
+            transform: translateX(-10px) scale(0.98);
+            animation: optEnter 0.3s var(--ease-out) forwards;
+            transition: border-color 0.2s var(--ease-out),
+                        transform 0.15s var(--ease-out),
+                        box-shadow 0.2s;
+            width: 100%;
+        }
+        @keyframes optEnter { to { opacity: 1; transform: translateX(0) scale(1); } }
+
+        /* Left accent bar */
+        .option-btn::before {
+            content: ''; position: absolute;
+            left: 0; top: 0; bottom: 0; width: 3px;
+            border-radius: 10px 0 0 10px;
+            background: var(--opt-color, var(--iba-cyan));
+            transform: scaleY(0); transform-origin: center;
+            transition: transform 0.25s var(--ease-out);
+        }
+        /* Bg fill */
+        .option-btn::after {
+            content: ''; position: absolute; inset: 0;
+            background: var(--opt-color, var(--iba-cyan)); opacity: 0;
+            transition: opacity 0.2s var(--ease-out);
+        }
+        .option-btn:hover { border-color: var(--opt-color, var(--border-h)); transform: translateX(3px); }
+        .option-btn:hover::before { transform: scaleY(1); }
+        .option-btn:hover::after  { opacity: 0.04; }
+        .option-btn:active { transform: scale(0.97); }
+        .option-btn:focus-visible { outline: 2px solid var(--iba-cyan); outline-offset: 2px; }
+
+        .option-btn.selected { border-color: var(--opt-color, var(--iba-cyan)); }
+        .option-btn.selected::before { transform: scaleY(1); }
+        .option-btn.selected::after  { opacity: 0.07; }
+        .option-btn.dimmed { opacity: 0.32; }
+
+        .opt-letter {
+            flex-shrink: 0; width: 26px; height: 26px; border-radius: 6px;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+            color: var(--ink-dim); position: relative; z-index: 1; margin-top: 1px;
+            transition: background 0.2s var(--ease-out), color 0.2s, border-color 0.2s;
+        }
+        .option-btn:hover .opt-letter  { background: rgba(255,255,255,0.08); color: #fff; }
+        .option-btn.selected .opt-letter {
+            background: var(--opt-color, var(--iba-cyan));
+            border-color: var(--opt-color, var(--iba-cyan));
+            color: #000;
+        }
+        .opt-text {
+            font-size: 14px; color: var(--ink-dim); line-height: 1.55;
+            position: relative; z-index: 1;
+            transition: color 0.2s;
+        }
+        .option-btn:hover .opt-text   { color: var(--ink); }
+        .option-btn.selected .opt-text { color: #fff; }
+
+        .ripple {
+            position: absolute; border-radius: 50%;
+            width: 80px; height: 80px;
+            margin-left: -40px; margin-top: -40px;
+            background: var(--opt-color, var(--iba-cyan));
+            opacity: 0; pointer-events: none;
+            animation: rippleOut 0.55s var(--ease-out) forwards;
+        }
+        @keyframes rippleOut {
+            from { transform: scale(0); opacity: 0.28; }
+            to   { transform: scale(6); opacity: 0; }
+        }
+
+        /* RESULT */
+        .result-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; overflow: hidden; margin-bottom: 12px;
+            animation: entryUp 0.4s var(--ease-out);
+        }
+        .result-header {
+            padding: 32px 32px 24px;
+            border-bottom: 1px solid rgba(0,167,225,0.08);
+        }
+        .result-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--ink-faint); margin-bottom: 8px;
+        }
+        .result-archetype {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px; font-weight: 800;
+            letter-spacing: -0.025em; line-height: 1.1;
+            margin-bottom: 16px;
+        }
+        .result-archetype.glitch { animation: glitch 0.38s var(--ease-out); }
+        @keyframes glitch {
+            0%   { clip-path: inset(40% 0 61% 0); transform: translate(-3px); }
+            25%  { clip-path: inset(10% 0 80% 0); transform: translate(3px); }
+            50%  { clip-path: inset(60% 0 20% 0); transform: translate(-2px); }
+            75%  { clip-path: inset(30% 0 50% 0); transform: translate(2px); }
+            100% { clip-path: inset(0   0 0   0); transform: translate(0); }
+        }
+        .result-desc { font-size: 14px; color: var(--ink-dim); line-height: 1.72; }
+        .result-body { padding: 22px 32px 28px; }
+
+        .score-section { margin-bottom: 22px; }
+        .score-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--ink-faint); margin-bottom: 14px;
+        }
+        .score-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .score-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; color: var(--ink-dim); width: 82px; flex-shrink: 0;
+        }
+        .score-track {
+            flex: 1; height: 4px; background: rgba(255,255,255,0.05);
+            border-radius: 100px; overflow: hidden;
+        }
+        .score-fill {
+            height: 100%; border-radius: 100px;
+            background: var(--score-color); width: 0;
+            transition: width 0.7s var(--ease-out);
+        }
+        .score-fill.animated { width: var(--score-pct); }
+        .score-pct-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; color: var(--ink-faint);
+            width: 30px; text-align: right; flex-shrink: 0;
+        }
+
+        .tip-box {
+            background: rgba(0,167,225,0.04); border: 1px solid rgba(0,167,225,0.1);
+            border-radius: 10px; padding: 14px 16px;
+            font-size: 13px; color: var(--ink-dim); line-height: 1.65;
+        }
+        .tip-box strong { color: #fff; font-weight: 600; }
+
+        .theme-hunter    .result-header { border-top: 2px solid var(--hunter); }
+        .theme-hunter    .result-archetype { color: var(--hunter); }
+        .theme-architect .result-header { border-top: 2px solid var(--architect); }
+        .theme-architect .result-archetype { color: var(--architect); }
+        .theme-guardian  .result-header { border-top: 2px solid var(--guardian); }
+        .theme-guardian  .result-archetype { color: var(--guardian); }
+        .theme-commander .result-header { border-top: 2px solid var(--commander); }
+        .theme-commander .result-archetype { color: var(--commander); }
+
+        .result-actions { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+        .btn-linkedin {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: #0A66C2; color: #fff;
+            font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 600;
+            padding: 13px 24px; border-radius: 8px; border: none; cursor: pointer;
+            transition: background 0.2s var(--ease-out), transform 0.15s var(--ease-out);
+        }
+        .btn-linkedin:hover  { background: #0856a0; transform: translateY(-1px); }
+        .btn-linkedin:active { transform: scale(0.97); }
+        .btn-linkedin:focus-visible { outline: 2px solid #0A66C2; outline-offset: 3px; }
+
+        .btn-retake {
+            display: block; width: 100%; text-align: center;
+            background: transparent; color: var(--ink-dim);
+            font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;
+            padding: 12px 24px; border-radius: 8px; border: 1px solid var(--border);
+            cursor: pointer;
+            transition: border-color 0.2s var(--ease-out), color 0.2s, background 0.2s;
+        }
+        .btn-retake:hover  { border-color: var(--border-h); color: var(--ink); background: rgba(0,167,225,0.03); }
+        .btn-retake:active { transform: scale(0.97); }
+        .btn-retake:focus-visible { outline: 2px solid var(--iba-cyan); outline-offset: 3px; }
+
+        .subscribe-nudge {
+            background: linear-gradient(135deg, #001530, #002d5a);
+            border: 1px solid rgba(0,167,225,0.14);
+            border-radius: 14px; padding: 28px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .subscribe-nudge::before {
+            content: ''; position: absolute; top: 0; left: 25%; right: 25%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--iba-cyan), transparent);
+            opacity: 0.4;
+        }
+        .nudge-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px;
+        }
+        .subscribe-nudge p { font-size: 13px; color: var(--ink-faint); line-height: 1.6; margin-bottom: 18px; }
+        .btn-subscribe {
+            display: inline-block; background: var(--iba-cyan); color: #00111f;
+            font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700;
+            padding: 10px 28px; border-radius: 7px; text-decoration: none;
+            transition: background 0.2s var(--ease-out), transform 0.15s var(--ease-out);
+        }
+        .btn-subscribe:hover  { background: #18bcf5; transform: translateY(-1px); }
+        .btn-subscribe:active { transform: scale(0.97); }
+        .btn-subscribe:focus-visible { outline: 2px solid var(--iba-cyan); outline-offset: 3px; }
+
+        /* BADGE SECTION */
+        .badge-section { margin-bottom: 12px; }
+        .badge-wrap {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px; padding: 24px;
+        }
+        .badge-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--ink-faint); margin-bottom: 14px;
+        }
+        .badge-preview {
+            border-radius: 10px; overflow: hidden;
+            margin-bottom: 16px; line-height: 0;
+        }
+        .badge-preview img { width: 100%; display: block; border-radius: 10px; }
+        .badge-hint {
+            font-size: 12px; color: var(--ink-faint);
+            line-height: 1.55; text-align: center; margin-top: 12px;
+        }
+        .btn-download {
+            width: 100%;
+            display: flex; align-items: center; justify-content: center; gap: 9px;
+            background: rgba(0,167,225,0.07); color: var(--iba-cyan);
+            font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700;
+            padding: 13px 20px; border-radius: 8px;
+            border: 1px solid rgba(0,167,225,0.18); cursor: pointer;
+            transition: background 0.2s var(--ease-out),
+                        border-color 0.2s var(--ease-out),
+                        transform 0.15s var(--ease-out);
+        }
+        .btn-download:hover  { background: rgba(0,167,225,0.14); border-color: rgba(0,167,225,0.35); transform: translateY(-1px); }
+        .btn-download:active { transform: scale(0.97); }
+        .btn-download:focus-visible { outline: 2px solid var(--iba-cyan); outline-offset: 3px; }
+
+        footer {
+            border-top: 1px solid rgba(0,167,225,0.06);
+            padding: 24px 32px; text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; color: var(--ink-faint);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .archetype-grid { grid-template-columns: repeat(2, 1fr); }
+            .ac-hunter, .ac-architect, .ac-guardian, .ac-commander { grid-column: span 1; }
+        }
+        @media (max-width: 620px) {
+            .archetype-grid { grid-template-columns: 1fr; }
+            .hud-corner { display: none; }
+            .question-card { padding: 24px 18px; }
+            .result-header, .result-body { padding-left: 20px; padding-right: 20px; }
+            .result-archetype { font-size: 26px; }
+            .site-header { padding: 12px 18px; }
+            .hero-title { font-size: 32px; }
+        }
+        @media (hover: none) {
+            .option-btn:hover { transform: none; border-color: rgba(0,167,225,0.08); }
+            .option-btn:hover::before { transform: scaleY(0); }
+            .option-btn:hover::after  { opacity: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-left">
+        <div class="header-pulse"></div>
+        <span class="header-brand">Cyber Risk Ranger</span>
+    </div>
+    <span class="header-org">Iowa Bankers Association</span>
+</header>
+
+<section class="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-scan" aria-hidden="true"></div>
+
+    <div class="hud-corner hud-tl" aria-hidden="true">
+        <span>SYS.STATUS &nbsp;<span class="hud-live">ONLINE</span></span>
+        <span class="hud-val">BUILD &nbsp;Q3-2026</span>
+    </div>
+    <div class="hud-corner hud-tr" aria-hidden="true">
+        <span class="hud-val">SECTOR &nbsp;BANKING.IA</span>
+        <span class="hud-val">PROTOCOL &nbsp;CRR.ASSESS</span>
+    </div>
+    <div class="hud-corner hud-bl" aria-hidden="true">
+        <span class="hud-val">0x3F4A&#xB7;B2C1</span>
+    </div>
+    <div class="hud-corner hud-br" aria-hidden="true">
+        <span class="hud-val">IBA&#xB7;Q3&#xB7;2026</span>
+    </div>
+
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="badge-dot"></span>
+            Q3 2026
+        </div>
+        <h1 class="hero-title">What's Your<br><em>Defender Style?</em></h1>
+        <p class="hero-desc">Six questions. One result that tells you something true about how you think about security.</p>
+        <a href="#archetypes" class="btn-cta">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Start the Assessment
+        </a>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-arrow"></div>
+    </div>
+</section>
+
+<section class="archetypes-section" id="archetypes">
+    <div class="section-header">
+        <h2 class="section-title">Four Defenders. One Mindset.</h2>
+        <p class="section-sub">Every banking IT professional leads with a dominant security approach. Six questions to find yours.</p>
+    </div>
+
+    <div class="archetype-grid">
+        <div class="archetype-card ac-hunter">
+            <div class="ac-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <div class="ac-name">The Threat Hunter</div>
+            <div class="ac-blurb">You think like the adversary. While others wait for alerts, you go looking. You know staying ahead is the only real edge.</div>
+        </div>
+        <div class="archetype-card ac-architect">
+            <div class="ac-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <div class="ac-name">The Resilience Architect</div>
+            <div class="ac-blurb">Your philosophy is when, not if. You build to survive what prevention can't catch.</div>
+        </div>
+        <div class="archetype-card ac-guardian">
+            <div class="ac-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="ac-name">The Compliance Guardian</div>
+            <div class="ac-blurb">You speak board, audit, and regulator. Governance is your foundation, not your paperwork.</div>
+        </div>
+        <div class="archetype-card ac-commander">
+            <div class="ac-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F43F5E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <div class="ac-name">The Incident Commander</div>
+            <div class="ac-blurb">When something goes wrong, the room looks to you. You prepare so others don't have to guess when everything is moving fast.</div>
+        </div>
+    </div>
+
+    <div class="cta-row">
+        <button class="btn-cta" onclick="startQuiz()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Find My Defender Style
+        </button>
+    </div>
+</section>
+
+<section id="quiz-section">
+    <div class="quiz-header">
+        <div class="quiz-label">Cyber Risk Ranger &nbsp;/&nbsp; Defender Assessment</div>
+    </div>
+
+    <div class="screen" id="screen-question">
+        <div class="progress-wrap">
+            <div class="progress-meta">
+                <span class="progress-label" id="q-counter">Question 1 of 6</span>
+                <span class="progress-pct" id="q-pct">0%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+            </div>
+        </div>
+        <div class="question-card" id="question-card">
+            <p class="question-text" id="q-text"></p>
+            <div class="options-list" id="options-list"></div>
+        </div>
+    </div>
+
+    <div class="screen" id="screen-result">
+        <div class="result-card" id="result-card">
+            <div class="result-header">
+                <div class="result-label">Your Defender Style</div>
+                <div class="result-archetype" id="result-title"></div>
+                <p class="result-desc" id="result-desc"></p>
+            </div>
+            <div class="result-body">
+                <div class="score-section">
+                    <div class="score-title">Profile Breakdown</div>
+                    <div id="score-bars"></div>
+                </div>
+                <div class="tip-box" id="result-tip"></div>
+            </div>
+        </div>
+        <div class="badge-section" id="badge-section" style="display:none;">
+            <div class="badge-wrap">
+                <div class="badge-label">Your LinkedIn Badge</div>
+                <div class="badge-preview">
+                    <img id="badge-img" alt="Your Defender Style Badge" />
+                </div>
+                <button class="btn-download" onclick="downloadBadge()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download Badge PNG
+                </button>
+                <p class="badge-hint">Download your badge, then attach it to your LinkedIn post to share your Defender Style.</p>
+            </div>
+        </div>
+        <div class="result-actions">
+            <button class="btn-linkedin" onclick="shareLinkedIn()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                Share Your Result on LinkedIn
+            </button>
+            <button class="btn-retake" onclick="retakeQuiz()">Retake the Assessment</button>
+        </div>
+        <div class="subscribe-nudge">
+            <div class="nudge-title">Get the Cyber Risk Ranger every quarter.</div>
+            <p>The Cyber Risk Ranger newsletter covering threats, tools, and trends that matter to Iowa banking IT professionals.</p>
+            <a href="mailto:editor@iowabankers.com" class="btn-subscribe">Subscribe to the Newsletter</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    Iowa Bankers Association &nbsp;&middot;&nbsp; 8901 Northpark Drive, Johnston, IA 50131 &nbsp;&middot;&nbsp; iowabankers.com
+</footer>
+
+<script>
+/* CANVAS — mouse-attracted particle network */
+(function () {
+    var canvas = document.getElementById('hero-canvas');
+    var ctx    = canvas.getContext('2d');
+    var pts = [], W, H;
+    var mouse = { x: -9999, y: -9999 };
+
+    function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+
+    function Pt() {
+        this.x  = Math.random() * W;
+        this.y  = Math.random() * H;
+        this.vx = (Math.random() - 0.5) * 0.34;
+        this.vy = (Math.random() - 0.5) * 0.34;
+        this.r  = Math.random() * 1.5 + 0.4;
+        this.a  = Math.random() * 0.5 + 0.14;
+    }
+    Pt.prototype.tick = function () {
+        var dx = mouse.x - this.x, dy = mouse.y - this.y;
+        var d  = Math.sqrt(dx * dx + dy * dy);
+        if (d < 170 && d > 0) { this.vx += dx / d * 0.022; this.vy += dy / d * 0.022; }
+        this.vx *= 0.984; this.vy *= 0.984;
+        var spd = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        if (spd > 1.6) { this.vx *= 1.6 / spd; this.vy *= 1.6 / spd; }
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0) this.x = W; if (this.x > W) this.x = 0;
+        if (this.y < 0) this.y = H; if (this.y > H) this.y = 0;
+    };
+
+    function init() {
+        resize(); pts = [];
+        var n = Math.min(95, Math.floor((W * H) / 9000));
+        for (var i = 0; i < n; i++) pts.push(new Pt());
+    }
+
+    var MAX = 140;
+    function frame() {
+        ctx.clearRect(0, 0, W, H);
+        for (var i = 0; i < pts.length; i++) {
+            pts[i].tick();
+            ctx.beginPath();
+            ctx.arc(pts[i].x, pts[i].y, pts[i].r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0,167,225,' + pts[i].a + ')';
+            ctx.fill();
+            for (var j = i + 1; j < pts.length; j++) {
+                var dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+                var dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MAX) {
+                    ctx.beginPath();
+                    ctx.moveTo(pts[i].x, pts[i].y);
+                    ctx.lineTo(pts[j].x, pts[j].y);
+                    ctx.strokeStyle = 'rgba(0,120,200,' + (1 - dist / MAX) * 0.19 + ')';
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(frame);
+    }
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        canvas.addEventListener('mousemove', function (e) {
+            var r = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - r.left;
+            mouse.y = e.clientY - r.top;
+        });
+        canvas.addEventListener('mouseleave', function () { mouse.x = -9999; mouse.y = -9999; });
+        window.addEventListener('resize', init);
+        init(); frame();
+    }
+}());
+
+/* INTERSECTION OBSERVER — archetype card reveals */
+var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.archetype-card').forEach(function (el) { io.observe(el); });
+
+/* DATA */
+var COLORS = { hunter: '#F59E0B', architect: '#10B981', guardian: '#8B5CF6', commander: '#F43F5E' };
+var LETTERS = ['A', 'B', 'C', 'D'];
+
+/*
+ * QUESTIONS - Edit here to update the quiz content.
+ *
+ * Each object is one question. Structure:
+ *   text:    The question shown to users (string).
+ *   options: Array of exactly 4 answer choices.
+ *     label: The answer text shown to the user.
+ *     a:     Which archetype this answer scores toward.
+ *            Must be one of: "hunter" | "architect" | "guardian" | "commander"
+ *
+ * Guidelines for editing:
+ *   - Keep exactly one option per archetype per question (the letters A/B/C/D are
+ *     auto-assigned in display order, but scoring only uses the "a" value).
+ *   - To ADD a question: copy any existing block from { to }, paste it before the
+ *     closing ] at the bottom of the array, and add a comma after the previous last }.
+ *   - To REMOVE a question: delete the full object (from its opening { through its
+ *     closing }) plus the comma before or after it. Keep at least 4 questions.
+ *   - After editing, save the file and open it in a browser to test all paths.
+ */
+var QUESTIONS = [
+    {
+        text: "When you think about your bank's security posture, what keeps you up at night most?",
+        options: [
+            { label: "Unknown threats already inside the network that haven't triggered an alert yet", a: "hunter" },
+            { label: "Whether our systems could actually recover if something went seriously wrong", a: "architect" },
+            { label: "Whether we're truly audit-ready and aligned with where regulations are heading", a: "guardian" },
+            { label: "Whether my team knows exactly what to do the moment an incident hits", a: "commander" }
+        ]
+    },
+    {
+        text: "When a major new threat hits the news, your first instinct is to:",
+        options: [
+            { label: "Research how the attack works and check whether our environment is exposed", a: "hunter" },
+            { label: "Review our backup and recovery capabilities against this specific scenario", a: "architect" },
+            { label: "Assess the regulatory and compliance implications for our institution", a: "guardian" },
+            { label: "Brief the team and check that our incident response playbook covers it", a: "commander" }
+        ]
+    },
+    {
+        text: "The security investment you'd fight hardest for in a budget meeting:",
+        options: [
+            { label: "Threat intelligence feeds and better detection tooling", a: "hunter" },
+            { label: "Redundant systems, DR testing infrastructure, and resilience exercises", a: "architect" },
+            { label: "GRC platforms and policy management that scale with regulatory demands", a: "guardian" },
+            { label: "Tabletop exercises and cross-functional incident response training", a: "commander" }
+        ]
+    },
+    {
+        text: "Which statement sounds most like you?",
+        options: [
+            { label: "\"I want to know how attackers think before they know how we think.\"", a: "hunter" },
+            { label: "\"Assume breach. Build to survive it.\"", a: "architect" },
+            { label: "\"Good governance is the foundation that makes everything else work.\"", a: "guardian" },
+            { label: "\"A team that has trained together will hold together under pressure.\"", a: "commander" }
+        ]
+    },
+    {
+        text: "A vendor pitches a new AI-powered security tool. Your first question:",
+        options: [
+            { label: "\"What threats is it catching that our current stack misses?\"", a: "hunter" },
+            { label: "\"How does it fit into our continuity and recovery strategy?\"", a: "architect" },
+            { label: "\"Does it satisfy our compliance requirements and generate audit trails?\"", a: "guardian" },
+            { label: "\"How does my team actually use this during a live incident?\"", a: "commander" }
+        ]
+    },
+    {
+        text: "The most underrated skill in banking security right now:",
+        options: [
+            { label: "Proactive threat hunting, finding the breach before it finds you", a: "hunter" },
+            { label: "Resilience testing, knowing your recovery actually works before you need it", a: "architect" },
+            { label: "Translating technical risk into language that moves the board to act", a: "guardian" },
+            { label: "Cross-functional coordination, getting IT, fraud, and ops aligned before a crisis", a: "commander" }
+        ]
+    }
+];
+
+var ARCHETYPES = {
+    hunter: {
+        title: "The Threat Hunter", theme: "theme-hunter",
+        desc: "You think like the adversary. While others wait for alerts, you go looking. You study how attacks work, probe your own environment, and stay current on how threat actors operate because staying ahead is the only real edge. In a landscape where agentic AI is shortening the time to exploit, your mindset is exactly what banks need right now.",
+        tip: "<strong>This quarter's focus for you:</strong> The Q3 2026 threat brief highlights AI-accelerated exploitation of known vulnerabilities. Your instinct to hunt proactively is the right response. The window to act on a known vulnerability is shrinking fast."
+    },
+    architect: {
+        title: "The Resilience Architect", theme: "theme-architect",
+        desc: "You build for the inevitable. Your philosophy is when, not if, and your career reflects it. Redundant systems, tested recovery plans, layered controls. You're the reason your institution keeps running when prevention falls short. Most people think about stopping attacks. You've already thought about surviving them.",
+        tip: "<strong>This quarter's focus for you:</strong> Fintech integrations and AI tooling are expanding the attack surface at community banks. Your resilience-first instinct is well-placed. Make sure your DR tests account for the new surface area those tools introduce."
+    },
+    guardian: {
+        title: "The Compliance Guardian", theme: "theme-guardian",
+        desc: "You speak board, you speak audit, and you speak regulator. You know that governance isn't paperwork. It's the structure that holds everything together. As regulatory mandates escalate and accountability shifts to institutions, people who can translate technical risk into organizational action are becoming indispensable.",
+        tip: "<strong>This quarter's focus for you:</strong> The FSB's new AI governance framework is exactly your territory. Strong governance and lifecycle risk management for AI adoption will be the differentiator for well-run institutions in the next 12 months."
+    },
+    commander: {
+        title: "The Incident Commander", theme: "theme-commander",
+        desc: "When something goes wrong, the room looks to you. You've invested in preparation because a team that has trained together holds together under pressure. Playbooks, tabletops, cross-functional coordination. You turn chaos into a managed response. The difference between an incident and a catastrophe usually comes down to someone like you.",
+        tip: "<strong>This quarter's focus for you:</strong> Iowa-specific teller impersonation scams are highly scripted and patient. Getting IT, fraud, and customer-facing staff coordinated on response protocol before an incident hits is exactly the kind of preparation that pays off."
+    }
+};
+
+/* ===== BADGE SYSTEM ===== */
+var _badgeCanvas = null;
+
+function hexToRgba(hex, alpha) {
+    var r = parseInt(hex.slice(1, 3), 16);
+    var g = parseInt(hex.slice(3, 5), 16);
+    var b = parseInt(hex.slice(5, 7), 16);
+    return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+}
+
+function drawRoundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+}
+
+function drawIBAMark(ctx, cx, cy, size) {
+    // Stacked cylinder rings — IBA brand mark (gray left / navy right)
+    ctx.save();
+
+    var rx    = size * 0.49;
+    var ry    = rx   * 0.17;
+    var n     = 4;
+    var ringH = (size * 0.78) / n;
+    var bodyH = ringH * 0.58;
+    var y0    = cy - (n * ringH) / 2;
+
+    function halfEllipse(ey, color, left) {
+        ctx.save();
+        ctx.beginPath();
+        if (left) ctx.rect(cx - rx - 2, ey - ry - 1, rx + 3, ry * 2 + 2);
+        else      ctx.rect(cx,           ey - ry - 1, rx + 2, ry * 2 + 2);
+        ctx.clip();
+        ctx.beginPath();
+        ctx.ellipse(cx, ey, rx, ry, 0, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.restore();
+    }
+
+    // Rings — bottom first so upper rings paint over lower ones
+    for (var r = n - 1; r >= 0; r--) {
+        var ty = y0 + r * ringH;
+        var by = ty + bodyH;
+
+        // Cylinder body halves
+        ctx.fillStyle = '#9ea6ab'; ctx.fillRect(cx - rx, ty, rx, bodyH);
+        ctx.fillStyle = '#003b71'; ctx.fillRect(cx,       ty, rx, bodyH);
+
+        // Top face (lighter — lit surface)
+        halfEllipse(ty, '#bdc4c8', true);
+        halfEllipse(ty, '#00459a', false);
+
+        // Bottom ledge (darker — shadow between rings)
+        halfEllipse(by, '#828a8f', true);
+        halfEllipse(by, '#002354', false);
+    }
+
+    // Very top face — most prominent, lightest
+    halfEllipse(y0, '#ced4d8', true);
+    halfEllipse(y0, '#0054b2', false);
+
+    // Registered trademark
+    ctx.font = Math.round(size * 0.17) + 'px serif';
+    ctx.fillStyle = 'rgba(162,169,173,0.82)';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillText('®', cx + rx * 0.66, y0 + n * ringH + ry + Math.round(size * 0.07));
+
+    ctx.restore();
+}
+
+function drawArchetypeCharacter(ctx, archetype, cx, cy, color, size) {
+    var s = size;
+    ctx.save();
+
+    if (archetype === 'hunter') {
+        // Detection rings (outer to inner, increasing opacity)
+        [0.46, 0.36, 0.26].forEach(function (scale, i) {
+            ctx.beginPath();
+            ctx.arc(cx, cy, s * scale, 0, Math.PI * 2);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = i === 2 ? 2.5 : 1.5;
+            ctx.globalAlpha = [0.15, 0.3, 0.65][i];
+            ctx.stroke();
+        });
+        // Crosshair lines (with gap for inner ring)
+        var gap = s * 0.3, len = s * 0.16;
+        ctx.globalAlpha = 0.55;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.8;
+        [[0, -(gap + len), 0, -gap], [0, gap, 0, gap + len],
+         [-(gap + len), 0, -gap, 0], [gap, 0, gap + len, 0]].forEach(function (l) {
+            ctx.beginPath();
+            ctx.moveTo(cx + l[0], cy + l[1]);
+            ctx.lineTo(cx + l[2], cy + l[3]);
+            ctx.stroke();
+        });
+        // Diagonal tick marks on outer ring
+        ctx.globalAlpha = 0.28;
+        ctx.lineWidth = 1.5;
+        for (var t = 1; t < 8; t += 2) {
+            var ta = (t / 8) * Math.PI * 2;
+            ctx.beginPath();
+            ctx.moveTo(cx + Math.cos(ta) * s * 0.46, cy + Math.sin(ta) * s * 0.46);
+            ctx.lineTo(cx + Math.cos(ta) * s * 0.53, cy + Math.sin(ta) * s * 0.53);
+            ctx.stroke();
+        }
+        // Center dot
+        ctx.beginPath();
+        ctx.arc(cx, cy, s * 0.045, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.globalAlpha = 1;
+        ctx.fill();
+        // Magnifying glass handle
+        ctx.globalAlpha = 0.75;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 5;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(cx + s * 0.24, cy + s * 0.24);
+        ctx.lineTo(cx + s * 0.42, cy + s * 0.42);
+        ctx.stroke();
+        ctx.lineCap = 'butt';
+
+    } else if (archetype === 'architect') {
+        // Blueprint grid (faint background)
+        ctx.globalAlpha = 0.1;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1;
+        var gs = s * 0.14;
+        for (var gx = cx - s * 0.5; gx <= cx + s * 0.5; gx += gs) {
+            ctx.beginPath(); ctx.moveTo(gx, cy - s * 0.5); ctx.lineTo(gx, cy + s * 0.5); ctx.stroke();
+        }
+        for (var gy = cy - s * 0.5; gy <= cy + s * 0.5; gy += gs) {
+            ctx.beginPath(); ctx.moveTo(cx - s * 0.5, gy); ctx.lineTo(cx + s * 0.5, gy); ctx.stroke();
+        }
+        // Node layout
+        var nodes = [
+            { x: cx,           y: cy,           r: s * 0.072 },
+            { x: cx - s * 0.3, y: cy - s * 0.26, r: s * 0.038 },
+            { x: cx + s * 0.3, y: cy - s * 0.26, r: s * 0.038 },
+            { x: cx + s * 0.34, y: cy + s * 0.08, r: s * 0.038 },
+            { x: cx - s * 0.28, y: cy + s * 0.3,  r: s * 0.038 },
+            { x: cx + s * 0.06, y: cy + s * 0.36, r: s * 0.032 }
+        ];
+        // Hub-to-node spokes
+        ctx.globalAlpha = 0.4;
+        ctx.lineWidth = 1.8;
+        for (var ni = 1; ni < nodes.length; ni++) {
+            ctx.beginPath();
+            ctx.moveTo(nodes[0].x, nodes[0].y);
+            ctx.lineTo(nodes[ni].x, nodes[ni].y);
+            ctx.strokeStyle = color;
+            ctx.stroke();
+        }
+        // Secondary cross-connections
+        ctx.globalAlpha = 0.2;
+        ctx.lineWidth = 1;
+        [[1, 2], [2, 3], [3, 5], [4, 5]].forEach(function (p) {
+            ctx.beginPath();
+            ctx.moveTo(nodes[p[0]].x, nodes[p[0]].y);
+            ctx.lineTo(nodes[p[1]].x, nodes[p[1]].y);
+            ctx.stroke();
+        });
+        // Hub outer ring
+        ctx.beginPath();
+        ctx.arc(nodes[0].x, nodes[0].y, nodes[0].r * 2, 0, Math.PI * 2);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.5;
+        ctx.globalAlpha = 0.28;
+        ctx.stroke();
+        // Node circles
+        nodes.forEach(function (n, i) {
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.globalAlpha = i === 0 ? 1 : 0.82;
+            ctx.fill();
+        });
+
+    } else if (archetype === 'guardian') {
+        // Shield outline
+        var sh = s * 0.47, sw = s * 0.39;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - sh);
+        ctx.bezierCurveTo(cx + sw, cy - sh, cx + sw, cy - sh * 0.1, cx + sw * 0.84, cy + sh * 0.14);
+        ctx.bezierCurveTo(cx + sw * 0.5, cy + sh * 0.56, cx, cy + sh, cx, cy + sh);
+        ctx.bezierCurveTo(cx - sw * 0.5, cy + sh * 0.56, cx - sw * 0.84, cy + sh * 0.14, cx - sw, cy - sh * 0.1);
+        ctx.bezierCurveTo(cx - sw, cy - sh, cx, cy - sh, cx, cy - sh);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.globalAlpha = 0.85;
+        ctx.stroke();
+        ctx.fillStyle = color;
+        ctx.globalAlpha = 0.055;
+        ctx.fill();
+        // Internal circuit lines
+        ctx.globalAlpha = 0.42;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.5;
+        [[cx - s * 0.23, cy, cx + s * 0.23, cy],
+         [cx, cy - s * 0.25, cx, cy - s * 0.07],
+         [cx, cy + s * 0.07, cx, cy + s * 0.23],
+         [cx - s * 0.23, cy, cx - s * 0.23, cy + s * 0.17],
+         [cx + s * 0.23, cy, cx + s * 0.23, cy + s * 0.17]].forEach(function (l) {
+            ctx.beginPath(); ctx.moveTo(l[0], l[1]); ctx.lineTo(l[2], l[3]); ctx.stroke();
+        });
+        // Junction dots
+        ctx.fillStyle = color;
+        ctx.globalAlpha = 0.68;
+        [[cx - s * 0.23, cy], [cx + s * 0.23, cy],
+         [cx - s * 0.23, cy + s * 0.17], [cx + s * 0.23, cy + s * 0.17],
+         [cx, cy - s * 0.25], [cx, cy + s * 0.23]].forEach(function (d) {
+            ctx.beginPath(); ctx.arc(d[0], d[1], s * 0.024, 0, Math.PI * 2); ctx.fill();
+        });
+        // Lock body
+        var lw = s * 0.11, lh = s * 0.09;
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2.2;
+        drawRoundRect(ctx, cx - lw, cy - lh * 0.28, lw * 2, lh * 1.6, s * 0.018);
+        ctx.stroke();
+        ctx.fillStyle = color; ctx.globalAlpha = 0.1; ctx.fill();
+        // Lock shackle
+        ctx.globalAlpha = 1;
+        ctx.beginPath();
+        ctx.arc(cx, cy - lh * 0.28, lw * 0.62, Math.PI, 0);
+        ctx.lineWidth = 2.2;
+        ctx.stroke();
+        // Keyhole
+        ctx.beginPath();
+        ctx.arc(cx, cy + lh * 0.5, s * 0.022, 0, Math.PI * 2);
+        ctx.fillStyle = color; ctx.fill();
+
+    } else if (archetype === 'commander') {
+        // Outer command ring
+        ctx.beginPath();
+        ctx.arc(cx, cy, s * 0.46, 0, Math.PI * 2);
+        ctx.strokeStyle = color; ctx.lineWidth = 1.5; ctx.globalAlpha = 0.18; ctx.stroke();
+        // 6 command spokes + outer nodes
+        var nc = 6;
+        for (var si = 0; si < nc; si++) {
+            var sa = (si / nc) * Math.PI * 2 - Math.PI / 2;
+            var nx = cx + Math.cos(sa) * s * 0.34;
+            var ny = cy + Math.sin(sa) * s * 0.34;
+            ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(nx, ny);
+            ctx.strokeStyle = color; ctx.lineWidth = 1.8; ctx.globalAlpha = 0.38; ctx.stroke();
+            ctx.beginPath(); ctx.arc(nx, ny, s * 0.044, 0, Math.PI * 2);
+            ctx.fillStyle = color; ctx.globalAlpha = 0.72; ctx.fill();
+        }
+        // Adjacent node connections
+        ctx.globalAlpha = 0.17; ctx.lineWidth = 1;
+        for (var si2 = 0; si2 < nc; si2++) {
+            var a1 = (si2 / nc) * Math.PI * 2 - Math.PI / 2;
+            var a2 = ((si2 + 1) / nc) * Math.PI * 2 - Math.PI / 2;
+            ctx.beginPath();
+            ctx.moveTo(cx + Math.cos(a1) * s * 0.34, cy + Math.sin(a1) * s * 0.34);
+            ctx.lineTo(cx + Math.cos(a2) * s * 0.34, cy + Math.sin(a2) * s * 0.34);
+            ctx.strokeStyle = color; ctx.stroke();
+        }
+        // Mid ring
+        ctx.beginPath(); ctx.arc(cx, cy, s * 0.18, 0, Math.PI * 2);
+        ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.globalAlpha = 0.38; ctx.stroke();
+        // Cardinal ticks between mid ring and spokes
+        ctx.globalAlpha = 0.5; ctx.lineWidth = 2;
+        for (var ct = 0; ct < 4; ct++) {
+            var cta = (ct / 4) * Math.PI * 2;
+            ctx.beginPath();
+            ctx.moveTo(cx + Math.cos(cta) * s * 0.2, cy + Math.sin(cta) * s * 0.2);
+            ctx.lineTo(cx + Math.cos(cta) * s * 0.28, cy + Math.sin(cta) * s * 0.28);
+            ctx.strokeStyle = color; ctx.stroke();
+        }
+        // Center hub (filled circle with cutout)
+        ctx.beginPath(); ctx.arc(cx, cy, s * 0.1, 0, Math.PI * 2);
+        ctx.fillStyle = color; ctx.globalAlpha = 1; ctx.fill();
+        ctx.beginPath(); ctx.arc(cx, cy, s * 0.044, 0, Math.PI * 2);
+        ctx.fillStyle = '#000d1f'; ctx.fill();
+    }
+
+    ctx.restore();
+}
+
+function drawBadge(canvas, archetype) {
+    var S = 800;
+    canvas.width = S;
+    canvas.height = S;
+    var ctx = canvas.getContext('2d');
+    var color = COLORS[archetype];
+    var a = ARCHETYPES[archetype];
+
+    // Background
+    ctx.fillStyle = '#000d1f';
+    ctx.fillRect(0, 0, S, S);
+
+    // Subtle grid
+    ctx.strokeStyle = 'rgba(0,167,225,0.028)';
+    ctx.lineWidth = 1;
+    for (var gx = 0; gx <= S; gx += 40) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, S); ctx.stroke(); }
+    for (var gy = 0; gy <= S; gy += 40) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(S, gy); ctx.stroke(); }
+
+    // Radial glow behind character art
+    var grd = ctx.createRadialGradient(S / 2, 340, 0, S / 2, 340, 310);
+    grd.addColorStop(0, hexToRgba(color, 0.09));
+    grd.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, S, S);
+
+    // Outer border frame
+    ctx.strokeStyle = hexToRgba(color, 0.22);
+    ctx.lineWidth = 3;
+    ctx.strokeRect(15, 15, S - 30, S - 30);
+
+    // Top accent bar (archetype color)
+    ctx.fillStyle = color;
+    ctx.fillRect(15, 15, S - 30, 5);
+
+    // IBA logo mark (stacked cylinders, size = total width)
+    drawIBAMark(ctx, 55, 70, 44);
+
+    // Header text
+    ctx.globalAlpha = 1;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+    ctx.font = '700 12px Montserrat, Arial, sans-serif';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText('IOWA BANKERS ASSOCIATION', 85, 65);
+    ctx.font = '400 11px JetBrains Mono, monospace';
+    ctx.fillStyle = '#00a7e1';
+    ctx.fillText('CYBER RISK RANGER  /  Q3 2026', 85, 82);
+
+    // Header separator
+    ctx.fillStyle = 'rgba(0,167,225,0.12)';
+    ctx.fillRect(40, 108, S - 80, 1);
+
+    // Archetype character art
+    drawArchetypeCharacter(ctx, archetype, S / 2, 338, color, 220);
+
+    // "YOUR DEFENDER STYLE" label
+    ctx.textAlign = 'center';
+    ctx.font = '400 12px JetBrains Mono, monospace';
+    ctx.fillStyle = 'rgba(107,146,184,0.88)';
+    ctx.globalAlpha = 1;
+    ctx.fillText('YOUR DEFENDER STYLE', S / 2, 598);
+
+    // Archetype title (auto-size if too long)
+    var titleSize = 46;
+    ctx.font = '800 ' + titleSize + 'px Montserrat, Arial Black, sans-serif';
+    var tw = ctx.measureText(a.title).width;
+    if (tw > 710) {
+        titleSize = Math.floor(titleSize * 710 / tw);
+        ctx.font = '800 ' + titleSize + 'px Montserrat, Arial Black, sans-serif';
+    }
+    ctx.fillStyle = color;
+    ctx.globalAlpha = 1;
+    ctx.fillText(a.title, S / 2, 652);
+
+    // Bottom bar
+    ctx.fillStyle = 'rgba(0,59,113,0.38)';
+    ctx.fillRect(15, 692, S - 30, 93);
+    ctx.fillStyle = hexToRgba(color, 0.28);
+    ctx.fillRect(15, 692, S - 30, 2);
+
+    ctx.font = '600 12px Montserrat, Arial, sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.fillText('CYBER RISK RANGER  |  Q3 2026', S / 2, 728);
+
+    ctx.font = '400 11px JetBrains Mono, monospace';
+    ctx.fillStyle = 'rgba(107,146,184,0.62)';
+    ctx.fillText('iowabankers.com', S / 2, 754);
+
+    ctx.textAlign = 'left';
+    ctx.globalAlpha = 1;
+}
+
+function showBadge(archetype) {
+    var canvas = document.createElement('canvas');
+    _badgeCanvas = canvas;
+    var section = document.getElementById('badge-section');
+
+    function render() {
+        drawBadge(canvas, archetype);
+        document.getElementById('badge-img').src = canvas.toDataURL('image/png');
+        section.style.display = 'block';
+    }
+
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(render);
+    } else {
+        render();
+    }
+}
+
+function downloadBadge() {
+    if (!_badgeCanvas) return;
+    _badgeCanvas.toBlob(function (blob) {
+        var url = URL.createObjectURL(blob);
+        var dl = document.createElement('a');
+        dl.href = url;
+        dl.download = 'iba-defender-badge.png';
+        dl.click();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1200);
+    }, 'image/png');
+}
+
+/* STATE */
+var scores = {}, currentQ = 0, lastAnswer = 'hunter', typeTimer = null;
+
+/* TYPEWRITER */
+function typewrite(el, text, onDone) {
+    if (typeTimer) { clearTimeout(typeTimer); typeTimer = null; }
+    el.innerHTML = '';
+    var cursor = document.createElement('span');
+    cursor.className = 'q-cursor';
+    el.appendChild(cursor);
+    var i = 0;
+    var speed = Math.max(12, Math.min(24, 650 / text.length));
+    function tick() {
+        if (i < text.length) {
+            cursor.insertAdjacentText('beforebegin', text[i++]);
+            typeTimer = setTimeout(tick, speed);
+        } else {
+            cursor.classList.add('done');
+            if (onDone) onDone();
+        }
+    }
+    tick();
+}
+
+/* QUIZ */
+function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+}
+
+function startQuiz() {
+    scores = { hunter: 0, architect: 0, guardian: 0, commander: 0 };
+    currentQ = 0; lastAnswer = 'hunter';
+    var qs = document.getElementById('quiz-section');
+    qs.classList.add('visible');
+    renderQuestion();
+    showScreen('screen-question');
+    setTimeout(function () { qs.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+}
+
+function renderQuestion() {
+    var q   = QUESTIONS[currentQ];
+    var pct = Math.round((currentQ / QUESTIONS.length) * 100);
+    document.getElementById('q-counter').textContent = 'Question ' + (currentQ + 1) + ' of ' + QUESTIONS.length;
+    document.getElementById('q-pct').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    var card = document.getElementById('question-card');
+    card.classList.remove('entering');
+    void card.offsetWidth;
+    card.classList.add('entering');
+
+    var old = card.querySelector('.q-scan');
+    if (old) old.remove();
+    var scan = document.createElement('div');
+    scan.className = 'q-scan';
+    card.insertBefore(scan, card.firstChild);
+    scan.addEventListener('animationend', function () { scan.remove(); });
+
+    var list = document.getElementById('options-list');
+    list.innerHTML = '';
+
+    typewrite(document.getElementById('q-text'), q.text, function () {
+        q.options.forEach(function (opt, i) {
+            var btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.type = 'button';
+            btn.style.cssText = '--opt-color:' + COLORS[opt.a] + '; animation-delay:' + (i * 65) + 'ms';
+            btn.innerHTML =
+                '<span class="opt-letter">' + LETTERS[i] + '</span>' +
+                '<span class="opt-text">' + opt.label + '</span>';
+            btn.addEventListener('click', function (e) { selectAnswer(opt.a, btn, e); });
+            list.appendChild(btn);
+        });
+    });
+}
+
+function selectAnswer(archetype, btn, e) {
+    var ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    ripple.style.left = (e.offsetX || btn.offsetWidth  / 2) + 'px';
+    ripple.style.top  = (e.offsetY || btn.offsetHeight / 2) + 'px';
+    btn.appendChild(ripple);
+    ripple.addEventListener('animationend', function () { ripple.remove(); });
+
+    document.querySelectorAll('.option-btn').forEach(function (b) {
+        b.classList.remove('selected');
+        b.classList.add('dimmed');
+    });
+    btn.classList.remove('dimmed');
+    btn.classList.add('selected');
+
+    scores[archetype]++;
+    lastAnswer = archetype;
+
+    setTimeout(function () {
+        currentQ++;
+        if (currentQ < QUESTIONS.length) { renderQuestion(); } else { showResult(); }
+    }, 380);
+}
+
+function showResult() {
+    var winner = lastAnswer, maxScore = -1;
+    Object.keys(scores).forEach(function (k) { if (scores[k] > maxScore) { maxScore = scores[k]; winner = k; } });
+    var bs = document.getElementById('badge-section');
+    if (bs) bs.style.display = 'none';
+
+    var a = ARCHETYPES[winner];
+    var card = document.getElementById('result-card');
+    card.className = 'result-card ' + a.theme;
+    var titleEl = document.getElementById('result-title');
+    titleEl.textContent = a.title;
+    document.getElementById('result-desc').textContent = a.desc;
+    document.getElementById('result-tip').innerHTML = a.tip;
+
+    var total = 0;
+    Object.keys(scores).forEach(function (k) { total += scores[k]; });
+
+    var names = { hunter: 'Threat Hunter', architect: 'Resilience', guardian: 'Compliance', commander: 'Commander' };
+    var order = ['hunter', 'architect', 'guardian', 'commander'];
+    document.getElementById('score-bars').innerHTML = order.map(function (k) {
+        var pct = total > 0 ? Math.round((scores[k] / total) * 100) : 0;
+        return '<div class="score-row">' +
+            '<span class="score-name">' + names[k] + '</span>' +
+            '<div class="score-track"><div class="score-fill" style="--score-color:' + COLORS[k] + '; --score-pct:' + pct + '%"></div></div>' +
+            '<span class="score-pct-val">' + pct + '%</span>' +
+            '</div>';
+    }).join('');
+
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('q-pct').textContent = '100%';
+    window._shareTitle = a.title;
+
+    showScreen('screen-result');
+    document.getElementById('quiz-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    showBadge(winner);
+
+    setTimeout(function () {
+        document.querySelectorAll('.score-fill').forEach(function (el, i) {
+            el.style.transitionDelay = (i * 90) + 'ms';
+            el.classList.add('animated');
+        });
+        titleEl.classList.add('glitch');
+        titleEl.addEventListener('animationend', function () { titleEl.classList.remove('glitch'); }, { once: true });
+    }, 150);
+}
+
+function shareLinkedIn() {
+    window.open(
+        'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href),
+        '_blank', 'noopener'
+    );
+}
+
+function retakeQuiz() { startQuiz(); }
+</script>
+</body>
+</html>
