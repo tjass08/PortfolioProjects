@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       Cyber Risk Ranger Games
- * Description:       Serves the Spot the Phish challenge at /spotthephish/ and the Defender Style quiz at /defenderstyle/ as full-screen pages.
- * Version:           1.0.0
+ * Plugin Name:       Cyber Risk Ranger: Spot the Phish
+ * Description:       Serves the Spot the Phish challenge as a full-screen page at /spotthephish/.
+ * Version:           1.1.0
  * Requires at least: 5.0
  * Requires PHP:      7.0
  * License:           GPL-2.0-or-later
@@ -18,8 +18,6 @@ function crr_games_addresses() {
 	return array(
 		'spotthephish'   => 'spot-the-phish.html',
 		'spot-the-phish' => 'spot-the-phish.html',
-		'defenderstyle'  => 'defender-style.html',
-		'defender-style' => 'defender-style.html',
 	);
 }
 

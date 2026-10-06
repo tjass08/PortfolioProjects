@@ -1,4 +1,4 @@
-"""Build the Cyber Risk Ranger Games WordPress plugin from the two standalone game files.
+"""Build the Cyber Risk Ranger WordPress plugin from the standalone Spot the Phish file.
 
 Run from anywhere:  python3 wordpress-plugin/build_plugin.py
 Writes:             wordpress-plugin/dist/cyber-risk-ranger-games.zip
@@ -17,7 +17,6 @@ SLUG = 'cyber-risk-ranger-games'
 ASSET_TOKEN = '__CRR_ASSETS__'
 GAMES = {
     'spot-the-phish.html': ROOT / 'spot-the-phish.html',
-    'defender-style.html': ROOT / 'cyber-risk-ranger-quiz.html',
 }
 SILENCE = '<?php\n// Silence is golden.\n'
 
