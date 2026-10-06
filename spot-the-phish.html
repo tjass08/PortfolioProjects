@@ -4,6 +4,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Spot the Phish Challenge | Cyber Risk Ranger</title>
 <meta name="description" content="Can you outsmart the phish? Test your eye for phishing red flags with the Cyber Risk Ranger challenge from the Iowa Bankers Association.">
+<style>
+/* Phone layout. The template sets these two-column grids inline, so the overrides need !important. */
+@media (max-width: 760px) {
+  #ranger [style*="minmax(280px"],
+  #quiz [style*="320px 1fr"],
+  #dc-root [style*="minmax(220px"] { grid-template-columns: minmax(0, 1fr) !important; }
+  #quiz [style*="320px 1fr"] > :first-child { min-height: 280px !important; }
+  #ranger [style*="minmax(280px"] > :first-child,
+  #dc-root [style*="minmax(220px"] > :last-child { width: 100%; max-width: 340px; justify-self: center; }
+}
+</style>
 <script>
 /**
  * @license React
