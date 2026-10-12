@@ -1,0 +1,389 @@
+<title>Bank Note Prototype</title>
+<meta name="description" content="Oct. 8, 2026, Bank Note rebuilt in the shorter Smart Brevity format, mapped to Constant Contact blocks.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a reviewer's desk. The email sits in its own column at true 600px width; build notes run beside it and stack below on phones. */
+:root {
+  --bg: #e9eef5;
+  --panel: #f8fafd;
+  --fg: #16233a;
+  --muted: #55657d;
+  --line: #c9d4e3;
+  --accent: #0054a6;
+  --tag-bg: #fff4c2;
+  --tag-fg: #5c4500;
+  --tag-line: #d9a400;
+  /* The email keeps one fixed look in both themes, like a real inbox render. */
+  --mail-paper: #ffffff;
+  --mail-ink: #1f2a37;
+  --mail-soft: #4b5869;
+  --mail-blue: #0054a6;
+  --mail-navy: #003d7a;
+  --mail-tint: #eaf2fb;
+  --mail-rule: #c6d6ea;
+  --mail-canvas: #dfe7f1;
+  --font-ui: "Public Sans", "Segoe UI", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-mail: Arial, Helvetica, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1724; --panel: #172235; --fg: #e3e9f3; --muted: #9db0c9; --line: #2c3b54;
+    --accent: #7db3ff; --tag-bg: #3a2f05; --tag-fg: #ffe08a; --tag-line: #b38900;
+    --mail-canvas: #1b2638; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1724; --panel: #172235; --fg: #e3e9f3; --muted: #9db0c9; --line: #2c3b54;
+  --accent: #7db3ff; --tag-bg: #3a2f05; --tag-fg: #ffe08a; --tag-line: #b38900;
+  --mail-canvas: #1b2638; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-ui); font-size: 15px; line-height: 1.5; padding-inline: 16px; padding-block: 28px 48px; }
+.wrap { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+.intro { display: grid; gap: 10px; max-width: 70ch; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.intro h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: -.01em; }
+.intro p { margin: 0; color: var(--muted); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; }
+.stat b { font-size: 24px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 13px; color: var(--muted); }
+.stat s { color: var(--muted); font-weight: 400; font-size: 16px; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.controls button { font: 600 14px var(--font-ui); color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+.controls button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.controls button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.controls small { color: var(--muted); }
+.layout { display: grid; grid-template-columns: minmax(0, 640px) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 960px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+
+/* Inbox chrome */
+.inbox { background: var(--mail-canvas); border-radius: 10px; padding: 20px; min-width: 0; }
+.envelope { background: var(--mail-paper); color: var(--mail-ink); font-family: var(--font-mail); max-width: 600px; margin: 0 auto 14px; border-radius: 6px; padding: 12px 16px; font-size: 13px; display: grid; gap: 3px; }
+.envelope .from { color: var(--mail-soft); }
+.envelope .subj { font-weight: 700; font-size: 15px; }
+.envelope .pre { color: var(--mail-soft); }
+.envelope .k { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--mail-soft); margin-right: 6px; }
+
+/* The email */
+.mail { background: var(--mail-paper); color: var(--mail-ink); font-family: var(--font-mail); font-size: 16px; line-height: 1.5; max-width: 600px; margin: 0 auto; transition: max-width .25s ease; }
+.mail.phone { max-width: 375px; }
+.mail img { display: block; width: 100%; height: auto; }
+.mail a { color: var(--mail-blue); font-weight: 700; }
+.mail p { margin: 0; }
+.mail ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.blk { position: relative; padding: 16px 24px; }
+.blk.flush { padding: 0; }
+.blk.tight { padding-top: 4px; }
+.mail.phone .blk { padding-inline: 16px; }
+.mail.phone .blk.flush { padding: 0; }
+.dateline { font-size: 13px; color: var(--mail-soft); display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; padding-block: 10px; border-bottom: 1px solid var(--mail-rule); }
+.toc { background: var(--mail-tint); }
+.toc h3 { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--mail-navy); margin-bottom: 8px; }
+.toc ul { list-style: none; padding: 0; gap: 6px; font-size: 15px; }
+.toc li::before { content: "\25B8"; color: var(--mail-blue); margin-right: 8px; }
+.label { background: var(--mail-blue); color: #ffffff; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding-block: 8px; }
+.label.navy { background: var(--mail-navy); }
+.hed { font-size: 23px; line-height: 1.2; color: var(--mail-navy); font-weight: 700; margin-bottom: 10px; }
+.hed.sm { font-size: 18px; margin-bottom: 6px; }
+.why { border-left: 4px solid var(--mail-blue); padding-left: 12px; }
+.why b, .next b { color: var(--mail-navy); }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 16px; align-items: start; }
+.split.left { grid-template-columns: 150px minmax(0, 1fr); }
+.mail.phone .split, .mail.phone .split.left { grid-template-columns: minmax(0, 1fr); }
+.mail.phone .split img { max-width: 160px; }
+.stack { display: grid; gap: 10px; }
+.btn { display: inline-block; background: var(--mail-blue); color: #ffffff !important; text-decoration: none; padding: 10px 18px; border-radius: 4px; font-size: 15px; }
+.hit { display: grid; gap: 6px; padding-block: 14px; }
+.hit + .hit { border-top: 1px solid var(--mail-rule); }
+.num { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 16px; align-items: center; background: var(--mail-tint); }
+.mail.phone .num { grid-template-columns: minmax(0, 1fr); }
+.num .big { font-size: 56px; font-weight: 700; color: var(--mail-blue); line-height: 1; font-variant-numeric: tabular-nums; }
+.cal { display: grid; gap: 10px; }
+.cal div { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 10px; }
+.mail.phone .cal div { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.cal .d { font-weight: 700; color: var(--mail-navy); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.caption { font-size: 13px; color: var(--mail-soft); }
+.sub { font-size: 14px; font-weight: 700; color: var(--mail-navy); text-transform: uppercase; letter-spacing: .06em; }
+.sponsor { font-size: 13px; color: var(--mail-soft); background: var(--mail-tint); padding: 8px 12px; }
+.footer { background: var(--mail-navy); color: #ffffff; font-size: 13px; display: grid; gap: 8px; }
+.footer a { color: #ffffff; }
+.footer .ask { font-size: 16px; }
+.ad { padding-block: 12px; }
+
+/* Constant Contact block labels */
+.show-blocks .blk { outline: 1px dashed var(--tag-line); outline-offset: -1px; }
+.show-blocks .blk::after { content: attr(data-cc); position: absolute; top: 2px; right: 2px; z-index: 2; font: 500 10.5px/1.2 var(--font-mono); background: var(--tag-bg); color: var(--tag-fg); border: 1px solid var(--tag-line); border-radius: 3px; padding: 2px 6px; pointer-events: none; max-width: 70%; }
+.show-blocks .blk:not(.flush) { padding-top: 26px; }
+.show-blocks .envelope { outline: 1px dashed var(--tag-line); }
+
+/* Notes column */
+.notes { display: grid; gap: 18px; min-width: 0; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; display: grid; gap: 10px; }
+.card h2 { font-size: 16px; font-weight: 700; }
+.card p, .card li { font-size: 14px; color: var(--fg); margin: 0; }
+.card ol, .card ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.card .muted { color: var(--muted); }
+table.cut { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.cut th, table.cut td { text-align: left; vertical-align: top; padding: 6px 4px; border-top: 1px solid var(--line); }
+table.cut th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; border-top: 0; }
+@media (prefers-reduced-motion: reduce) { .mail { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header class="intro">
+    <span class="eyebrow">Bank Note redesign · Prototype 1</span>
+    <h1>The Oct. 8 issue, rebuilt for a three-minute read</h1>
+    <p>Same week’s content, new structure: the most important news leads, every item says why it matters and the member sections keep their spots. Every block below is a standard Constant Contact block. No custom code.</p>
+  </header>
+
+  <section class="stats" aria-label="Before and after">
+    <div class="stat"><b><s>1,470</s> → <span id="wc">748</span></b><span>words in the body</span></div>
+    <div class="stat"><b><s>15</s> → 10</b><span>stories and member items</span></div>
+    <div class="stat"><b><s>6 min</s> → 3 min</b><span>read time at 250 wpm</span></div>
+    <div class="stat"><b>5 → 5</b><span>sponsor ad units kept</span></div>
+  </section>
+
+  <div class="controls" role="toolbar" aria-label="Preview options">
+    <button type="button" id="toggle-blocks" aria-pressed="true">Show Constant Contact blocks</button>
+    <button type="button" id="toggle-phone" aria-pressed="false">Phone width</button>
+    <small>Yellow tags name the block to drag in. Turn them off to read it as a banker would.</small>
+  </div>
+
+  <div class="layout">
+    <div class="inbox show-blocks" id="inbox">
+      <div class="envelope" aria-label="Inbox preview">
+        <div class="from"><span class="k">From</span>Iowa Bankers Association</div>
+        <div class="subj"><span class="k">Subject</span>The Fed is redrawing its supervision map</div>
+        <div class="pre"><span class="k">Preheader</span>Plus: A crypto kiosk operator shut down, community banks eye tokenized deposits and 2 Iowa bank deals.</div>
+      </div>
+
+      <article class="mail" id="mail">
+        <div class="blk flush" data-cc="Image block · header (unchanged)"><img src="images/header.jpg" alt="Bank Note: Weekly news in brief, Iowa Bankers Association"></div>
+        <div class="blk tight dateline" data-cc="Text block"><span>Thursday, Oct. 8, 2026</span><span>3-minute read</span></div>
+
+        <div class="blk toc" data-cc="Text block · section fill color">
+          <h3>In this issue</h3>
+          <ul>
+            <li>The Fed is redrawing its supervision map</li>
+            <li>34 states shut down a crypto kiosk operator</li>
+            <li>By the numbers: Tokenized deposits are coming</li>
+            <li>Coming up: ABA core survey closes Monday</li>
+            <li>Meet the 2026 Leaders in Advocacy grads</li>
+            <li>People and Places: 2 Iowa bank deals</li>
+          </ul>
+        </div>
+
+        <!-- THE TOP STORY -->
+        <div class="blk label" data-cc="Text block · fill color">Top story</div>
+        <div class="blk" data-cc="Image + Text block (image right)">
+          <div class="split">
+            <div class="stack">
+              <h2 class="hed">The Fed is redrawing its supervision map</h2>
+              <p>Fed Vice Chair for Supervision Michelle Bowman announced plans to organize bank supervision into five regions drawn along state lines, replacing the 12 Reserve Bank districts.</p>
+            </div>
+            <img src="images/bowman.jpg" alt="Michelle Bowman">
+          </div>
+        </div>
+        <div class="blk tight" data-cc="Text block">
+          <div class="stack">
+            <p class="why"><b>Why it matters:</b> If the Fed supervises your bank or holding company, your examiners aren’t changing. The chain of command above them is. Each region gets one leader responsible for supervision, which the Fed says will simplify decisions and improve coordination with other regulators.</p>
+            <ul>
+              <li>Examiners stay in their current Reserve Bank offices and keep the banks they supervise now.</li>
+              <li>Bowman announced the plan at the Community Banking Research Conference in St. Louis.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="blk tight" data-cc="Button block"><a class="btn" href="#">Read Bowman’s speech</a></div>
+
+        <div class="blk ad" data-cc="Image block · sponsor ad 1"><img src="images/ad-shazam.jpg" alt="SHAZAM: There’s only one you"></div>
+
+        <!-- QUICK HITS -->
+        <div class="blk label" data-cc="Text block · fill color">Policy and industry</div>
+        <div class="blk" data-cc="Text block (one per item) + Divider">
+          <div class="hit">
+            <h3 class="hed sm">34 states shut down a crypto kiosk operator</h3>
+            <p>State regulators, including the Iowa Division of Banking, reached a $2.5 million settlement with Coinme Inc. over Bank Secrecy Act and anti-money laundering violations. Coinme must end its kiosk operations by Jan. 1, 2027.</p>
+            <p class="why"><b>Why it matters:</b> Crypto kiosks are a common tool in the scams your front line works to stop, and Iowa’s regulator was at the table. <a href="#">Read the settlement</a></p>
+          </div>
+          <div class="hit">
+            <h3 class="hed sm">Iowa’s economic outlook stays positive</h3>
+            <p>The Iowa Business Council’s third-quarter survey of the state’s 22 largest employers rose slightly to 64.91. Anything above 50 is positive.</p>
+            <p class="why"><b>Why it matters:</b> Capital spending posted the biggest gain, a good sign for commercial loan demand. Workforce challenges remain a top concern. <a href="#">See the survey</a></p>
+          </div>
+        </div>
+
+        <!-- BY THE NUMBERS -->
+        <div class="blk label navy" data-cc="Text block · fill color">By the numbers</div>
+        <div class="blk num" data-cc="2-column layout · Text | Text">
+          <div class="big">18%</div>
+          <div class="stack">
+            <p>of community banks plan to offer tokenized deposits in the next 12 months, up from 4% that offer them today. Another 16% plan to offer stablecoin solutions, up from 3%.</p>
+            <p class="caption">Source: Conference of State Bank Supervisors, 2026 Annual Survey of Community Banks</p>
+            <p class="next"><b>Your next step:</b> The IBA is one of 40 state associations in the BankChain Alliance, an industry-owned payments network targeting a 2027 launch. <a href="#">Learn about BankChain</a></p>
+          </div>
+        </div>
+
+        <div class="blk ad" data-cc="Image block · sponsor ad 2"><img src="images/ad-bok.jpg" alt="BOK Financial Capital Markets: Maintaining your balance sheet or maximizing it?"></div>
+
+        <!-- COMING UP -->
+        <div class="blk label" data-cc="Text block · fill color">Coming up</div>
+        <div class="blk" data-cc="Text block (bold dates, one link each)">
+          <div class="cal">
+            <div><span class="d">Oct. 13</span><span>ABA Core Platform Providers Survey closes. Anonymous, about 15 minutes. <a href="#">Take the survey</a></span></div>
+            <div><span class="d">Oct. 27-28</span><span>IBA Technology Conference: AI, cyber risk, cybercrime and IT. <a href="#">Register</a></span></div>
+            <div><span class="d">Nov. 18</span><span>FDIC webinar on disaster recovery partnerships and CRA consideration (rescheduled). <a href="#">Register</a></span></div>
+          </div>
+        </div>
+
+        <div class="blk ad" data-cc="2-column layout · Image | Image · sponsor ads 3-4">
+          <div class="two"><img src="images/ad-wipfli.jpg" alt="Wipfli: Strength"><img src="images/ad-ubb.jpg" alt="United Bankers’ Bank: Your full-service bankers’ bank"></div>
+        </div>
+
+        <!-- FROM THE IBA -->
+        <div class="blk label" data-cc="Text block · fill color">From the IBA</div>
+        <div class="blk flush" data-cc="Image block"><img src="images/leaders-advocacy.jpg" alt="The 2026 Leaders in Advocacy class at the IBA office"></div>
+        <div class="blk" data-cc="Text block">
+          <div class="stack">
+            <h2 class="hed sm">Meet the 2026 Leaders in Advocacy grads</h2>
+            <p>Eight bankers wrapped up a year of advocacy training that took them to the Iowa Capitol twice and to Washington to meet with members of Congress, Treasury Secretary Scott Bessent and federal regulators. Each closed the program with a personal advocacy plan for their bank.</p>
+            <p class="caption">From left: Travis Eagle, Ohnward Bank &amp; Trust; Amy Whitaker, Mediapolis Savings Bank; Josh Craighead, Northwest Bank; Crystal Wright, Community State Bank; Mike Cisney, Lincoln Savings Bank; Nicky Simpson, Bank Midwest; Kelsey Ray, West Bank; and Heather Smith, Denver Savings Bank.</p>
+            <p class="next"><b>Your next step:</b> Know an emerging leader? Applications for the 2027 class are open. <a href="#">Apply or nominate</a></p>
+          </div>
+        </div>
+
+        <!-- PEOPLE AND PLACES -->
+        <div class="blk label navy" data-cc="Text block · fill color">People and Places</div>
+        <div class="blk" data-cc="Image block (headshot strip) + Text block">
+          <div class="stack">
+            <img src="images/people-places.jpg" alt="Headshots: Black, Wiersema, Stenberg and Mulholland">
+            <p class="sub">Deals</p>
+            <ul>
+              <li><b>Iowa State Bank</b>, Algona, and Mid-Iowa Bancshares Co. plan to acquire Swea City Bancorporation Inc., holding company of Estherville-based Bank Plus.</li>
+              <li><b>Blackhawk Bancorporation</b>, Milan, Ill., plans to acquire Liberty Bancorporation, holding company of Durant-based Liberty Trust &amp; Savings Bank.</li>
+            </ul>
+            <p class="sub">Moves</p>
+            <ul>
+              <li><b>Heartland Bank</b>, Somers: CEO Kevin Black will retire at the end of January after 43 years.</li>
+              <li><b>Citizens First Bank</b>, Clinton: Kristine Wiersema promoted to Morrison branch manager.</li>
+              <li><b>Northwest Bank</b>, Spencer: Wendy Stenberg hired as wealth advisor.</li>
+              <li><b>Fortress Bank</b>, Peoria, Ill.: Jarret Mulholland hired as Des Moines market director.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- BANKING IN THE COMMUNITY -->
+        <div class="blk label navy" data-cc="Text block · fill color">Banking in the Community</div>
+        <div class="blk" data-cc="Image + Text block (image left)">
+          <div class="split left">
+            <img src="images/freedombank.jpg" alt="FreedomBank presents a $2,000 check to the memorial park committee">
+            <div class="stack">
+              <h3 class="hed sm">FreedomBank backs a veterans memorial</h3>
+              <p>FreedomBank gave $2,000 to the Giard Northeast Iowa Vietnam Veterans Memorial Park, a community project honoring Vietnam veterans from across northeast Iowa.</p>
+              <p class="caption">Iowa banks give more than $50.4 million and 300,000 volunteer hours a year. <a href="#">Share your bank’s story</a></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MEMBER SPOTLIGHT -->
+        <div class="blk label navy" data-cc="Text block · fill color">Member Spotlight</div>
+        <div class="blk" data-cc="Image + Text block (image left)">
+          <div class="split left">
+            <img src="images/backes.jpg" alt="Kenedy Backes">
+            <div class="stack">
+              <h3 class="hed sm">Backes finds the story behind the numbers</h3>
+              <p>Kenedy Backes, credit portfolio manager at Bankers Trust, calls herself a storyteller: her job is explaining the gray area in the numbers. Best career advice she’s received? Be patient and don’t rush the season you’re in.</p>
+              <p><a href="#">Read her story</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="blk tight" data-cc="Text block · sponsor line">
+          <p class="sponsor">Member Spotlight is brought to you by IBA associate member <b>Abrigo</b>. <a href="#">Nominate a banker</a></p>
+        </div>
+
+        <!-- PHOTO OF THE WEEK: HAPPY CARD -->
+        <div class="blk label" data-cc="Text block · fill color">Photo of the week</div>
+        <div class="blk flush" data-cc="Image block"><img src="images/photo-of-week.jpg" alt="Matt Johnson and family with Benny, their adopted puppy"></div>
+        <div class="blk" data-cc="Text block">
+          <p>Matt Johnson of Community Savings Bank met Benny at the IBA Annual Convention, where the Animal Rescue League was the featured nonprofit. Benny went home with the Johnsons. 🐶</p>
+        </div>
+
+        <div class="blk ad" data-cc="Image block · sponsor ad 5"><img src="images/ad-iba-printing.jpg" alt="IBA Printing: Save time and money on printing"></div>
+
+        <div class="blk footer" data-cc="Text block + required Footer block">
+          <p class="ask"><b>What would make Bank Note essential to you?</b> <a href="#">Tell us in one question</a></p>
+          <p>Published by the Iowa Bankers Association. Send news to editor@iowabankers.com.</p>
+          <p>Iowa Bankers Association | 8901 Northpark Drive | Johnston, IA 50131 · Unsubscribe | Update Profile</p>
+        </div>
+      </article>
+    </div>
+
+    <aside class="notes">
+      <section class="card">
+        <h2>Build order in Constant Contact</h2>
+        <ol>
+          <li>Copy last week’s campaign and delete everything between the header and footer.</li>
+          <li>Rebuild the skeleton once with the blocks tagged at left, then save it as the Bank Note master. Copy the master every week.</li>
+          <li>Set the subject and preheader first. They name the top story and add a second reason to open.</li>
+          <li>Write the “In this issue” list last, once you know what made the cut.</li>
+          <li>Preview on mobile and send a test to desktop Outlook before every send.</li>
+        </ol>
+      </section>
+
+      <section class="card">
+        <h2>Why no clickable table of contents</h2>
+        <p>Constant Contact’s editor doesn’t support jump links inside an email, and Gmail and Outlook handle them poorly anyway. “In this issue” is a plain-text scan list. It still does its job: telling a banker in 5 seconds whether to keep scrolling.</p>
+      </section>
+
+      <section class="card">
+        <h2>What got cut, and where it went</h2>
+        <table class="cut">
+          <thead><tr><th>Oct. 8 item</th><th>Now</th></tr></thead>
+          <tbody>
+            <tr><td>Leaders in Advocacy feature (330 words)</td><td>About 90 words in From the IBA. Full story moves to the website.</td></tr>
+            <tr><td>Fed supervision restructuring</td><td>Promoted to the top story</td></tr>
+            <tr><td>Digital asset survey + BankChain Alliance</td><td>Merged into By the numbers</td></tr>
+            <tr><td>ABA survey, FDIC webinar</td><td>Grouped in Coming up</td></tr>
+            <tr><td>Habitat CEO build, Bank Security Seminar recap</td><td>Cut from the email. Social media and website.</td></tr>
+            <tr><td>Photo of the week</td><td>Moved to the end as the happy card</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2>Before this goes out</h2>
+        <ul>
+          <li>Have the government relations team check each “Why it matters” line. They’re drafts written from the original items.</li>
+          <li>Confirm sponsor contracts allow a shorter Member Spotlight sponsor line and new ad positions.</li>
+        </ul>
+        <p class="muted">Links are placeholders in this mockup.</p>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<script>
+(function () {
+  var inbox = document.getElementById('inbox');
+  var mail = document.getElementById('mail');
+  var bBtn = document.getElementById('toggle-blocks');
+  var pBtn = document.getElementById('toggle-phone');
+  bBtn.addEventListener('click', function () {
+    var on = inbox.classList.toggle('show-blocks');
+    bBtn.setAttribute('aria-pressed', String(on));
+  });
+  pBtn.addEventListener('click', function () {
+    var on = mail.classList.toggle('phone');
+    pBtn.setAttribute('aria-pressed', String(on));
+  });
+  // Live word count of the email body (header image, ads and legal footer excluded).
+  var words = 0;
+  mail.querySelectorAll('.blk:not(.ad):not(.footer)').forEach(function (el) {
+    words += (el.innerText || el.textContent).trim().split(/\s+/).filter(Boolean).length;
+  });
+  document.getElementById('wc').textContent = words.toLocaleString();
+})();
+</script>
