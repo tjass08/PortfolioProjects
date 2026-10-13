@@ -29,7 +29,8 @@ Redesign and reformat **Bank Note**, IBA’s weekly member e-newsletter for Iowa
 
 - Done: research-backed criteria report (also exists as a Claude Doc in claude.ai, titled “Bank Note Redesign: Research-Backed Criteria”). Its contents are mirrored in `docs/`.
 - Done: Prototype 1, the Oct. 8, 2026, issue rebuilt in the new format and mapped to Constant Contact blocks (`prototype/`), plus a build guide, platform notes on Axios HQ and a checklist scorecard.
-- Next: build the master template in Constant Contact, add UTM tags, pull baseline click data from recent issues and talk with 5 to 10 member bankers.
+- Done: Prototype 2, the Education Bulletin folded into Bank Note as a standing education section (working name “Credit Hours”). Education requires every webinar to be listed with its own link. See `docs/education-merge.md`.
+- Next: confirm the section name and webinar window with Education, build the master template in Constant Contact, add UTM tags, pull baseline click data from recent issues and talk with 5 to 10 member bankers.
 - Open questions are listed in `docs/proposed-structure.md`.
 
 ## Files
@@ -45,6 +46,9 @@ Redesign and reformat **Bank Note**, IBA’s weekly member e-newsletter for Iowa
 | `docs/constant-contact-build-guide.md` | Block-by-block build of the new issue in Constant Contact, UTM tagging and weekly checklist |
 | `docs/platform-options.md` | Stay in Constant Contact vs. Axios HQ, with pricing and demo questions |
 | `docs/prototype-scorecard.md` | Prototype 1 scored against the checklist, before and after numbers |
+| `docs/education-merge.md` | Education Bulletin merge: requirements, section structure, name ideas, weekly workflow, sunset plan |
+| `prototype/bank-note-education-merge.html` | Prototype 2: Oct. 8 issue with the education section, name switcher (open in a browser) |
+| `prototype/images/banners/` | Education section banner PNGs, one per name option |
 | `prototype/bank-note-prototype.html` | Working mockup of the Oct. 8 issue in the new format (open in a browser) |
 
 ## How to work with me
