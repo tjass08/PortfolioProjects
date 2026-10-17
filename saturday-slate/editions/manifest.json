@@ -1,0 +1,19 @@
+{
+  "description": "Immutable weekly snapshots of The Saturday Slate. Each file is the exact standalone page published that week, including its predictions and playoff-probability estimates as of that edition. Never edit a past edition in place; git history also preserves every version.",
+  "editions": [
+    {
+      "date": "2026-10-15",
+      "week": "Week 7",
+      "weekend": "Oct 16-19, 2026",
+      "file": "2026-10-15-week7.html",
+      "note": "First edition of the upgraded publication (front page, playoff outlook, enhanced previews). Iowa #17 / Iowa State / Vikings all on bye; GOTW Ohio State @ Indiana.",
+      "picks": [
+        {"game": "Ohio State @ Indiana", "pick": "Ohio State 27-24", "confidence": 55},
+        {"game": "Notre Dame @ BYU", "pick": "Notre Dame 31-20", "confidence": 62},
+        {"game": "Alabama @ Tennessee", "pick": "Alabama 31-24", "confidence": 60},
+        {"game": "Cowboys @ Packers", "pick": "Packers 27-24", "confidence": 55},
+        {"game": "Southeast Polk @ Johnston", "pick": "Southeast Polk 28-21", "confidence": 56}
+      ]
+    }
+  ]
+}
