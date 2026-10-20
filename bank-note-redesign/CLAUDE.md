@@ -31,6 +31,7 @@ Redesign and reformat **Bank Note**, IBA’s weekly member e-newsletter for Iowa
 - Done: Prototype 1, the Oct. 8, 2026, issue rebuilt in the new format and mapped to Constant Contact blocks (`prototype/`), plus a build guide, platform notes on Axios HQ and a checklist scorecard.
 - Done: Prototype 2, the Education Bulletin folded into Bank Note as a standing education section (working name “Credit Hours”). Education requires every webinar to be listed with its own link. See `docs/education-merge.md`.
 - Done: custom-code HTML template for Constant Contact’s code editor (`template/`).
+- Note: Constant Contact custom code emails stay code-only. Block editing for the team needs a drag-and-drop rebuild, via Constant Contact’s design service or self-built from `docs/drag-and-drop-template-spec.md`.
 - Next: confirm the section name and webinar window with Education, build the master template in Constant Contact, add UTM tags, pull baseline click data from recent issues and talk with 5 to 10 member bankers.
 - Open questions are listed in `docs/proposed-structure.md`.
 
@@ -50,6 +51,7 @@ Redesign and reformat **Bank Note**, IBA’s weekly member e-newsletter for Iowa
 | `docs/education-merge.md` | Education Bulletin merge: requirements, section structure, name ideas, weekly workflow, sunset plan |
 | `prototype/bank-note-education-merge.html` | Prototype 2: Oct. 8 issue with the education section, name switcher (open in a browser) |
 | `prototype/images/banners/` | Education section banner PNGs, one per name option |
+| `docs/drag-and-drop-template-spec.md` | Spec for rebuilding the modern design as a drag-and-drop Constant Contact template (for their design service or a self-build) |
 | `template/` | Custom-code HTML email template for Constant Contact (blank starter, Oct. 8 sample, generator script, README) |
 | `prototype/bank-note-prototype.html` | Working mockup of the Oct. 8 issue in the new format (open in a browser) |
 
