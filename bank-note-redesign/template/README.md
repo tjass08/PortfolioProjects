@@ -4,7 +4,19 @@
 | --- | --- |
 | `bank-note-template.html` | The blank starter. Paste it into Constant Contact’s custom code editor and save it as the Bank Note template. |
 | `bank-note-sample-2026-10-08.html` | The same template filled with the Oct. 8, 2026, issue, so you can see how real content fits |
+| `bank-note-template-copy.html` | A helper page with one-click Copy buttons, paste steps and a preview. Published as a private Claude artifact. |
 | `build_template.py` | Regenerates both files if the design changes (`python3 build_template.py`) |
+
+## Section order
+
+1. What’s in this edition
+2. The top story
+3. Banking briefs: a quick news roundup, most urgent first. A brief can carry a big stat (the old By the numbers).
+4. Across Iowa’s banking industry: a recognition story, People and Places, Banking in the Community and Photo of the week
+5. Member Spotlight: its own gold-trimmed feature card with a large photo and a highlighted line
+6. Dates and deadlines: deadlines, the Credit Hours education section (every webinar listed) and useful resources
+
+Five sponsor ad slots sit between sections.
 
 ## First-time setup
 
@@ -32,6 +44,6 @@ Each section is marked with a comment that’s easy to spot in the editor, for e
 ## What’s built in
 
 - Table layout with inline styles, which desktop Outlook needs.
-- Two-column sections (top story photo, By the numbers, side-by-side ads, Community, Spotlight) stack into one column on phones.
+- Two-column sections (top story photo, side-by-side ads, Community, Spotlight, deadlines, webinars) stack into one column on phones.
 - Light color scheme set, so phones in dark mode are less likely to repaint the blues.
 - Every image has alt text and a fixed width, so the layout holds when images are blocked.
