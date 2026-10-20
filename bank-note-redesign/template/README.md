@@ -31,7 +31,7 @@ Five sponsor ad slots sit between sections.
 Each section is marked with a comment that’s easy to spot in the editor, for example `<!-- ===== TOP STORY ===== -->`. Edit only the words between tags.
 
 - **Preheader:** the first `<div>` after `<body>`. Custom code emails don’t have a preheader field, so it lives here.
-- **Repeating items:** to add a policy item, copy everything from one `<!-- HIT -->` to the next. To add a webinar day, copy one `<!-- WEBINAR DAY -->` row.
+- **Repeating items:** to add a brief, copy everything from one `<!-- BRIEF -->` to the next. Deadline rows (`<!-- DEADLINE -->`) and resources (`<!-- RESOURCE -->`) work the same way. To add a webinar day, copy one `<!-- WEBINAR DAY -->` row.
 - **Links:** every `href="#"` is a placeholder. Paste the real URL, with UTM tags, between the quotes.
 - **Never type** `[#`, `${` or `<@`. Constant Contact rejects custom code that contains them.
 
@@ -39,7 +39,7 @@ Each section is marked with a comment that’s easy to spot in the editor, for e
 
 - Check that the legal footer, with the address and unsubscribe link, appears in a test send. Constant Contact should add it automatically to custom code emails, but confirm on the first send.
 - Send tests to desktop Outlook, Gmail and a phone. Also check once with images turned off.
-- Keep the file under about 100 KB, or Gmail cuts off the end with a “View entire message” link. The sample issue is 36 KB.
+- Keep the file under about 100 KB, or Gmail cuts off the end with a “View entire message” link. The sample issue is 40 KB.
 
 ## What’s built in
 
