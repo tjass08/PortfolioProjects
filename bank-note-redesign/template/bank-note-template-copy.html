@@ -49,8 +49,8 @@ iframe { display:block; width:100%; height:900px; border:0; }
       </div>
     </div>
     <p class="status" id="status" role="status" aria-live="polite"></p>
-    <div id="fallback" hidden>
-      <p class="note">Your browser blocked automatic copying. The code is selected in the box below. Press <kbd>Ctrl</kbd>+<kbd>C</kbd> (<kbd>Cmd</kbd>+<kbd>C</kbd> on a Mac) to copy it.</p>
+    <div id="fallback" style="display:grid;gap:8px">
+      <p class="note"><strong>Button not working?</strong> Click inside the box below, press <kbd>Ctrl</kbd>+<kbd>A</kbd> then <kbd>Ctrl</kbd>+<kbd>C</kbd> (<kbd>Cmd</kbd> on a Mac). The box holds the <span id="fallback-kind">blank template</span>.</p>
       <textarea id="fallback-text" readonly aria-label="Template code"></textarea>
     </div>
   </section>
@@ -61,7 +61,7 @@ iframe { display:block; width:100%; height:900px; border:0; }
       <li>Open your custom code email, the screen with the numbered lines.</li>
       <li>Click anywhere inside the code window.</li>
       <li>Press <kbd>Ctrl</kbd>+<kbd>A</kbd> (<kbd>Cmd</kbd>+<kbd>A</kbd> on a Mac) to select the starter code that’s there.</li>
-      <li>Press <kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>Cmd</kbd>+<kbd>V</kbd>) to paste. The starter code is replaced.</li>
+      <li>Press <kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>Cmd</kbd>+<kbd>V</kbd>) to paste. The starter code is replaced. Line 1 should now read <code>&lt;!DOCTYPE html&gt;</code>, with about 120 lines below it. If the window is empty, nothing was copied, so go back and use the box above.</li>
       <li>Turn on <strong>Live Preview</strong> to see the email, then click <strong>Save</strong>.</li>
     </ol>
     <p class="note">Gray boxes are placeholder images. Swap them for your real photos and ads before sending. The README in the project folder walks through that.</p>
@@ -94,14 +94,18 @@ iframe { display:block; width:100%; height:900px; border:0; }
   var fb = document.getElementById('fallback'), fbt = document.getElementById('fallback-text');
   function copy(kind, label) {
     var text = D[kind];
-    fb.hidden = true;
-    function fallback() { fbt.value = text; fb.hidden = false; fbt.focus(); fbt.select(); status.textContent = ''; }
+    fbt.value = text; document.getElementById('fallback-kind').textContent = label;
+    function fallback() {
+      fbt.focus(); fbt.select();
+      status.textContent = 'Automatic copy was blocked. The code is selected in the box below. Press Ctrl+C (Cmd+C on a Mac) now.';
+    }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(function () {
-        status.textContent = '✓ Copied the ' + label + '. Now paste it into Constant Contact.';
+        status.textContent = '✓ Copied the ' + label + ' (' + text.split('\n').length + ' lines). Now paste it into Constant Contact.';
       }, fallback);
     } else { fallback(); }
   }
+  fbt.value = D.blank;
   document.getElementById('copy-blank').addEventListener('click', function () { copy('blank', 'blank template'); });
   document.getElementById('copy-sample').addEventListener('click', function () { copy('sample', 'sample issue'); });
 
