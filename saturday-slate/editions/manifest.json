@@ -14,6 +14,20 @@
         {"game": "Cowboys @ Packers", "pick": "Packers 27-24", "confidence": 55},
         {"game": "Southeast Polk @ Johnston", "pick": "Southeast Polk 28-21", "confidence": 56}
       ]
+    },
+    {
+      "date": "2026-10-22",
+      "week": "Week 8",
+      "weekend": "Oct 23-26, 2026",
+      "file": "2026-10-22-week8.html",
+      "note": "Miami new AP No. 1 after Georgia's loss; Iowa up to No. 15. All three big teams back from byes (Iowa at Minnesota, Iowa State at Arizona, Vikings vs Colts). Final week of the Iowa HS regular season. GOTW Ole Miss @ Texas.",
+      "picks": [
+        {"game": "Ole Miss @ Texas", "pick": "Ole Miss 30-24", "confidence": 55},
+        {"game": "Indiana @ Michigan", "pick": "Indiana 27-20", "confidence": 58},
+        {"game": "Iowa @ Minnesota", "pick": "Iowa 23-17", "confidence": 62},
+        {"game": "Iowa State @ Arizona", "pick": "Arizona 31-20", "confidence": 60},
+        {"game": "Chiefs @ Seahawks", "pick": "Seahawks 24-22", "confidence": 53}
+      ]
     }
   ]
 }
