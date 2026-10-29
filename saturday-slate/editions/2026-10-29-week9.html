@@ -1,0 +1,1081 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A weekly, shareable football guide — College, NFL and Iowa high school.">
+<meta name="theme-color" content="#152238">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%23152238%22%2F%3E%3Cpath%20d%3D%22M6%2016c0-5%204-9%2010-9s10%204%2010%209-4%209-10%209S6%2021%206%2016Z%22%20fill%3D%22none%22%20stroke%3D%22%23E7B44E%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M12%2012l8%208M20%2012l-8%208%22%20stroke%3D%22%23E7B44E%22%20stroke-width%3D%221.6%22%2F%3E%3C%2Fsvg%3E">
+<style>
+  :root{color-scheme:light dark; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px)}
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:#faf9f7}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+<title>Saturday Slate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+/* ===== Saturday Slate — theme tokens ===== */
+:root{
+  --ground:#E7EAF0; --surface:#FFFFFF; --surface-2:#F2F4F8; --elev:#FFFFFF;
+  --ink:#141A24; --ink-soft:#39424F; --muted:#69727F; --line:#D6DBE3; --line-soft:#E4E8EE;
+  --accent:#A9791A; --accent-2:#7A5610; --accent-fill:#F1D089; --accent-ink:#3d2c00;
+  --navy:#152238; --navy-2:#1d3050; --on-navy:#EAF0F8; --on-navy-mut:#9fb0c9;
+  --toss:#1f6fb0; --live:#C81E2B; --good:#1F7A4D;
+  --iowa:#0c0c0c; --iowa-gold:#FFCD00; --isu:#C8102E; --isu-gold:#E5A823;
+  --min:#4F2683; --min-gold:#FFC62F; --ank:#E8541E; --cen:#13284B; --cen-gold:#C9A227;
+  --shadow:0 1px 2px rgba(16,22,34,.05), 0 10px 30px rgba(16,22,34,.07);
+  --shadow-sm:0 1px 2px rgba(16,22,34,.06);
+  --radius:12px; --radius-sm:8px;
+  --font-display:'Oswald','Arial Narrow',sans-serif;
+  --font-body:'Libre Franklin',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --ground:#0A0E15; --surface:#131A25; --surface-2:#1A2331; --elev:#18212F;
+  --ink:#EEF2F7; --ink-soft:#C6CEDA; --muted:#8B97A7; --line:#28323F; --line-soft:#1f2937;
+  --accent:#E7B44E; --accent-2:#F2C86A; --accent-fill:#4a3a10; --accent-ink:#F5DFA6;
+  --navy:#0C1522; --navy-2:#12233b; --on-navy:#EAF0F8; --on-navy-mut:#8fa1bb;
+  --toss:#5aa2e6; --live:#F0555F; --good:#3fbb7c; --isu-gold:#E5A823;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 34px rgba(0,0,0,.5); --shadow-sm:0 1px 2px rgba(0,0,0,.5);
+}}
+:root[data-theme="dark"]{
+  --ground:#0A0E15; --surface:#131A25; --surface-2:#1A2331; --elev:#18212F;
+  --ink:#EEF2F7; --ink-soft:#C6CEDA; --muted:#8B97A7; --line:#28323F; --line-soft:#1f2937;
+  --accent:#E7B44E; --accent-2:#F2C86A; --accent-fill:#4a3a10; --accent-ink:#F5DFA6;
+  --navy:#0C1522; --navy-2:#12233b; --on-navy:#EAF0F8; --on-navy-mut:#8fa1bb;
+  --toss:#5aa2e6; --live:#F0555F; --good:#3fbb7c; --isu-gold:#E5A823;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 34px rgba(0,0,0,.5); --shadow-sm:0 1px 2px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box}
+body{background:var(--ground); color:var(--ink); font-family:var(--font-body); font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px; margin:0 auto; padding-inline:16px}
+h1,h2,h3{margin:0; font-family:var(--font-display); font-weight:600; text-wrap:balance; letter-spacing:.01em}
+button{font-family:inherit; cursor:pointer}
+.tnum{font-variant-numeric:tabular-nums}
+:focus-visible{outline:2.5px solid var(--accent); outline-offset:2px; border-radius:4px}
+
+/* topbar */
+.topbar{position:sticky; top:env(safe-area-inset-top,0px); z-index:40;
+  background:color-mix(in srgb, var(--ground) 86%, transparent);
+  backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--line)}
+.topbar-in{display:flex; align-items:center; gap:14px; padding-block:11px}
+.brand{display:flex; flex-direction:column; line-height:1; margin-right:auto; min-width:0}
+.brand .mark{font-family:var(--font-display); font-weight:700; font-size:22px; letter-spacing:.02em; text-transform:uppercase; display:flex; align-items:center; gap:9px}
+.brand .mark b{color:var(--accent-2)}
+.pigskin{width:19px;height:19px;flex:none;color:var(--accent-2)}
+.brand .sub{font-size:11.5px; color:var(--muted); margin-top:4px; letter-spacing:.02em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.tb-btn{display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:999px; padding:8px 13px; font-size:12.5px; font-weight:600; box-shadow:var(--shadow-sm); transition:transform .12s, border-color .12s}
+.tb-btn:hover{border-color:var(--accent)}
+.tb-btn:active{transform:translateY(1px)}
+.tb-btn svg{width:16px;height:16px}
+.tb-btn.primary{background:var(--accent); border-color:var(--accent); color:#1a1204}
+.icon-btn{padding:8px; width:38px; justify-content:center}
+.sun{display:none} .moon{display:block}
+:root[data-theme="dark"] .sun{display:block} :root[data-theme="dark"] .moon{display:none}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .sun{display:block} :root:not([data-theme="light"]) .moon{display:none} }
+.hide-sm{display:inline}
+@media (max-width:560px){ .hide-sm{display:none} .brand .sub{display:none} }
+
+/* league switcher */
+.league-nav{position:sticky; top:calc(env(safe-area-inset-top,0px) + 54px); z-index:30; background:var(--ground); padding-block:12px; border-bottom:1px solid var(--line-soft)}
+.league-nav-in{display:flex; gap:8px}
+.lg-btn{flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; border:1px solid var(--line); background:var(--surface); border-radius:12px; padding:10px 8px; box-shadow:var(--shadow-sm); transition:border-color .12s, transform .12s; min-width:0}
+.lg-btn .t{font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:.06em; font-size:15px; color:var(--ink); line-height:1}
+.lg-btn .s{font-size:10.5px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%}
+.lg-btn:hover{border-color:var(--accent)}
+.lg-btn[aria-pressed="true"]{border-color:transparent; background:var(--navy)}
+.lg-btn[aria-pressed="true"] .t{color:#fff}
+.lg-btn[aria-pressed="true"] .s{color:var(--on-navy-mut)}
+
+/* hero */
+.hero{margin-top:20px; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); color:var(--on-navy); position:relative; isolation:isolate;
+  background:radial-gradient(120% 140% at 88% -20%, var(--navy-2), transparent 60%), linear-gradient(180deg, var(--navy), #0c1626)}
+.hero::before{content:""; position:absolute; inset:0; z-index:-1; opacity:.5; background-image:repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 76px)}
+.hero-in{padding:22px 20px 24px}
+.hero-top{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:16px}
+.gow-tag{font-family:var(--font-display); text-transform:uppercase; letter-spacing:.16em; font-weight:700; font-size:12px; color:#0f1a2c; background:var(--accent); padding:5px 11px; border-radius:6px}
+.hero-when{color:var(--on-navy-mut); font-size:12.5px; font-weight:600; letter-spacing:.04em}
+.hero-when b{color:var(--on-navy)}
+.hero-match{font-family:var(--font-display); font-weight:600; line-height:1.02; font-size:clamp(28px, 6.6vw, 54px); letter-spacing:.005em; margin:2px 0 4px}
+.hero-match .at{color:var(--on-navy-mut); font-weight:300; font-size:.6em; padding:0 .18em; font-style:italic}
+.hero-match .rk{vertical-align:.3em; font-size:.34em; color:var(--accent-2); font-weight:700; margin-right:.14em; font-family:var(--font-mono)}
+.hero-venue{color:var(--on-navy-mut); font-size:13px; margin-bottom:16px}
+.hero-strip{display:flex; flex-wrap:wrap; gap:10px 22px; align-items:center; border-top:1px solid rgba(255,255,255,.14); padding-top:16px}
+.hero-stat{display:flex; flex-direction:column; gap:3px}
+.hero-stat .k{font-size:10.5px; text-transform:uppercase; letter-spacing:.14em; color:var(--on-navy-mut)}
+.hero-stat .v{font-family:var(--font-mono); font-size:16px; font-weight:600; color:var(--on-navy)}
+.hero-stat .v.fav{color:var(--accent-2)}
+.hero-tidbit{margin:16px 0 0; max-width:64ch; color:#dbe4f0; font-size:14.5px; line-height:1.55}
+.hero-tidbit b{color:#fff}
+
+/* section headings */
+.sec{margin-top:30px}
+.sec-head{display:flex; align-items:baseline; gap:12px; margin-bottom:15px; flex-wrap:wrap}
+.sec-head h2{font-size:22px; font-weight:600; letter-spacing:.01em; text-transform:uppercase}
+.sec-head .note{font-size:12.5px; color:var(--muted)}
+.rule{flex:1; height:1px; background:var(--line); min-width:24px}
+
+/* team panels */
+.teams{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+@media (max-width:720px){ .teams{grid-template-columns:1fr} }
+.teams.one{grid-template-columns:1fr; max-width:560px}
+.team{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-sm); overflow:hidden; display:flex; flex-direction:column}
+.team-bar{height:6px}
+.team[data-team="iowa"] .team-bar{background:linear-gradient(90deg,var(--iowa),#000 60%,var(--iowa-gold))}
+.team[data-team="isu"] .team-bar{background:linear-gradient(90deg,var(--isu),#8a0b20 60%,var(--isu-gold))}
+.team[data-team="min"] .team-bar{background:linear-gradient(90deg,var(--min),#2e1550 55%,var(--min-gold))}
+.team[data-team="ank"] .team-bar{background:linear-gradient(90deg,var(--ank),#111 70%)}
+.team[data-team="cen"] .team-bar{background:linear-gradient(90deg,var(--cen),#0a1830 55%,var(--cen-gold))}
+.team-in{padding:16px 16px 6px}
+.team-id{display:flex; align-items:flex-start; gap:11px; margin-bottom:12px}
+.team-logo{width:42px; height:42px; border-radius:9px; flex:none; display:grid; place-items:center; font-family:var(--font-display); font-weight:700; font-size:15px; letter-spacing:.01em}
+.team[data-team="iowa"] .team-logo{background:var(--iowa); color:var(--iowa-gold); box-shadow:inset 0 0 0 1px rgba(255,205,0,.5)}
+.team[data-team="isu"] .team-logo{background:var(--isu); color:#fff}
+.team[data-team="min"] .team-logo{background:var(--min); color:var(--min-gold)}
+.team[data-team="ank"] .team-logo{background:#111; color:var(--ank)}
+.team[data-team="cen"] .team-logo{background:var(--cen); color:var(--cen-gold)}
+.team-name{font-size:20px; font-weight:600; line-height:1.05; text-transform:uppercase}
+.team-meta{font-size:12px; color:var(--muted); margin-top:4px; display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.chip{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:600; padding:2px 8px; border-radius:999px; background:var(--surface-2); color:var(--ink-soft); border:1px solid var(--line-soft)}
+.chip.rank{background:var(--accent); color:#1a1204; border-color:transparent}
+.team-game{display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; background:var(--surface-2); border:1px solid var(--line-soft); border-radius:var(--radius-sm); padding:11px 13px; margin-bottom:12px}
+.team-game .op{font-family:var(--font-display); font-weight:600; font-size:16px; letter-spacing:.01em}
+.team-game .op small{color:var(--muted); font-weight:400; font-family:var(--font-body); font-size:12px}
+.tg-line{display:flex; gap:14px; margin-left:auto; flex-wrap:wrap}
+.tg-line .b{display:flex; flex-direction:column; gap:1px}
+.tg-line .k{font-size:9.5px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted)}
+.tg-line .v{font-family:var(--font-mono); font-size:13.5px; font-weight:600}
+.tg-line .v.fav{color:var(--accent-2)}
+.team-blurb{font-size:13.5px; color:var(--ink-soft); line-height:1.55; margin:0 0 14px}
+.team-blurb b{color:var(--ink)}
+.ranks{border-top:1px solid var(--line-soft); margin-top:auto}
+.ranks-toggle{width:100%; display:flex; align-items:center; gap:8px; background:none; border:0; padding:12px 16px; font-family:var(--font-display); text-transform:uppercase; letter-spacing:.1em; font-weight:600; font-size:12.5px; color:var(--ink)}
+.ranks-toggle .cnt{color:var(--muted); font-weight:400; letter-spacing:.02em; font-family:var(--font-body)}
+.ranks-toggle .chev{margin-left:auto; transition:transform .18s; color:var(--muted)}
+.ranks-toggle[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.ranks-body{padding:0 16px 16px}
+.rtbl-wrap{overflow-x:auto}
+.rtbl{width:100%; border-collapse:collapse; font-size:13px}
+.rtbl caption{text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:var(--accent-2); font-weight:700; padding:12px 0 6px; font-family:var(--font-display)}
+.rtbl th,.rtbl td{padding:7px 10px; text-align:right; border-bottom:1px solid var(--line-soft); white-space:nowrap}
+.rtbl th:first-child,.rtbl td:first-child{text-align:left; padding-left:0}
+.rtbl thead th{font-size:10px; text-transform:uppercase; letter-spacing:.09em; color:var(--muted); font-weight:600; border-bottom-color:var(--line)}
+.rtbl td.m{font-weight:500; color:var(--ink)}
+.rtbl td.v{font-family:var(--font-mono); color:var(--ink-soft)}
+.rtbl td.r{font-family:var(--font-mono); font-weight:600}
+.rtbl td.top{color:var(--good)}
+.rtbl td.top::before{content:""; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--good); margin-right:6px; vertical-align:middle}
+.rank-note{font-size:11px; color:var(--muted); line-height:1.5; margin:10px 0 0}
+
+/* controls / filters */
+.controls{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:16px}
+.seg{display:inline-flex; background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:3px; gap:2px; box-shadow:var(--shadow-sm); flex-wrap:wrap}
+.seg button{border:0; background:none; color:var(--ink-soft); font-weight:600; font-size:12.5px; padding:7px 12px; border-radius:999px; display:inline-flex; align-items:center; gap:6px; transition:color .12s}
+.seg button .n{font-family:var(--font-mono); font-size:11px; color:var(--muted); background:var(--surface); border-radius:999px; padding:0 6px; line-height:16px}
+.seg button[aria-pressed="true"]{background:var(--accent); color:#1a1204; box-shadow:var(--shadow-sm)}
+.seg button[aria-pressed="true"] .n{color:#3d2c00; background:rgba(255,255,255,.5)}
+.ctz{margin-left:auto; font-size:11.5px; color:var(--muted); display:inline-flex; align-items:center; gap:6px}
+.ctz b{color:var(--ink-soft)}
+
+/* slate grid */
+.slate{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px}
+.game{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-sm); overflow:hidden; display:flex; flex-direction:column; transition:border-color .14s, box-shadow .14s}
+.game:hover{border-color:color-mix(in srgb, var(--accent) 55%, var(--line)); box-shadow:var(--shadow)}
+.game.mw{border-top:3px solid var(--live)}
+.game-toggle{text-align:left; background:none; border:0; padding:14px 15px 13px; color:inherit; display:flex; flex-direction:column; gap:10px; width:100%}
+.game.flat .game-toggle{cursor:default}
+.g-row1{display:flex; align-items:center; gap:9px; flex-wrap:wrap}
+.g-time{font-family:var(--font-mono); font-weight:600; font-size:14px}
+.g-day{font-family:var(--font-display); font-size:10.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-2); border:1px solid var(--line); border-radius:5px; padding:1px 6px}
+.g-day.alt{color:#fff; background:var(--live); border-color:transparent}
+.tv{margin-left:auto; font-size:11px; font-weight:600; color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line-soft); border-radius:6px; padding:3px 8px; white-space:nowrap}
+.g-match{font-family:var(--font-display); font-weight:500; font-size:19px; line-height:1.12; letter-spacing:.005em}
+.g-match .at{color:var(--muted); font-weight:300; font-style:italic; font-size:.72em; padding:0 .12em}
+.g-match .rk{font-size:.6em; color:var(--accent-2); font-weight:700; margin-right:.12em; font-family:var(--font-mono); vertical-align:.12em}
+.g-bottom{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.fav{display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-weight:600; font-size:12.5px; color:var(--accent-ink); background:var(--accent-fill); border-radius:999px; padding:3px 11px}
+.fav .lab{font-family:var(--font-body); font-weight:600; font-size:10px; text-transform:uppercase; letter-spacing:.08em; opacity:.7}
+.g-tags{display:inline-flex; gap:6px; margin-left:auto; flex-wrap:wrap}
+.tag{font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; padding:2px 7px; border-radius:5px; color:var(--muted); border:1px solid var(--line-soft)}
+.tag.mustwatch{color:var(--live); border-color:color-mix(in srgb,var(--live) 40%, transparent)}
+.tag.slot{color:var(--toss); border-color:color-mix(in srgb,var(--toss) 40%, transparent)}
+.tag.conf{color:var(--accent-2); border-color:color-mix(in srgb,var(--accent) 35%, transparent)}
+.g-tidbit{font-size:13px; color:var(--ink-soft); line-height:1.5; margin:0}
+.g-tidbit .more-hint{color:var(--accent-2); font-weight:600; font-size:11.5px; white-space:nowrap}
+.game-more{border-top:1px dashed var(--line); padding:13px 15px 15px; display:flex; flex-direction:column; gap:12px}
+.qs{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px}
+.qs li{position:relative; padding-left:16px; font-size:12.5px; color:var(--ink-soft); line-height:1.45}
+.qs li::before{content:""; position:absolute; left:0; top:7px; width:6px; height:6px; border-radius:1px; background:var(--accent); transform:rotate(45deg)}
+.why{font-size:12.5px; color:var(--ink); background:var(--surface-2); border-left:3px solid var(--accent); border-radius:0 6px 6px 0; padding:9px 12px; line-height:1.5}
+.why b{font-family:var(--font-display); text-transform:uppercase; letter-spacing:.08em; font-size:11px; color:var(--accent-2); display:block; margin-bottom:2px; font-weight:600}
+.ou{font-family:var(--font-mono); font-size:11.5px; color:var(--muted)}
+.empty{grid-column:1/-1; text-align:center; color:var(--muted); font-size:13px; padding:28px 0}
+
+/* poll strip */
+.poll{margin-top:14px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-sm); padding:14px 0}
+.poll h3{font-size:12.5px; text-transform:uppercase; letter-spacing:.12em; color:var(--ink); padding:0 16px; margin-bottom:11px; display:flex; align-items:center; gap:10px}
+.poll h3 small{color:var(--muted); font-family:var(--font-body); font-weight:400; letter-spacing:.02em; text-transform:none; font-size:11.5px}
+.poll-row{display:flex; gap:7px; overflow-x:auto; padding:2px 16px 6px; scrollbar-width:thin}
+.pchip{flex:none; display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line); border-radius:8px; padding:6px 10px 6px 7px; background:var(--surface-2)}
+.pchip .r{font-family:var(--font-mono); font-weight:600; font-size:12px; color:var(--muted); min-width:17px; text-align:right}
+.pchip .t{font-family:var(--font-display); font-weight:500; font-size:13.5px; letter-spacing:.01em; white-space:nowrap}
+.pchip.playing{border-color:color-mix(in srgb,var(--accent) 45%, var(--line))}
+.pchip.playing::after{content:""; width:6px;height:6px;border-radius:50%; background:var(--accent)}
+.pchip.me{background:var(--accent); border-color:transparent}
+.pchip.me .r,.pchip.me .t{color:#1a1204}
+.pchip.me::after{background:#1a1204}
+.poll-key{padding:9px 16px 0; font-size:11px; color:var(--muted)}
+.poll-key i{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block; margin-right:5px;vertical-align:middle}
+
+/* footer */
+footer{margin:40px 0 30px}
+.foot-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-sm); padding:20px}
+.foot-card h3{font-size:15px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:12px}
+.how{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:16px}
+@media (max-width:640px){ .how{grid-template-columns:1fr} }
+.how .step{font-size:12.5px; color:var(--ink-soft); line-height:1.5}
+.how .step b{display:block; font-family:var(--font-display); text-transform:uppercase; letter-spacing:.06em; color:var(--ink); font-size:12.5px; margin-bottom:3px}
+.how .step .num{color:var(--accent-2); font-family:var(--font-mono); font-weight:600}
+.how .step .kbd{font-weight:600; color:var(--accent-2)}
+.foot-meta{border-top:1px solid var(--line-soft); padding-top:14px; font-size:11.5px; color:var(--muted); line-height:1.6}
+.foot-meta b{color:var(--ink-soft)}
+.foot-brand{font-family:var(--font-display); text-transform:uppercase; letter-spacing:.1em; color:var(--accent-2); font-weight:600; font-size:12px; margin-bottom:8px}
+
+.toast{position:fixed; left:50%; bottom:calc(22px + env(safe-area-inset-bottom,0px)); transform:translate(-50%, 30px); background:var(--ink); color:var(--ground); padding:11px 18px; border-radius:999px; font-size:13px; font-weight:600; box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:60}
+.toast.show{opacity:1; transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){ *{transition:none!important; scroll-behavior:auto!important} }
+
+/* ===== v2 — publication cover, playoff system, enhanced previews ===== */
+.cover{padding-top:18px}
+.masthead{border-bottom:3px solid var(--ink); padding-bottom:14px; margin-bottom:18px}
+.mast-kicker{font-family:var(--font-display); text-transform:uppercase; letter-spacing:.22em; font-size:11px; font-weight:600; color:var(--accent-2)}
+.mast-title{font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:.005em; font-size:clamp(30px,8vw,60px); line-height:.92; margin:6px 0 9px}
+.mast-sub{display:flex; flex-wrap:wrap; gap:5px 14px; align-items:baseline; font-size:12px; color:var(--muted); font-family:var(--font-mono)}
+.mast-sub b{color:var(--ink-soft); font-weight:600}
+.mast-edition{font-family:var(--font-display); text-transform:uppercase; letter-spacing:.08em; font-weight:600; color:var(--ink); font-size:13px}
+
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-sm); padding:16px 18px}
+.card-h{font-family:var(--font-display); text-transform:uppercase; letter-spacing:.08em; font-weight:600; font-size:13px; color:var(--accent-2); margin-bottom:11px}
+.fp-grid{display:grid; grid-template-columns:1.35fr 1fr; gap:16px; align-items:start; margin-bottom:16px}
+@media (max-width:820px){ .fp-grid{grid-template-columns:1fr} }
+.briefing p{margin:0; font-size:14.5px; line-height:1.62; color:var(--ink-soft)}
+.briefing p b{color:var(--ink)}
+
+.stories{list-style:none; margin:0; padding:0; counter-reset:s}
+.stories li{counter-increment:s; display:flex; gap:11px; padding:9px 0; border-top:1px solid var(--line-soft)}
+.stories li:first-child{border-top:0; padding-top:0}
+.stories li::before{content:counter(s); font-family:var(--font-display); font-weight:700; font-size:15px; color:var(--accent-2); min-width:16px; line-height:1.3}
+.stories .st{font-weight:600; color:var(--ink); font-size:13.5px; line-height:1.3}
+.stories .sd{color:var(--muted); font-size:12px; line-height:1.45; margin-top:2px}
+.lgdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.lgdot.college{background:var(--accent)} .lgdot.nfl{background:var(--toss)} .lgdot.hs{background:var(--good)}
+
+.bb{display:flex; flex-direction:column; gap:9px}
+.bb-item{display:flex; gap:12px; align-items:flex-start; width:100%; text-align:left; background:var(--surface-2); border:1px solid var(--line-soft); border-radius:var(--radius-sm); padding:11px 12px; transition:border-color .12s; color:inherit}
+.bb-item:hover{border-color:var(--accent)}
+.bb-rank{font-family:var(--font-display); font-weight:700; font-size:20px; color:var(--accent-2); line-height:1; min-width:18px}
+.bb-main{min-width:0; flex:1}
+.bb-match{font-family:var(--font-display); font-weight:600; font-size:15.5px; line-height:1.1}
+.bb-match .rk{font-size:.62em;color:var(--accent-2);font-family:var(--font-mono);font-weight:700;margin-right:.1em;vertical-align:.12em}
+.bb-meta{font-size:11px; color:var(--muted); margin-top:3px; font-family:var(--font-mono)}
+.bb-why{font-size:12px; color:var(--ink-soft); margin-top:5px; line-height:1.4}
+.bb-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.bb-tag{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 6px;border-radius:4px;color:var(--accent-2);background:color-mix(in srgb,var(--accent) 13%,transparent)}
+
+.supers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+@media (max-width:720px){ .supers{grid-template-columns:1fr} }
+.super{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:14px;border-top:3px solid var(--accent)}
+.super.r{border-top-color:var(--live)} .super.s{border-top-color:var(--toss)} .super.u{border-top-color:var(--good)}
+.super .lab{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.1em;font-size:10px;font-weight:600;color:var(--muted)}
+.super .mt{font-family:var(--font-display);font-weight:600;font-size:17px;margin:5px 0 4px;line-height:1.08}
+.super .tx{font-size:12px;color:var(--ink-soft);line-height:1.45}
+
+.spotlight{background:radial-gradient(120% 140% at 88% -20%, var(--navy-2), transparent 60%), linear-gradient(180deg,var(--navy),#0c1626);color:var(--on-navy);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.spotlight .card-h{color:var(--accent-2)}
+.spotlight p{color:#dbe4f0;font-size:13.5px;line-height:1.55;margin:0 0 11px}
+.spotlight p b{color:#fff}
+.spotlight ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.spotlight li{font-size:12.5px;color:#cdd9ea;padding-left:16px;position:relative;line-height:1.45}
+.spotlight li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;background:var(--accent-2);border-radius:1px;transform:rotate(45deg)}
+.spotlight li b{color:#fff}
+
+.tl{display:flex;flex-direction:column;gap:13px}
+.tl-day{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.08em;font-weight:600;font-size:12.5px;color:var(--accent-2);margin-bottom:5px;display:flex;gap:8px;align-items:baseline}
+.tl-day .c{font-family:var(--font-mono);font-size:10.5px;color:var(--muted);font-weight:400}
+.tl-row{display:flex;gap:9px;align-items:baseline;padding:4px 0;border-top:1px solid var(--line-soft);font-size:12px}
+.tl-row:first-of-type{border-top:0}
+.tl-time{font-family:var(--font-mono);font-weight:600;color:var(--ink);min-width:58px}
+.tl-mt{color:var(--ink-soft);flex:1;min-width:0}
+.tl-mt b{color:var(--ink);font-weight:600}
+.tl-tv{font-family:var(--font-mono);font-size:10px;color:var(--muted);white-space:nowrap}
+
+.po{border-top:1px solid var(--line-soft);margin:12px -16px 0;padding:14px 16px 0}
+.po-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:5px}
+.po-stand{font-size:12px;color:var(--ink-soft);font-weight:600}
+.trend{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:999px}
+.trend.up{color:var(--good);background:color-mix(in srgb,var(--good) 15%,transparent)}
+.trend.down{color:var(--live);background:color-mix(in srgb,var(--live) 15%,transparent)}
+.trend.flat{color:var(--accent-2);background:color-mix(in srgb,var(--accent) 15%,transparent)}
+.trend-tx{font-size:12px;color:var(--ink-soft);line-height:1.45;margin:4px 0 12px}
+.probs{display:flex;flex-direction:column;gap:11px}
+.prob .prob-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:4px}
+.prob-lab{font-size:12.5px;font-weight:600;color:var(--ink)}
+.prob-val{font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--accent-2);white-space:nowrap;text-align:right}
+.prob-val.pill{background:color-mix(in srgb,var(--accent) 15%,transparent);padding:1px 8px;border-radius:999px;font-size:10.5px}
+.prob-track{height:7px;background:var(--surface-2);border:1px solid var(--line-soft);border-radius:999px;overflow:hidden}
+.prob-fill{height:100%;background:linear-gradient(90deg,var(--accent-2),var(--accent));border-radius:999px}
+.prob.scenario .prob-track{display:none}
+.prob-src{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.4}
+.po-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:13px}
+@media (max-width:560px){ .po-cols{grid-template-columns:1fr} }
+.po-col h4{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.07em;font-size:10.5px;font-weight:600;margin:0 0 6px}
+.po-col.paths h4{color:var(--good)} .po-col.threats h4{color:var(--live)}
+.po-col ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.po-col li{font-size:12px;color:var(--ink-soft);line-height:1.4;padding-left:14px;position:relative}
+.po-col li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%}
+.po-col.paths li::before{background:var(--good)} .po-col.threats li::before{background:var(--live)}
+.po-note{font-size:10.5px;color:var(--muted);margin-top:12px;line-height:1.5;border-top:1px dashed var(--line);padding-top:10px}
+
+.race{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:720px){ .race{grid-template-columns:1fr} }
+.race-col h4{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.07em;font-size:11.5px;font-weight:600;margin:0 0 8px}
+.race-col ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.race-col li{font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+.race-col li b{color:var(--ink)}
+
+.stand{width:100%;border-collapse:collapse;font-size:13px}
+.stand th,.stand td{padding:7px 8px;border-bottom:1px solid var(--line-soft);text-align:center;white-space:nowrap}
+.stand th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.stand td.tm{text-align:left;font-weight:600;color:var(--ink)}
+.stand th.tm{text-align:left}
+.stand tr.me td{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.stand td.tm .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle;background:var(--accent)}
+
+.form-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px}
+.flab{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin-bottom:3px}
+.res{font-family:var(--font-mono);font-size:11px;font-weight:600;padding:2px 7px;border-radius:5px}
+.res.w{color:var(--good);background:color-mix(in srgb,var(--good) 14%,transparent)}
+.res.l{color:var(--live);background:color-mix(in srgb,var(--live) 14%,transparent)}
+.res.nx{color:var(--ink-soft);background:var(--surface-2);border:1px dashed var(--line)}
+
+.pv{display:flex;flex-direction:column;gap:10px}
+.pv-b{background:var(--surface-2);border-radius:var(--radius-sm);padding:10px 12px}
+.pv-b h5{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.07em;font-size:10px;font-weight:600;color:var(--accent-2);margin:0 0 5px}
+.pv-b p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.5}
+.pv-keys{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:480px){ .pv-keys{grid-template-columns:1fr} }
+.pick{display:flex;flex-direction:column;gap:7px;background:var(--surface-2);border-left:3px solid var(--toss);border-radius:0 6px 6px 0;padding:10px 12px}
+.pick .pk-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pick .pk-w{font-family:var(--font-display);font-weight:600;font-size:14px}
+.pick .pk-sc{font-family:var(--font-mono);font-weight:600;font-size:13px;color:var(--ink)}
+.pick .pk-rat{font-size:12px;color:var(--ink-soft);line-height:1.45}
+.conf{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted)}
+.conf-meter{flex:1;height:5px;background:var(--surface);border:1px solid var(--line-soft);border-radius:999px;overflow:hidden;max-width:130px}
+.conf-fill{height:100%;background:var(--toss)}
+.proj-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--toss);margin-right:5px}
+.fact-note{font-size:10px;color:var(--muted);font-style:italic}
+</style>
+</head>
+<body>
+
+
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <div class="brand">
+      <span class="mark">
+        <svg class="pigskin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3.5 12c0-4 3.2-8.5 8.5-8.5S20.5 8 20.5 12 17.3 20.5 12 20.5 3.5 16 3.5 12Z"/><path d="M8.5 8.5 15.5 15.5M15.5 8.5 8.5 15.5" stroke-width="1.3"/><path d="M9.6 12h4.8M12 9.6v4.8" stroke-width="1.1"/></svg>
+        Saturday <b>Slate</b>
+      </span>
+      <span class="sub">Football, sorted for the weekend — all times Central.</span>
+    </div>
+    <button class="tb-btn primary" id="copyBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>
+      <span class="hide-sm">Copy this slate</span>
+    </button>
+    <button class="tb-btn icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8Z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="wrap cover" id="cover"></div>
+
+<div class="league-nav"><div class="wrap league-nav-in" id="leagueNav"></div></div>
+
+<main class="wrap" id="app"></main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================================
+   SATURDAY SLATE — WEEKLY DATA  (edit DATA each week; everything renders from it)
+   Times are CENTRAL. rank: number or null. spread: "-6.5" string or null.
+   Leagues: college (conf tabs), nfl (primetime filter), hs (metro).
+   ============================================================================ */
+const DATA = {
+  updated: "Oct 29, 2026",
+
+  edition: {
+    label: "Week 9 Edition",
+    date: "Weekend of Oct 30 – Nov 2, 2026",
+    briefing: "<b>A brutal rivalry Saturday for the Hawkeyes.</b> Minnesota stunned Iowa 13–10 on a walk-off field goal to reclaim the Floyd of Rosedale, knocking <b>Iowa out of the Top 25</b> and all but ending its playoff bid — and <b>Iowa State</b> was routed 39–3 at Arizona. Both are home this week looking to steady the ship. The <b>6–0 Vikings</b>, the NFL's last unbeaten, face their toughest test yet at the <b>Lions</b>. And it's <b>Iowa high school playoff time</b> — Tyler's <b>Ankeny</b> hosts Waukee in the 5A Round of 16. Nationally, it's <b>Georgia–Florida</b> and a top-5 Saturday."
+  },
+
+  storylines: [
+    { lg:"college", t:"Iowa's playoff bid takes a gut punch", d:"A 13–10 walk-off loss at Minnesota dropped the Hawkeyes out of the AP poll; the CFP math is all but gone." },
+    { lg:"nfl", t:"6–0 Vikings' toughest test yet", d:"The NFL's lone unbeaten is a road underdog at a 4–2 Lions team that can seize the division lead." },
+    { lg:"hs", t:"Ankeny hosts a playoff heavyweight", d:"The No. 4 seed welcomes Waukee in the Class 5A Round of 16 — win and reach the quarterfinals." },
+    { lg:"college", t:"Georgia–Florida renews in Jacksonville", d:"No. 3 Georgia and No. 17 Florida meet in the sport's great neutral-site rivalry." },
+    { lg:"college", t:"Iowa State skids to 3–4", d:"A 39–3 loss at Arizona leaves the Cyclones needing a strong finish just to reach a bowl." },
+  ],
+
+  bigBoard: [
+    { lg:"college", away:"Florida", aRank:17, home:"Georgia", hRank:3, day:"SAT", time:"2:30 PM", tv:"ABC", tags:["Rivalry","Top-5","Neutral site"], why:"The World's Largest Outdoor Cocktail Party — No. 3 Georgia vs No. 17 Florida in Jacksonville." },
+    { lg:"nfl", away:"Vikings", home:"Lions", day:"SUN", time:"12:00 PM", tv:"FOX", tags:["Division","Unbeaten on the line"], why:"The 6–0 Vikings' toughest test — a road division game at 4–2 Detroit." },
+    { lg:"college", away:"Ohio State", aRank:2, home:"USC", hRank:null, day:"SAT", time:"6:30 PM", tv:"NBC", tags:["Top-5","Primetime","QB injury"], why:"No. 2 Ohio State at USC in primetime — with star QB Julian Sayin hurt." },
+    { lg:"college", away:"Wisconsin", aRank:25, home:"Iowa", hRank:null, day:"SAT", time:"11:00 AM", tv:"FOX", tags:["Big Ten","Bounce-back"], why:"Tyler's Hawkeyes host ranked Wisconsin trying to steady the season at Kinnick." },
+    { lg:"hs", away:"Waukee", home:"Ankeny", day:"FRI", time:"7:00 PM", tags:["Playoffs","Round of 16"], why:"Tyler's No. 4 seed Ankeny hosts Waukee in a Class 5A playoff heavyweight." },
+    { lg:"college", away:"Miami", aRank:1, home:"North Carolina", hRank:null, day:"SAT", time:"6:30 PM", tv:"ABC", tags:["Top-ranked"], why:"No. 1 Miami visits Bill Belichick's North Carolina." },
+  ],
+
+  superlatives: {
+    rivalry: { matchup:"Georgia vs Florida", text:"The World's Largest Outdoor Cocktail Party in Jacksonville — one of college football's great neutral-site rivalries." },
+    stakes:  { matchup:"Vikings at Lions", text:"The NFL's lone unbeaten on the line, and the NFC North lead with it — Detroit can flip the division with a win." },
+    upset:   { matchup:"USC over Ohio State", text:"USC is a home underdog to No. 2 Ohio State — and the Buckeyes may be without star QB Julian Sayin (arm injury)." },
+  },
+
+  iowaSpotlight: {
+    text: "A rough week for the big two — but a big one for the preps. <b>Iowa (5–2)</b> fell out of the Top 25 after the Floyd of Rosedale heartbreak and hosts ranked <b>Wisconsin</b> trying to stop the slide. <b>Iowa State (3–4)</b> hosts <b>Oklahoma State</b> needing wins to reach a bowl. And it's <b>playoff time</b> in Iowa high school football — Tyler's <b>Ankeny</b> (No. 4 seed) hosts Waukee in the 5A Round of 16.",
+    bullets: [
+      "<b>Iowa</b> (5–2) hosts No. 25 Wisconsin (Sat 11:00 CT, FOX) as a 3.5-point favorite — a bounce-back spot after the Minnesota gut punch. CFP hopes are all but gone; a strong bowl is the goal.",
+      "<b>Iowa State</b> (3–4) hosts No. 24 Oklahoma State (Sat 6:00 CT, FS1) needing 3 wins from its last 5 to reach a bowl.",
+      "<b>Ankeny (7–2, No. 4 seed)</b> hosts Waukee in the Class 5A Round of 16 (Fri 7:00 CT) — win Pod D and reach the state quarterfinals.",
+      "<b>Ankeny Centennial</b>'s season is over; the Jaguars finished outside the 16-team field.",
+    ],
+  },
+
+  college: {
+    label:"College", tag:"NCAA", sub:"Week 9 · Oct 30–31",
+    gameOfWeek:{
+      away:{name:"Florida",rank:17}, home:{name:"Georgia",rank:3}, day:"SAT", time:"2:30 PM", tv:"ABC",
+      venue:"EverBank Stadium · Jacksonville (neutral site)",
+      favored:"Georgia", spread:null, ou:null,
+      tidbit:"<b>The World's Largest Outdoor Cocktail Party.</b> No. 3 Georgia meets No. 17 Florida on the neutral turf in Jacksonville — one of the sport's great rivalries, with the Bulldogs trying to stay on the top line of the playoff race."
+    },
+    teams:[
+      { key:"iowa", logo:"IOWA", name:"Iowa Hawkeyes", conf:"Big Ten", rank:null, record:"5–2", coach:"Kirk Ferentz", qb:"Hank Brown", pollName:"Iowa",
+        game:{ ha:"vs", opp:"#25 Wisconsin", oppName:"Wisconsin", day:"SAT", time:"11:00 AM", tv:"FOX", venue:"Kinnick Stadium · Iowa City", favored:"Iowa", spread:"-3.5", ou:"38.5" },
+        blurb:"<b>Back home, trying to stop the slide.</b> The Floyd of Rosedale heartbreak — a 13–10 walk-off loss at Minnesota — knocked Iowa (5–2) out of the Top 25. Now the Hawkeyes host a ranked Wisconsin as a field-goal favorite, with a low 38.5 total that screams Iowa football.",
+        offense:[], defense:[],
+        note:"",
+        playoff:{
+          standing:"Big Ten 2–2 · unranked (receiving votes)", trend:"down",
+          trendText:"Down hard — the second loss dropped Iowa out of the AP Top 25 (No. 24 coaches) and gutted its playoff math.",
+          bars:[
+            {label:"Make the Playoff (CFP)", scenario:true, disp:"Realistically out (two losses)", src:"ESPN FPI cut Iowa's CFP chances sharply after the loss; no two-loss non-champion is a lock", asOf:"Oct 26"},
+            {label:"Bowl eligibility", scenario:true, disp:"Near-lock — needs 1 win", src:"6 wins = eligible; Iowa is 5–2. CBS projects the Music City Bowl", asOf:"Oct 27"},
+          ],
+          paths:["Win out (to 10–2) to force back into the national conversation — but Iowa likely no longer controls its own destiny.","More realistically, stack wins toward a strong bowl bid; the Wisconsin game starts that stretch."],
+          threats:["With two losses, Iowa needs chaos above it and would still likely need help.","The offense's inconsistency (10 points at Minnesota) is the season-long concern."],
+          note:"Probabilities are published third-party estimates (ESPN FPI, betting markets) shown as ranges or scenarios. The CFP committee adds selection uncertainty a win-loss model can't fully capture."
+        },
+        form:{ recent:[{opp:"Washington",res:"W",score:"41–24"},{opp:"Minnesota",res:"L",score:"10–13"}], upcoming:[] } },
+      { key:"isu", logo:"ISU", name:"Iowa State Cyclones", conf:"Big 12", rank:null, record:"3–4", coach:"Jimmy Rogers", qb:"Jaylen Raynor", pollName:null,
+        game:{ ha:"vs", opp:"#24 Oklahoma State", oppName:"Oklahoma State", day:"SAT", time:"6:00 PM", tv:"FS1", venue:"Jack Trice Stadium · Ames", favored:"Oklahoma State", spread:null, ou:"56.5" },
+        blurb:"<b>Needing to stop the bleeding.</b> Back-to-back losses — capped by a 39–3 wipeout at Arizona — have the Cyclones (3–4) reeling. They host a ranked, surging No. 24 Oklahoma State as a home underdog, needing three wins from their last five to reach a bowl.",
+        offense:[], defense:[],
+        note:"",
+        playoff:{
+          standing:"Big 12 1–3", trend:"down",
+          trendText:"Down — a 39–3 loss at Arizona was a second straight defeat; it's bowl-or-bust math now.",
+          bars:[
+            {label:"Make the Playoff (CFP)", scenario:true, disp:"Out", src:"No credible model lists Iowa State", asOf:"Oct 29"},
+            {label:"Bowl eligibility", scenario:true, disp:"Tougher — needs 3 of last 5", src:"6 wins = eligible; ISU is 3–4", asOf:"calc Oct 29"},
+          ],
+          paths:["Win 3 of the last 5, starting at home vs Oklahoma State, to reach a bowl."],
+          threats:["Back-to-back losses have the offense reeling (3 points at Arizona).","The remaining Big 12 slate offers little margin."],
+          note:"No defensible playoff probability exists for Iowa State, so we show qualification scenarios and standing instead of inventing a number."
+        },
+        form:{ recent:[{opp:"BYU",res:"L",score:"10–24"},{opp:"Arizona",res:"L",score:"3–39"}], upcoming:[] } },
+    ],
+    poll:["Miami","Ohio State","Georgia","Indiana","Notre Dame","Utah","UCLA","BYU","Kentucky","Alabama","Texas","Ole Miss","Texas Tech","Wake Forest","LSU","Tennessee","Florida","Houston","SMU","Boise State","Northwestern","Arizona","Missouri","Oklahoma State","Wisconsin"],
+    playoffRace:{
+      title:"CFP Race Briefing", sub:"AP poll as of Oct 25 · first CFP committee rankings expected Nov 3",
+      cols:[
+        {h:"Top line", items:["<b>Miami (7–0)</b> holds No. 1; <b>Ohio State</b> and <b>Georgia</b> round out the top three.","<b>Indiana</b> and <b>Notre Dame</b> stay in the top five."]},
+        {h:"Stock down", items:["<b>Iowa</b> fell OUT of the Top 25 after losing at Minnesota.","<b>BYU</b> slid to No. 8 after its first loss.","<b>Ole Miss</b>, <b>Texas Tech</b> and <b>Tennessee</b> each dropped five spots."]},
+        {h:"On the bubble", items:["<b>Texas</b> (jumped to No. 11), <b>Houston</b>, <b>SMU</b> and the one-loss pack are jockeying for at-large position."]},
+      ],
+      note:"Format: 12 teams — automatic bids to the ACC, Big Ten, Big 12 and SEC champions plus the top Group-of-5 champion; the other seven are at-large by the committee's final ranking, and the four highest-ranked teams earn first-round byes. The committee's first rankings are expected Nov 3; until then this reflects the AP poll."
+    },
+    games:[
+      /* Big Ten */
+      {conf:"B1G", day:"SAT", time:"11:00 AM", tv:"FOX", away:{name:"Wisconsin",rank:25}, home:{name:"Iowa",rank:null}, favored:"Iowa", spread:"-3.5", ou:"38.5", mustWatch:true,
+        tidbit:"Tyler's Hawkeyes host ranked Wisconsin in a bounce-back spot at Kinnick.", stats:["Iowa −3.5, low 38.5 total","Iowa off the Minnesota loss","Classic Big Ten rock fight"], why:"Iowa trying to steady the season against a ranked Badgers team.",
+        matters:"A bounce-back game for a reeling Iowa — a loss would turn a disappointing season into a crisis.", watch:"Whether Iowa's defense can carry a sputtering offense in a low-scoring slugfest.", matchup:"Iowa's defensive front vs. Wisconsin's power run game.",
+        keys:{away:"Control the clock and win the field-position battle.", home:"Finish drives — the offense left too many points on the field at Minnesota."},
+        upset:"Wisconsin just cracked the Top 25 and could pile on the Hawkeyes' misery.",
+        pick:{winner:"Iowa", score:"20–13", conf:57, confLabel:"57%", rationale:"Home field and a defense-first profile favor Iowa, but neither offense inspires confidence."}},
+      {conf:"B1G", day:"SAT", time:"6:30 PM", tv:"NBC", away:{name:"Ohio State",rank:2}, home:{name:"USC",rank:null}, favored:"Ohio State", spread:"-7", ou:"50.5", mustWatch:true,
+        tidbit:"No. 2 Ohio State visits USC in primetime — with star QB Julian Sayin banged up.", stats:["Ohio State −7 on the road","QB Julian Sayin (arm) injured","Primetime on NBC"], why:"A top-5 team on the road with a quarterback question — upset intrigue.",
+        matters:"Ohio State is chasing a top seed; a QB injury at a live USC makes this trickier than the line suggests.", watch:"Who takes the snaps for Ohio State, and whether USC's offense can exploit it.",
+        upset:"USC at home, getting a touchdown, against a potentially banged-up Ohio State is the upset of the week.",
+        pick:{winner:"Ohio State", score:"31–24", conf:58, confLabel:"58%", rationale:"Ohio State's talent should win out, but the QB situation keeps USC within a score."}},
+      {conf:"B1G", day:"SAT", time:"2:30 PM", tv:"CBS", away:{name:"Northwestern",rank:21}, home:{name:"Oregon",rank:null}, favored:"Oregon", spread:"-3.5",
+        tidbit:"No. 21 Northwestern at Oregon in a Big Ten crossover — Oregon a field-goal favorite."},
+      /* SEC */
+      {conf:"SEC", day:"SAT", time:"2:30 PM", tv:"ABC", away:{name:"Florida",rank:17}, home:{name:"Georgia",rank:3}, neutral:true, favored:"Georgia", spread:null, mustWatch:true,
+        tidbit:"The headliner: No. 3 Georgia vs No. 17 Florida in Jacksonville.", stats:["Neutral-site rivalry in Jacksonville","Georgia chasing a top CFP seed","The Cocktail Party on ABC"], why:"One of the sport's signature rivalries, with playoff stakes for Georgia.",
+        matters:"Georgia is protecting a top-line playoff position; Florida wants a season-defining upset in the rivalry.", watch:"Whether Florida's defense can slow Georgia in a game that's often closer than the rankings suggest.", matchup:"Georgia's lines vs. Florida's front seven.",
+        keys:{away:"Win the turnover battle and shorten the game.", home:"Impose the run and avoid the trap-game letdown."},
+        upset:"Rivalry games ignore records — a fired-up Florida is always live in Jacksonville.",
+        pick:{winner:"Georgia", score:"27–20", conf:62, confLabel:"62%", rationale:"Georgia's the better team, but the Cocktail Party rarely goes quietly."}},
+      {conf:"SEC", day:"SAT", time:"6:30 PM", tv:"ESPN", away:{name:"Mississippi State",rank:null}, home:{name:"Texas",rank:11}, favored:"Texas", spread:null,
+        tidbit:"No. 11 Texas, suddenly surging up the poll, hosts Mississippi State in a night game."},
+      /* Big 12 */
+      {conf:"B12", day:"SAT", time:"6:00 PM", tv:"FS1", away:{name:"Oklahoma State",rank:24}, home:{name:"Iowa State",rank:null}, favored:"Oklahoma State", spread:null, ou:"56.5", mustWatch:true,
+        tidbit:"Tyler's Cyclones (3–4) host ranked Oklahoma State in a bowl-math game.", stats:["High 56.5 total","Oklahoma State favored on the road","ISU needs wins to reach a bowl"], why:"Iowa State fighting to keep its bowl hopes alive at home.",
+        matters:"A near-must-win for Iowa State's bowl chances after two straight losses.", watch:"Whether the Cyclones' offense can rebound from a 3-point showing at Arizona.", matchup:"Iowa State's offense vs. Oklahoma State's pass rush.",
+        keys:{away:"Keep the pressure on and win the explosive-play battle.", home:"Protect the ball and get Jaylen Raynor comfortable early."},
+        upset:"At home with its season on the brink, Iowa State has every reason to flip this.",
+        pick:{winner:"Oklahoma State", score:"31–27", conf:55, confLabel:"55% — lean", rationale:"A high total and a reeling ISU defense point to points; the pick is a coin-flip leaning road."}},
+      {conf:"B12", day:"SAT", time:"11:00 AM", tv:"ESPN", away:{name:"Arizona",rank:22}, home:{name:"Texas Tech",rank:13}, favored:null, spread:null,
+        tidbit:"Ranked Big 12 noon game: No. 22 Arizona at No. 13 Texas Tech."},
+      {conf:"B12", day:"SAT", time:"2:45 PM", tv:"ESPN", away:{name:"Utah",rank:6}, home:{name:"Cincinnati",rank:null}, favored:null, spread:null,
+        tidbit:"No. 6 Utah visits Cincinnati with a top-10 ranking on the line."},
+      {conf:"B12", day:"FRI", time:"6:30 PM", tv:"ESPN", away:{name:"Baylor",rank:null}, home:{name:"UCF",rank:null}, favored:"UCF", spread:"-1.5",
+        tidbit:"Friday-night Big 12 opens the weekend — Baylor at UCF in Orlando."},
+      /* ACC */
+      {conf:"ACC", day:"SAT", time:"6:30 PM", tv:"ABC", away:{name:"Miami",rank:1}, home:{name:"North Carolina",rank:null}, favored:"Miami", spread:"-14.5", ou:"52.5",
+        tidbit:"No. 1 Miami visits Bill Belichick's North Carolina as a two-touchdown favorite."},
+    ],
+  },
+
+  nfl: {
+    label:"NFL", tag:"NFL", sub:"Week 8 · Oct 29 – Nov 2",
+    gameOfWeek:{
+      away:{name:"Vikings"}, home:{name:"Lions"}, day:"SUN", time:"12:00 PM", tv:"FOX",
+      venue:"Ford Field · Detroit",
+      favored:"Lions", spread:"-3", ou:"46.5",
+      tidbit:"<b>The unbeaten's toughest test.</b> Tyler's 6–0 Vikings — the NFL's last undefeated team — hit the road to face a 4–2 Lions team that can seize the NFC North lead with a win. Detroit's a field-goal home favorite."
+    },
+    teams:[
+      { key:"min", logo:"MIN", name:"Minnesota Vikings", conf:"NFC North", rank:null, record:"6–0", pollName:null,
+        game:{ ha:"at", opp:"Detroit Lions", oppName:"Lions", day:"SUN", time:"12:00 PM", tv:"FOX", venue:"Ford Field · Detroit", favored:"Lions", spread:"-3", ou:"46.5" },
+        blurb:"<b>6–0 and the NFL's last unbeaten.</b> Minnesota handled the Colts 16–10 to stay perfect, but this is the real test: a road division game at a 4–2 Lions team, as a field-goal underdog. Win and the Vikings all but bury the NFC North; lose and Chicago (5–2) and Detroit are right there.",
+        note:"",
+        playoff:{
+          standing:"NFC North 1st · 6–0 (2–0 div)", trend:"up",
+          trendText:"Up — 6–0 and the NFL's only unbeaten, though Chicago (5–2) and Detroit (4–2) are closing in.",
+          bars:[
+            {label:"Make the Playoffs", lo:85, hi:93, disp:"~85–93%", src:"Implied by public models for a 6–0 team; current playoff brackets slot MIN among the top NFC seeds", asOf:"Oct 28"},
+            {label:"Win the NFC North", lo:48, hi:60, disp:"~48–60%", src:"Betting markets ≈55%; division tightening (CHI 5–2, DET 4–2)", asOf:"Oct 28"},
+            {label:"No. 1 NFC seed", scenario:true, disp:"In the hunt (top-2 now)", src:"6–0; current brackets have MIN on the 1–2 seed line", asOf:"Oct 28"},
+          ],
+          paths:["Win at Detroit on Sunday to bank a huge division road win and a tiebreaker.","Keep taking care of the NFC North — a win pushes the cushion over the 5–2 Bears and 4–2 Lions."],
+          threats:["The Lions (4–2) host them with a chance to hand Minnesota its first loss.","Chicago (5–2) is surging a game back — the NFC North is a gauntlet."],
+          note:"Probabilities are published third-party estimates / implied by public models, shown as ranges. Standings are through Week 7."
+        },
+        form:{ recent:[{opp:"Colts",res:"W",score:"16–10"}], upcoming:[] } },
+    ],
+    playoffRace:{
+      title:"Playoff Picture — NFC North", sub:"Standings through Week 7",
+      standings:{ title:"NFC North", cols:["W","L","Diff"], rows:[
+        {team:"Vikings", me:true, vals:["6","0","+51"]},
+        {team:"Bears", vals:["5","2","+37"]},
+        {team:"Lions", vals:["4","2","+19"]},
+        {team:"Packers", vals:["4","3","−1"]},
+      ], note:"Through Week 7. All four NFC North teams are at or above .500 — one of the league's deepest divisions." },
+      cols:[
+        {h:"In front", items:["<b>Vikings (6–0)</b> lead the North and sit on the top NFC seed line."]},
+        {h:"Chasing", items:["<b>Bears (5–2)</b> are the closest; <b>Lions (4–2)</b> host Minnesota this week; <b>Packers (4–3)</b> slipped to last."]},
+        {h:"This week's swing", items:["Vikings at Lions could either bury the division race or blow it wide open."]},
+      ],
+      note:"ESPN rates the NFC North a top-two division. The Vikings' odds above are published third-party estimates / implied by public models, shown as ranges."
+    },
+    games:[
+      {slot:"TNF", day:"THU", time:"7:15 PM", tv:"Prime Video", away:{name:"Panthers"}, home:{name:"Packers"}, favored:"Packers", spread:"-6.5",
+        tidbit:"Thursday night in Green Bay — the Packers a touchdown-ish home favorite over Carolina.", stats:["Packers −6.5 at home","Amazon Prime Video","Green Bay trying to climb out of the NFC North cellar"], why:"Division-relevant football to open the weekend."},
+      {day:"SUN", time:"12:00 PM", tv:"FOX", away:{name:"Vikings"}, home:{name:"Lions"}, favored:"Lions", spread:"-3", ou:"46.5", mustWatch:true,
+        tidbit:"Game of the week: the 6–0 Vikings' toughest test, a road division game at Detroit.", stats:["Lions −3 at home","Vikings are the NFL's last unbeaten","NFC North lead on the line"], why:"Tyler's unbeaten Vikings in their biggest game of the season so far.",
+        matters:"The NFL's last unbeaten record and the NFC North lead are both on the line.", watch:"Whether Minnesota's defense can slow a high-powered Lions offense at a loud Ford Field.",
+        pick:{winner:"Lions", score:"27–24", conf:55, confLabel:"55% — coin-flip", rationale:"Home field tilts a close one to Detroit, but the Vikings have found ways to win all year."}},
+      {day:"SUN", time:"12:00 PM", tv:"CBS", away:{name:"Ravens"}, home:{name:"Bills"}, favored:"Bills", spread:null},
+      {day:"SUN", time:"12:00 PM", tv:"CBS", away:{name:"Titans"}, home:{name:"Bengals"}, favored:"Bengals", spread:null},
+      {day:"SUN", time:"12:00 PM", tv:"FOX", away:{name:"Cardinals"}, home:{name:"Cowboys"}, favored:"Cowboys", spread:null},
+      {day:"SUN", time:"12:00 PM", tv:"CBS", away:{name:"Colts"}, home:{name:"Jaguars"}, favored:"Jaguars", spread:null},
+      {day:"SUN", time:"12:00 PM", tv:"CBS", away:{name:"Raiders"}, home:{name:"Jets"}, favored:null, spread:null},
+      {day:"SUN", time:"12:00 PM", tv:"CBS", away:{name:"Browns"}, home:{name:"Steelers"}, favored:null, spread:null},
+      {day:"SUN", time:"12:00 PM", tv:"FOX", away:{name:"Falcons"}, home:{name:"Buccaneers"}, favored:null, spread:null},
+      {day:"SUN", time:"3:05 PM", tv:"FOX", away:{name:"Chargers"}, home:{name:"Rams"}, favored:null, spread:null},
+      {day:"SUN", time:"3:25 PM", tv:"CBS", away:{name:"Chiefs"}, home:{name:"Broncos"}, favored:null, spread:null},
+      {day:"SUN", time:"3:25 PM", tv:"CBS", away:{name:"Patriots"}, home:{name:"Dolphins"}, favored:null, spread:null},
+      {slot:"SNF", day:"SUN", time:"7:20 PM", tv:"NBC", away:{name:"Eagles"}, home:{name:"Commanders"}, favored:null, spread:null,
+        tidbit:"Sunday Night Football — an NFC East rivalry, Eagles at Commanders.", stats:["Primetime on NBC / Peacock","NFC East stakes","Division rematch energy"], why:"The marquee national window of the weekend."},
+      {slot:"MNF", day:"MON", time:"7:15 PM", tv:"ESPN/ABC", away:{name:"Bears"}, home:{name:"Seahawks"}, favored:"Seahawks", spread:"-3", mustWatch:true,
+        tidbit:"Monday Night Football — the 5–2 Bears visit Seattle.", stats:["Seahawks ~−3 at home","Chicago chasing the Vikings in the NFC North","Caps the week on ESPN/ABC"], why:"A playoff-relevant primetime game to close Week 8."},
+    ],
+  },
+
+  hs: {
+    label:"Iowa HS", tag:"IA HS", sub:"5A Playoffs · Round of 16 · Fri Oct 30",
+    gameOfWeek:{
+      away:{name:"Waukee",rank:null}, home:{name:"Ankeny",rank:4}, day:"FRI", time:"7:00 PM", tv:"",
+      venue:"Northview Stadium · Ankeny (5A Round of 16, Pod D)",
+      favored:null, spread:null,
+      tidbit:"<b>Playoff football in Ankeny.</b> Tyler's Hawkeyes (7–2), the No. 4 seed, host Waukee in the Class 5A Round of 16 — a genuine metro heavyweight. Win Pod D and Ankeny is off to the state quarterfinals."
+    },
+    teams:[
+      { key:"ank", logo:"ANK", name:"Ankeny Hawks", conf:"CIML · Class 5A", rank:4, record:"7–2", pollName:"Ankeny",
+        game:{ ha:"vs", opp:"Waukee", oppName:"Waukee", day:"FRI", time:"7:00 PM", tv:"", venue:"Northview Stadium · Ankeny (Round of 16)", favored:null, spread:null },
+        blurb:"<b>Tyler's Hawks — 7–2 and the No. 4 seed.</b> After closing the regular season with a 66–7 rout, Ankeny hosts Waukee in the Class 5A Round of 16 (Pod D). Win and it's on to the state quarterfinals.",
+        note:"",
+        playoff:{
+          standing:"Class 5A playoffs · No. 4 seed · 7–2", trend:"up",
+          trendText:"Up — a 66–7 finale earned Ankeny a home Round-of-16 game; the Hawks are rolling into the postseason.",
+          bars:[
+            {label:"Reach the quarterfinals", scenario:true, disp:"Win Pod D (home vs Waukee)", src:"IHSAA 5A Round of 16 — Pod D; pod winners advance", asOf:"Oct 29"},
+          ],
+          paths:["Beat Waukee at home Friday to win Pod D and reach the state quarterfinals.","As the No. 4 seed, Ankeny has home field through the pod round."],
+          threats:["Waukee is a quality metro opponent — a true playoff test.","Iowa City Liberty or Indianola would await the pod winner."],
+          note:"Class 5A plays in pods of four; the pod winner advances to the state quarterfinals. No public win-probability model exists, so we show the bracket path."
+        },
+        form:{ recent:[{opp:"Valley",res:"L",score:"35–36 (2OT)"},{opp:"C.B. Lincoln",res:"W",score:"66–7"}], upcoming:[] } },
+      { key:"cen", logo:"CEN", name:"Ankeny Centennial Jaguars", conf:"CIML · Class 5A", rank:null, record:"Season over", pollName:"Ankeny Centennial",
+        game:{ ha:"", opp:"Season complete", day:"", time:"", tv:"", venue:"Missed the Class 5A playoffs (No. 23 RPI)" },
+        blurb:"<b>The Jaguars' season is over.</b> Ankeny Centennial finished outside the 16-team Class 5A field (No. 23 in the RPI) and did not reach the playoffs. A young core returns for 2027.",
+        note:"",
+        playoff:{
+          standing:"Missed the Class 5A playoffs", trend:"down",
+          trendText:"Season complete — the Jaguars finished No. 23 in the RPI, outside the 16-team field.",
+          bars:[
+            {label:"Class 5A playoffs", scenario:true, disp:"Did not qualify (No. 23 RPI)", src:"IHSAA Class 5A RPI — final", asOf:"Oct 2026"},
+          ],
+          note:"5A qualification is RPI-only; Centennial finished outside the top 16."
+        } },
+    ],
+    playoffRace:{
+      title:"Class 5A Playoffs — Round of 16", sub:"Fri Oct 30 · pods of four · winners reach the quarterfinals",
+      standings:{ title:"Metro teams in the Round of 16", cols:["Round-of-16 matchup"], rows:[
+        {team:"Ankeny", me:true, vals:["vs Waukee (Pod D, home)"]},
+        {team:"Johnston", vals:["vs Pleasant Valley (Pod A, home)"]},
+        {team:"Southeast Polk", vals:["vs Urbandale (Pod C, home)"]},
+        {team:"Valley", vals:["vs Dallas Center-Grimes (Pod A, home)"]},
+        {team:"Dowling Catholic", vals:["vs Bettendorf (Pod B)"]},
+        {team:"Waukee Northwest", vals:["at Cedar Falls (Pod B)"]},
+      ], note:"Class 5A plays in pods of four; the pod winner advances to the state quarterfinals. All games Friday, Oct 30 at 7:00 PM CT." },
+      cols:[
+        {h:"Metro hosts", items:["<b>Ankeny (No. 4 seed)</b> hosts Waukee in Pod D — the marquee metro matchup.","<b>Johnston</b>, <b>Southeast Polk</b> and <b>Valley</b> also host Round-of-16 games."]},
+        {h:"On the road", items:["<b>Waukee Northwest</b> travels to Cedar Falls; <b>Dowling Catholic</b> draws Bettendorf."]},
+        {h:"Eliminated", items:["<b>Ankeny Centennial</b> (No. 23 RPI) missed the 16-team field; its season is over."]},
+      ],
+      note:"Pod winners advance to the state quarterfinals. No public probability model exists for Iowa high school football, so we show the bracket."
+    },
+    games:[
+      {day:"FRI", time:"7:00 PM", tv:"", away:{name:"Waukee",rank:null}, home:{name:"Ankeny",rank:4}, favored:null, spread:null, mustWatch:true,
+        tidbit:"Round of 16: Tyler's No. 4 seed Ankeny (7–2) hosts Waukee in Pod D.", stats:["Class 5A Round of 16","Ankeny the No. 4 seed","Pod winner reaches the quarterfinals"], why:"A metro playoff heavyweight with a quarterfinal berth on the line.",
+        matters:"Win and Ankeny advances to the state quarterfinals; lose and a strong season ends.", watch:"A physical metro rematch — field position and turnovers will decide it.",
+        pick:{winner:"Ankeny", score:"", conf:55, confLabel:"Slight edge (home)", rationale:"Home field and the higher seed give Ankeny a slight edge in a close one."}},
+      {day:"FRI", time:"7:00 PM", tv:"", away:{name:"Pleasant Valley",rank:null}, home:{name:"Johnston",rank:null}, favored:null, spread:null,
+        tidbit:"Pod A: metro power Johnston hosts Pleasant Valley in the Round of 16."},
+      {day:"FRI", time:"7:00 PM", tv:"", away:{name:"Urbandale",rank:null}, home:{name:"Southeast Polk",rank:null}, favored:null, spread:null,
+        tidbit:"Pod C: top-seeded Southeast Polk hosts Urbandale."},
+      {day:"FRI", time:"7:00 PM", tv:"", away:{name:"Dallas Center-Grimes",rank:null}, home:{name:"Valley",rank:null}, favored:null, spread:null,
+        tidbit:"Pod A: Valley hosts Dallas Center-Grimes."},
+      {day:"FRI", time:"7:00 PM", tv:"", away:{name:"Bettendorf",rank:null}, home:{name:"Dowling Catholic",rank:null}, favored:null, spread:null,
+        tidbit:"Pod B: Dowling Catholic faces Bettendorf (Drake Stadium)."},
+      {day:"FRI", time:"7:00 PM", tv:"", away:{name:"Waukee Northwest",rank:null}, home:{name:"Cedar Falls",rank:null}, favored:null, spread:null,
+        tidbit:"Pod B: Waukee Northwest travels to Cedar Falls."},
+    ],
+  },
+};
+
+/* ============================================================================
+   RENDER + INTERACTION
+   ============================================================================ */
+(function(){
+  "use strict";
+  const $ = (s,r)=>(r||document).querySelector(s);
+  const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const MINUS="−";
+  const spreadTxt = s => s==null?null:String(s).replace("-",MINUS);
+  const rk = r => r?`<span class="rk">${r}</span>`:"";
+  const LEAGUES=["college","nfl","hs"];
+  const LGNAME={college:"College",nfl:"NFL",hs:"Iowa HS"};
+  const DAYORDER={THU:0,FRI:1,SAT:2,SUN:3,MON:4};
+  const DAYLONG={THU:"Thursday",FRI:"Friday",SAT:"Saturday",SUN:"Sunday",MON:"Monday"};
+  function toMin(t){ const m=/(\d+):(\d+)\s*(AM|PM)/i.exec(t||""); if(!m) return 9999; let h=(+m[1])%12; if(/PM/i.test(m[3])) h+=12; return h*60+(+m[2]); }
+
+  function trendBadge(tr){ const m={up:["up","▲ Improving"],down:["down","▼ Slipping"],flat:["flat","▬ Holding"]}[tr]; return m?`<span class="trend ${m[0]}">${m[1]}</span>`:""; }
+  function probBars(bars){
+    if(!bars||!bars.length) return "";
+    return `<div class="probs">${bars.map(b=>{
+      const src=b.src?`<div class="prob-src">${esc(b.src)}${b.asOf?` · as of ${esc(b.asOf)}`:""}</div>`:"";
+      if(b.scenario) return `<div class="prob scenario"><div class="prob-top"><span class="prob-lab">${esc(b.label)}</span><span class="prob-val pill">${esc(b.disp)}</span></div>${src}</div>`;
+      const val=(b.hi!=null&&b.lo!=null)?Math.round((b.lo+b.hi)/2):(b.val!=null?b.val:0);
+      return `<div class="prob"><div class="prob-top"><span class="prob-lab">${esc(b.label)}</span><span class="prob-val">${esc(b.disp)}</span></div><div class="prob-track"><div class="prob-fill" style="width:${Math.max(2,Math.min(100,val))}%"></div></div>${src}</div>`;
+    }).join("")}</div>`;
+  }
+  function pathsThreats(p){
+    const col=(cls,h,items)=> (items&&items.length)?`<div class="po-col ${cls}"><h4>${esc(h)}</h4><ul>${items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`:"";
+    if(!(p.paths&&p.paths.length)&&!(p.threats&&p.threats.length)) return "";
+    return `<div class="po-cols">${col("paths","Paths in",p.paths)}${col("threats","Threats",p.threats)}</div>`;
+  }
+  function teamPlayoff(t){
+    const p=t.playoff; if(!p) return "";
+    return `<div class="po"><div class="po-h">${p.standing?`<span class="po-stand">${esc(p.standing)}</span>`:""}${trendBadge(p.trend)}</div>
+      ${p.trendText?`<p class="trend-tx">${esc(p.trendText)}</p>`:""}
+      ${probBars(p.bars)}${pathsThreats(p)}
+      ${p.note?`<p class="po-note">${esc(p.note)}</p>`:""}</div>`;
+  }
+  function formHTML(f){
+    if(!f) return "";
+    const rec=(f.recent||[]).map(r=>`<span class="res ${r.res==='W'?'w':'l'}">${r.res} ${esc(r.score||"")}</span>`).join("");
+    const nx=(f.upcoming||[]).map(u=>`<span class="res nx">${esc(u.opp)}${u.diff?` · ${esc(u.diff)}`:""}</span>`).join("");
+    if(!rec&&!nx) return "";
+    return `<div class="po" style="border-top:0;padding-top:0;margin-top:12px">
+      ${rec?`<div class="flab">Recent form</div><div class="form-row">${rec}</div>`:""}
+      ${nx?`<div class="flab" style="margin-top:10px">Up next</div><div class="form-row">${nx}</div>`:""}</div>`;
+  }
+
+  function standingsHTML(s){
+    if(!s||!s.rows) return "";
+    return `<div class="card"><div class="card-h">${esc(s.title||"Standings")}</div><div class="rtbl-wrap">
+      <table class="stand"><thead><tr><th class="tm">Team</th>${(s.cols||["W","L"]).map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead>
+      <tbody>${s.rows.map(r=>`<tr class="${r.me?'me':''}"><td class="tm">${r.me?'<span class="dot"></span>':''}${esc(r.team)}</td>${r.vals.map(v=>`<td>${esc(v)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+      ${s.note?`<p class="po-note">${esc(s.note)}</p>`:""}</div>`;
+  }
+  function raceHTML(L){
+    const r=L.playoffRace; if(!r) return "";
+    const cols=(r.cols||[]).map(c=>`<div class="race-col"><h4>${esc(c.h)}</h4><ul>${c.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("");
+    const std=r.standings?standingsHTML(r.standings):"";
+    const briefing=cols?`<div class="card" style="margin-top:14px"><div class="race">${cols}</div>${r.note?`<p class="po-note">${r.note}</p>`:""}</div>`:(r.note?`<div class="card" style="margin-top:14px"><p class="po-note" style="border-top:0;padding-top:0;margin-top:0">${r.note}</p></div>`:"");
+    return `<section class="sec"><div class="sec-head"><h2>${esc(r.title||"Playoff Outlook")}</h2>${r.sub?`<span class="note">${esc(r.sub)}</span>`:""}<span class="rule"></span></div>${std}${briefing}</section>`;
+  }
+
+  function mastheadHTML(){
+    const e=DATA.edition||{};
+    return `<header class="masthead"><div class="mast-kicker">Tyler's Football Weekend</div>
+      <h1 class="mast-title">The Saturday Slate</h1>
+      <div class="mast-sub">${e.label?`<span class="mast-edition">${esc(e.label)}</span>`:""}${e.date?`<span>${esc(e.date)}</span>`:""}<span>Updated <b>${esc(DATA.updated)}</b> · all times Central</span></div></header>`;
+  }
+  function storylinesHTML(){
+    const s=DATA.storylines; if(!s||!s.length) return "";
+    return `<div class="card"><div class="card-h">The Five Biggest Storylines</div>
+      <ul class="stories">${s.map(x=>`<li><div><div class="st"><span class="lgdot ${esc(x.lg)}"></span>${esc(x.t)}</div><div class="sd">${esc(x.d)}</div></div></li>`).join("")}</ul></div>`;
+  }
+  function bigBoardHTML(){
+    const b=DATA.bigBoard; if(!b||!b.length) return "";
+    return `<div class="card"><div class="card-h">The Big Board — Ranked</div>
+      <div class="bb">${b.map((g,i)=>`<button class="bb-item" type="button" data-jump="${esc(g.lg)}">
+        <span class="bb-rank">${i+1}</span>
+        <span class="bb-main"><span class="bb-match">${g.aRank?`<span class="rk">${g.aRank}</span>`:""}${esc(g.away)} <span style="color:var(--muted);font-weight:300;font-style:italic">at</span> ${g.hRank?`<span class="rk">${g.hRank}</span>`:""}${esc(g.home)}</span>
+        <span class="bb-meta">${esc(LGNAME[g.lg]||g.lg)} · ${esc(g.day||"")} ${esc(g.time||"")}${g.tv?" · "+esc(g.tv):""}</span>
+        ${g.why?`<span class="bb-why">${esc(g.why)}</span>`:""}
+        ${g.tags&&g.tags.length?`<span class="bb-tags">${g.tags.map(t=>`<span class="bb-tag">${esc(t)}</span>`).join("")}</span>`:""}</span></button>`).join("")}</div>
+      <p class="po-note" style="border-top:0;padding-top:8px;margin-top:8px">Ranked by our editors weighing rankings, rivalry weight, playoff stakes, projected closeness and storyline. Tap a game to jump to its league.</p></div>`;
+  }
+  function supersHTML(){
+    const s=DATA.superlatives; if(!s) return "";
+    const card=(cls,lab,o)=> o?`<div class="super ${cls}"><div class="lab">${esc(lab)}</div><div class="mt">${esc(o.matchup)}</div><div class="tx">${esc(o.text)}</div></div>`:"";
+    return `<div class="supers">${card("r","Biggest Rivalry",s.rivalry)}${card("s","Most at Stake",s.stakes)}${card("u","Best Upset Shot",s.upset)}</div>`;
+  }
+  function spotlightHTML(){
+    const s=DATA.iowaSpotlight; if(!s) return "";
+    return `<div class="spotlight"><div class="card-h">Iowa Spotlight</div>${s.text?`<p>${s.text}</p>`:""}${(s.bullets&&s.bullets.length)?`<ul>${s.bullets.map(b=>`<li>${b}</li>`).join("")}</ul>`:""}</div>`;
+  }
+  function timelineHTML(){
+    const all=[];
+    LEAGUES.forEach(k=>{ (DATA[k].games||[]).forEach(g=>{ if(g.away&&g.home&&g.day&&g.time) all.push({lg:k,day:g.day,time:g.time,away:g.away.name,home:g.home.name,tv:g.tv,mw:g.mustWatch}); }); });
+    if(!all.length) return "";
+    const byDay={}; all.forEach(g=>{ (byDay[g.day]=byDay[g.day]||[]).push(g); });
+    const days=Object.keys(byDay).sort((a,b)=>((DAYORDER[a]==null?9:DAYORDER[a])-(DAYORDER[b]==null?9:DAYORDER[b])));
+    const body=days.map(d=>{
+      const rows=byDay[d].slice().sort((a,b)=>toMin(a.time)-toMin(b.time));
+      return `<div><div class="tl-day">${esc(DAYLONG[d]||d)} <span class="c">${rows.length} game${rows.length>1?"s":""}</span></div>
+        ${rows.map(g=>`<div class="tl-row"><span class="tl-time">${esc(g.time)}</span><span class="tl-mt"><span class="lgdot ${g.lg}"></span>${esc(g.away)} <span style="color:var(--muted)">at</span> <b>${esc(g.home)}</b>${g.mw?' <span class="proj-tag">★</span>':''}</span><span class="tl-tv">${esc(g.tv||"")}</span></div>`).join("")}</div>`;
+    }).join("");
+    return `<div class="card"><div class="card-h">Kickoff Windows — All Times Central</div><div class="tl">${body}</div>
+      <p class="po-note" style="border-top:0;padding-top:8px;margin-top:8px"><span class="lgdot college"></span> College <span class="lgdot nfl" style="margin-left:8px"></span> NFL <span class="lgdot hs" style="margin-left:8px"></span> Iowa HS · ★ = must-watch</p></div>`;
+  }
+  function coverHTML(){
+    const e=DATA.edition||{};
+    return mastheadHTML()
+      + (e.briefing?`<div class="card briefing" style="margin-bottom:16px"><div class="card-h">The Briefing</div><p>${e.briefing}</p></div>`:"")
+      + `<div class="fp-grid"><div>${bigBoardHTML()}</div><div>${storylinesHTML()}</div></div>`
+      + supersHTML()
+      + `<div class="fp-grid"><div>${spotlightHTML()}</div><div>${timelineHTML()}</div></div>`;
+  }
+  const FILTERS={
+    college:[
+      {id:"all",label:"All games",test:()=>true},
+      {id:"mw",label:"Must-watch",test:g=>g.mustWatch},
+      {id:"B1G",label:"Big Ten",test:g=>g.conf==="B1G"},
+      {id:"SEC",label:"SEC",test:g=>g.conf==="SEC"},
+      {id:"B12",label:"Big 12",test:g=>g.conf==="B12"},
+      {id:"ACC",label:"ACC",test:g=>g.conf==="ACC"},
+    ],
+    nfl:[
+      {id:"all",label:"All games",test:()=>true},
+      {id:"mw",label:"Must-watch",test:g=>g.mustWatch},
+      {id:"pt",label:"Prime time",test:g=>["TNF","SNF","MNF"].includes(g.slot)},
+    ],
+    hs:[ {id:"all",label:"All games",test:()=>true} ],
+  };
+
+  function playingSet(L){
+    const s=new Set();
+    const add=g=>{ if(!g)return; [g.away,g.home].forEach(t=>t&&t.name&&s.add(t.name)); };
+    add(L.gameOfWeek); (L.games||[]).forEach(add);
+    (L.teams||[]).forEach(t=>{ if(t.pollName)s.add(t.pollName); if(t.game&&t.game.oppName)s.add(t.game.oppName); });
+    return s;
+  }
+
+  function heroHTML(L){
+    const g=L.gameOfWeek; if(!g) return "";
+    const dayWord={SAT:"Saturday",SUN:"Sunday",FRI:"Friday",THU:"Thursday",MON:"Monday"}[g.day]||g.day;
+    const stats=[["Kickoff",`${g.time} CT`,false]]; if(g.tv) stats.push(["Watch",g.tv,false]);
+    if(g.favored&&g.spread) stats.push(["Favored",`${g.favored} ${spreadTxt(g.spread)}`,true]);
+    if(g.ou) stats.push(["Over / Under",g.ou,false]);
+    const join = g.home&&g.away ? `<span class="at">${L===DATA.hs?"at":"at"}</span>` : "";
+    return `<section class="hero"><div class="hero-in">
+      <div class="hero-top"><span class="gow-tag">Game of the Week</span>
+      <span class="hero-when">${esc(L.sub)} · <b>${esc(dayWord)} ${esc(g.time)} CT</b></span></div>
+      <h1 class="hero-match">${rk(g.away.rank)}${esc(g.away.name)} <span class="at">at</span> ${rk(g.home.rank)}${esc(g.home.name)}</h1>
+      <div class="hero-venue">${esc(g.venue)}</div>
+      <div class="hero-strip">${stats.map(s=>`<div class="hero-stat"><span class="k">${esc(s[0])}</span><span class="v${s[2]?' fav':''}">${esc(s[1])}</span></div>`).join("")}</div>
+      <p class="hero-tidbit">${g.tidbit}</p></div></section>`;
+  }
+
+  function rtable(caption,rows){
+    if(!rows||!rows.length) return "";
+    return `<table class="rtbl"><caption>${esc(caption)}</caption>
+      <thead><tr><th>Metric</th><th>Per game</th><th>Nat'l</th></tr></thead>
+      <tbody>${rows.map(r=>`<tr><td class="m">${esc(r.m)}</td><td class="v">${esc(r.v)}</td><td class="r${r.top?' top':''}">${r.natl?esc(r.natl):"—"}</td></tr>`).join("")}</tbody></table>`;
+  }
+  function teamHTML(t){
+    const g=t.game;
+    const rankChip = t.rank?`<span class="chip rank">#${t.rank}</span>`:`<span class="chip">Unranked</span>`;
+    const nRanks=(t.offense?t.offense.length:0)+(t.defense?t.defense.length:0);
+    const ranks = nRanks? `<div class="ranks">
+        <button class="ranks-toggle" type="button" aria-expanded="true">Where they rank <span class="cnt">${nRanks} metrics</span>
+          <svg class="chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="ranks-body"><div class="rtbl-wrap">${rtable(t.offense&&t.offense.length?"Offense":"",t.offense)}${rtable("Defense",t.defense)}</div>
+        ${t.note?`<p class="rank-note">${t.note}</p>`:""}</div></div>` : (t.note?`<div class="ranks"><div class="ranks-body"><p class="rank-note" style="margin-top:14px">${t.note}</p></div></div>`:"");
+    return `<article class="team" data-team="${esc(t.key)}"><div class="team-bar"></div>
+      <div class="team-in">
+        <div class="team-id"><div class="team-logo">${esc(t.logo)}</div>
+          <div><div class="team-name">${esc(t.name)}</div>
+          <div class="team-meta">${rankChip}<span class="chip">${esc(t.record)}</span><span>${esc(t.conf)}</span></div></div></div>
+        <div class="team-game"><div class="op">${g.ha?esc(g.ha)+" ":""}${esc(g.opp)}<br><small>${[((g.day||g.time)?`${esc({SAT:"Sat",SUN:"Sun",FRI:"Fri",THU:"Thu",MON:"Mon"}[g.day]||g.day||"")}${g.time?(g.day?" ":"")+esc(g.time)+" CT":""}`.trim():""), (g.tv?esc(g.tv):""), (g.venue?esc(g.venue):"")].filter(Boolean).join(" · ")}</small></div>
+          <div class="tg-line">${g.favored&&g.spread?`<div class="b"><span class="k">Favored</span><span class="v fav">${esc(g.favored)} ${spreadTxt(g.spread)}</span></div>`:""}${g.ou?`<div class="b"><span class="k">O/U</span><span class="v">${esc(g.ou)}</span></div>`:""}</div></div>
+        <p class="team-blurb">${t.blurb}</p>
+        ${teamPlayoff(t)}${formHTML(t.form)}
+      </div>${ranks}</article>`;
+  }
+
+  function favHTML(g){
+    if(g.spread) return `<span class="fav"><span class="lab">Fav</span> ${esc(g.favored)} ${spreadTxt(g.spread)}</span>`;
+    if(g.favored) return `<span class="fav"><span class="lab">Fav</span> ${esc(g.favored)}</span>`;
+    return "";
+  }
+  function gameHTML(g,i){
+    const hasMore = !!(g.stats||g.why||g.matters||g.watch||g.matchup||g.keys||g.upset||g.pick);
+    const rich = !!(g.tidbit) && hasMore;
+    const tags=[];
+    if(g.mustWatch) tags.push(`<span class="tag mustwatch">Must-watch</span>`);
+    if(g.slot) tags.push(`<span class="tag slot">${esc(g.slot)}</span>`);
+    if(g.conf) tags.push(`<span class="tag conf">${esc({B1G:"Big Ten",SEC:"SEC",B12:"Big 12",ACC:"ACC"}[g.conf]||g.conf)}</span>`);
+    const altday = g.day&&!["SAT","SUN"].includes(g.day);
+    const pv=[
+      g.matters?`<div class="pv-b"><h5>Why it matters</h5><p>${esc(g.matters)}</p></div>`:"",
+      g.watch?`<div class="pv-b"><h5>What to watch</h5><p>${esc(g.watch)}</p></div>`:"",
+      g.matchup?`<div class="pv-b"><h5>Key matchup</h5><p>${esc(g.matchup)}</p></div>`:"",
+      g.keys?`<div class="pv-keys">${g.keys.away?`<div class="pv-b"><h5>${esc(g.away.name)} must</h5><p>${esc(g.keys.away)}</p></div>`:""}${g.keys.home?`<div class="pv-b"><h5>${esc(g.home.name)} must</h5><p>${esc(g.keys.home)}</p></div>`:""}</div>`:"",
+      g.upset?`<div class="pv-b"><h5>Upset watch</h5><p>${esc(g.upset)}</p></div>`:"",
+      g.pick?`<div class="pick"><div class="pk-top"><span class="pk-w"><span class="proj-tag">Projection</span>${esc(g.pick.winner)}</span>${g.pick.score?`<span class="pk-sc">${esc(g.pick.score)}</span>`:""}</div>${g.pick.rationale?`<div class="pk-rat">${esc(g.pick.rationale)}</div>`:""}${g.pick.conf!=null?`<div class="conf">Confidence <div class="conf-meter"><div class="conf-fill" style="width:${Math.max(5,Math.min(100,g.pick.conf))}%"></div></div> ${esc(g.pick.confLabel||(g.pick.conf+"%"))}</div>`:""}<div class="fact-note">Editorial projection — not a verified fact or betting advice.</div></div>`:"",
+    ].join("");
+    const more = rich? `<div class="game-more" id="more-${i}" hidden>
+        ${g.stats?`<ul class="qs">${g.stats.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>`:""}
+        ${g.ou?`<div class="ou">Over / Under ${esc(g.ou)}${g.venue?" · "+esc(g.venue):""}</div>`:(g.venue?`<div class="ou">${esc(g.venue)}</div>`:"")}
+        ${g.why?`<div class="why"><b>Why watch</b>${esc(g.why)}</div>`:""}
+        ${pv?`<div class="pv">${pv}</div>`:""}</div>`:"";
+    return `<article class="game${g.mustWatch?' mw':''}${rich?'':' flat'}" data-i="${i}">
+      <button class="game-toggle" type="button"${rich?` aria-expanded="false" aria-controls="more-${i}"`:" disabled"}>
+        <div class="g-row1">${g.day?`<span class="g-day${altday?' alt':''}">${esc(g.day)}</span>`:""}
+          <span class="g-time">${esc(g.time)} <span style="font-weight:400;font-size:11px;color:var(--muted)">CT</span></span>
+          ${g.tv?`<span class="tv">${esc(g.tv)}</span>`:""}</div>
+        <h3 class="g-match">${rk(g.away.rank)}${esc(g.away.name)} <span class="at">at</span> ${rk(g.home.rank)}${esc(g.home.name)}</h3>
+        <div class="g-bottom">${favHTML(g)}<span class="g-tags">${tags.join("")}</span></div>
+        ${g.tidbit?`<p class="g-tidbit">${esc(g.tidbit)}${rich?` <span class="more-hint">Tap for more ›</span>`:""}</p>`:""}
+      </button>${more}</article>`;
+  }
+
+  function pollHTML(L){
+    if(!L.poll) return "";
+    const playing=playingSet(L);
+    const me=(L.teams||[]).filter(t=>t.pollName).map(t=>t.pollName);
+    const chips=L.poll.map((name,i)=>{
+      const cls = me.includes(name)?"pchip me":(playing.has(name)?"pchip playing":"pchip");
+      return `<div class="${cls}"><span class="r">${i+1}</span><span class="t">${esc(name)}</span></div>`;
+    }).join("");
+    return `<section class="sec"><div class="sec-head"><h2>The Rankings</h2><span class="rule"></span></div>
+      <section class="poll" aria-label="AP Top 25"><h3>AP Top 25 <small>— poll in effect for ${esc(L.sub)}</small></h3>
+      <div class="poll-row">${chips}</div><div class="poll-key"><i></i> Ranked team playing this weekend</div></section></section>`;
+  }
+
+  function controlsHTML(key,L){
+    const fs=FILTERS[key];
+    if(fs.length<=1) return `<div class="controls"><span class="ctz"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Times in <b>Central</b></span></div>`;
+    const btns=fs.map(f=>{const n=(L.games||[]).filter(f.test).length; return `<button type="button" data-filter="${f.id}" aria-pressed="${f.id==='all'}">${esc(f.label)} <span class="n">${n}</span></button>`;}).join("");
+    return `<div class="controls"><div class="seg" role="group" aria-label="Filter games">${btns}</div>
+      <span class="ctz"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Times in <b>Central</b></span></div>`;
+  }
+
+  function teamsLabel(key){ return key==="nfl"?"Tyler's Team":"Tyler's Teams"; }
+  function teamsNote(key){
+    if(key==="college") return "Hawkeyes &amp; Cyclones — in depth, with weekly ranks";
+    if(key==="nfl") return "Minnesota Vikings — in depth";
+    return "Ankeny Hawks &amp; Ankeny Centennial — in depth";
+  }
+
+  function leagueHTML(key){
+    const L=DATA[key];
+    const teams=L.teams||[];
+    return `<section class="league" data-league="${key}" hidden>
+      ${heroHTML(L)}
+      <section class="sec"><div class="sec-head"><h2>${teamsLabel(key)}</h2><span class="note">${teamsNote(key)}</span><span class="rule"></span></div>
+        <div class="teams${teams.length===1?' one':''}">${teams.map(teamHTML).join("")}</div></section>
+      ${raceHTML(L)}
+      <section class="sec"><div class="sec-head"><h2>The Slate</h2><span class="note">${esc(L.sub)}</span><span class="rule"></span></div>
+        ${controlsHTML(key,L)}
+        <div class="slate" data-grid="${key}">${(L.games||[]).map((g,i)=>gameHTML(g,i)).join("")||'<div class="empty">No games listed.</div>'}</div></section>
+      ${pollHTML(L)}
+    </section>`;
+  }
+
+  // cover / front page (cross-league)
+  const cover=$("#cover"); if(cover) cover.innerHTML=coverHTML();
+  const bsub=document.querySelector(".brand .sub"); if(bsub&&DATA.edition) bsub.textContent=DATA.edition.label+" · "+DATA.edition.date;
+
+  // league nav
+  const nav=$("#leagueNav");
+  nav.innerHTML=LEAGUES.map(k=>`<button class="lg-btn" type="button" data-league="${k}" aria-pressed="false"><span class="t">${esc(DATA[k].label)}</span><span class="s">${esc(DATA[k].sub)}</span></button>`).join("");
+
+  const app=$("#app");
+  app.innerHTML=LEAGUES.map(leagueHTML).join("")+footerHTML();
+
+  // big-board jump → switch league + scroll to it
+  if(cover) cover.addEventListener("click",e=>{const b=e.target.closest("[data-jump]"); if(b) showLeague(b.dataset.jump,true);});
+
+  function footerHTML(){
+    return `<footer><div class="foot-card"><h3>How to use this</h3>
+      <div class="how">
+        <div class="step"><b><span class="num">01</span> Pick a league</b>Use the <span class="kbd">College · NFL · Iowa HS</span> buttons up top to switch between all three. Your pick is remembered.</div>
+        <div class="step"><b><span class="num">02</span> Filter &amp; dig in</b>College filters by conference (Big Ten, SEC, Big 12, ACC) or Must-watch; NFL by prime time. Tap any highlighted game for stats &amp; a why-watch. Tyler's teams get the deep dive in every league.</div>
+        <div class="step"><b><span class="num">03</span> Share</b>Hit <span class="kbd">Copy this slate</span> to drop the league you're viewing into a group chat.</div>
+      </div>
+      <div class="foot-meta"><div class="foot-brand">How the numbers work</div>
+      <b>Playoff &amp; postseason odds</b> are published third-party estimates — ESPN FPI, betting-market implied probabilities and public simulation models — cited on each card with a source and an as-of date, and shown as a <b>range</b> when models disagree rather than a single figure. They are not a proprietary Saturday Slate model, and the CFP selection committee adds uncertainty no win-loss model fully captures. Where no defensible probability exists (Iowa State's CFP odds, all Iowa high school football), we show standings, RPI position and qualification scenarios instead of inventing a number. <b>Projections</b> (projected winner, score, confidence) are our editorial reads, clearly labeled — not verified facts or betting advice. We never fabricate stats, injuries, lines or results; unverifiable fields are left blank.
+      <div class="foot-brand" style="margin-top:14px">Saturday Slate · Edition updated ${esc(DATA.updated)}</div>
+      All kickoffs are Central and can shift for TV windows; betting lines are from major sportsbooks and move through the week. College ranks are AP Top 25; Iowa HS positions are the IHSAA Class 5A RPI. Built to refresh every Thursday — College, NFL and Iowa high school.</div></div></footer>`;
+  }
+
+  /* ---- interactions ---- */
+  const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+  // theme
+  const root=document.documentElement, savedTheme=store.get("ss_theme");
+  if(savedTheme==="dark"||savedTheme==="light") root.setAttribute("data-theme",savedTheme);
+  $("#themeBtn").addEventListener("click",()=>{
+    const cur=root.getAttribute("data-theme");
+    const sysDark=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const next=(cur?cur==="dark":sysDark)?"light":"dark";
+    root.setAttribute("data-theme",next); store.set("ss_theme",next);
+  });
+
+  // league switching
+  let activeLeague="college";
+  function showLeague(key,scroll){
+    if(!DATA[key]) key="college";
+    activeLeague=key;
+    document.querySelectorAll('.league').forEach(s=>s.hidden = s.dataset.league!==key);
+    document.querySelectorAll('.lg-btn').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.league===key)));
+    store.set("ss_league",key);
+    if(scroll){
+      const sec=document.querySelector('.league[data-league="'+key+'"]');
+      if(sec){ const tb=document.querySelector('.topbar'), nv=document.querySelector('.league-nav');
+        const off=(tb?tb.getBoundingClientRect().height:0)+(nv?nv.getBoundingClientRect().height:0)+6;
+        const top=window.pageYOffset+sec.getBoundingClientRect().top-off;
+        window.scrollTo({top:Math.max(0,top),behavior:'auto'}); }
+    }
+  }
+  nav.addEventListener("click",e=>{const b=e.target.closest("button[data-league]"); if(b) showLeague(b.dataset.league,true);});
+  const savedLeague=store.get("ss_league");
+  showLeague(LEAGUES.includes(savedLeague)?savedLeague:"college",false);
+
+  // card expand (delegated across whole app)
+  app.addEventListener("click",e=>{
+    const btn=e.target.closest(".game-toggle"); if(!btn||btn.disabled) return;
+    const id=btn.getAttribute("aria-controls"); if(!id) return;
+    const more=document.getElementById(id); const open=btn.getAttribute("aria-expanded")==="true";
+    btn.setAttribute("aria-expanded",String(!open)); if(more) more.hidden=open;
+    const hint=btn.querySelector(".more-hint"); if(hint) hint.textContent=open?"Tap for more ›":"Show less ‹";
+  });
+
+  // rankings toggles
+  document.querySelectorAll(".ranks-toggle").forEach(btn=>{
+    const body=btn.nextElementSibling;
+    btn.addEventListener("click",()=>{const open=btn.getAttribute("aria-expanded")==="true"; btn.setAttribute("aria-expanded",String(!open)); if(body) body.hidden=open;});
+  });
+
+  // filters (per league)
+  const filterState={};
+  document.querySelectorAll('.league').forEach(section=>{
+    const key=section.dataset.league; const seg=section.querySelector('.seg'); if(!seg) return;
+    const grid=section.querySelector('[data-grid]');
+    function apply(id){
+      const f=(FILTERS[key].find(x=>x.id===id))||FILTERS[key][0];
+      grid.querySelectorAll('.game').forEach(card=>{const g=DATA[key].games[+card.dataset.i]; card.hidden=!(g&&f.test(g));});
+      seg.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===id)));
+      store.set("ss_filter_"+key,id);
+    }
+    seg.addEventListener('click',e=>{const b=e.target.closest('button[data-filter]'); if(b) apply(b.dataset.filter);});
+    const saved=store.get("ss_filter_"+key);
+    apply(saved&&FILTERS[key].some(f=>f.id===saved)?saved:"all");
+  });
+
+  // copy active league
+  function buildShare(){
+    const key=activeLeague, L=DATA[key]; const lines=[];
+    lines.push(`SATURDAY SLATE — ${L.label} (${L.sub})`); lines.push("All times Central."); lines.push("");
+    const g=L.gameOfWeek;
+    if(g){ const a=(g.away.rank?`#${g.away.rank} `:"")+g.away.name, h=(g.home.rank?`#${g.home.rank} `:"")+g.home.name;
+      lines.push("GAME OF THE WEEK"); lines.push(`- ${a} at ${h} — ${g.time} ${g.tv||""}${g.favored&&g.spread?` (${g.favored} ${spreadTxt(g.spread)})`:""}`.trim()); lines.push(""); }
+    (L.teams||[]).forEach(t=>{ const tg=t.game; lines.push(`${t.name.toUpperCase()} (${t.record})`); lines.push(`- ${tg.ha} ${tg.opp} — ${tg.time} ${tg.tv||""}${tg.favored&&tg.spread?` (${tg.favored} ${spreadTxt(tg.spread)})`:""}`.trim()); });
+    lines.push(""); lines.push("THE SLATE");
+    (L.games||[]).forEach(x=>{ const a=(x.away.rank?`#${x.away.rank} `:"")+x.away.name, h=(x.home.rank?`#${x.home.rank} `:"")+x.home.name;
+      const d=x.day&&!["SAT"].includes(x.day)?x.day+" ":""; const ln=x.favored&&x.spread?` (${x.favored} ${spreadTxt(x.spread)})`:"";
+      lines.push(`- ${a} at ${h} — ${d}${x.time} ${x.tv||""}${ln}`.replace(/\s+/g," ").trim()); });
+    lines.push(""); lines.push("— made with Saturday Slate");
+    return lines.join("\n");
+  }
+  const toast=$("#toast"); let tT;
+  function showToast(m){toast.textContent=m; toast.classList.add("show"); clearTimeout(tT); tT=setTimeout(()=>toast.classList.remove("show"),2200);}
+  $("#copyBtn").addEventListener("click",async()=>{
+    const text=buildShare();
+    try{ if(navigator.clipboard&&navigator.clipboard.writeText){ await navigator.clipboard.writeText(text); showToast(`${DATA[activeLeague].label} slate copied`); return;} throw 0; }
+    catch(e){ try{ const ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.focus(); ta.select(); const ok=document.execCommand&&document.execCommand("copy"); document.body.removeChild(ta); showToast(ok?`${DATA[activeLeague].label} slate copied`:"Press ⌘/Ctrl+C to copy"); }catch(e2){ showToast("Couldn't copy automatically"); } }
+  });
+})();
+</script>
+
+</body>
+</html>

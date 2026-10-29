@@ -28,6 +28,21 @@
         {"game": "Iowa State @ Arizona", "pick": "Arizona 31-20", "confidence": 60},
         {"game": "Chiefs @ Seahawks", "pick": "Seahawks 24-22", "confidence": 53}
       ]
+    },
+    {
+      "date": "2026-10-29",
+      "week": "Week 9",
+      "weekend": "Oct 30 - Nov 2, 2026",
+      "file": "2026-10-29-week9.html",
+      "note": "Iowa LOST 13-10 at Minnesota (walk-off FG) and fell out of the AP Top 25; Iowa State routed 39-3 at Arizona (now 3-4). Both home this week. Vikings 6-0, road underdog at the Lions. Iowa HS flipped to 5A playoffs: Ankeny (No. 4 seed) hosts Waukee in the Round of 16; Centennial's season over. GOTW Georgia vs Florida.",
+      "picks": [
+        {"game": "Georgia vs Florida", "pick": "Georgia 27-20", "confidence": 62},
+        {"game": "Ohio State @ USC", "pick": "Ohio State 31-24", "confidence": 58},
+        {"game": "Wisconsin @ Iowa", "pick": "Iowa 20-13", "confidence": 57},
+        {"game": "Oklahoma State @ Iowa State", "pick": "Oklahoma State 31-27", "confidence": 55},
+        {"game": "Vikings @ Lions", "pick": "Lions 27-24", "confidence": 55},
+        {"game": "Waukee @ Ankeny (5A R16)", "pick": "Ankeny (slight edge, home)", "confidence": 55}
+      ]
     }
   ]
 }
