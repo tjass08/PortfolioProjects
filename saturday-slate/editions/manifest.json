@@ -43,6 +43,21 @@
         {"game": "Vikings @ Lions", "pick": "Lions 27-24", "confidence": 55},
         {"game": "Waukee @ Ankeny (5A R16)", "pick": "Ankeny (slight edge, home)", "confidence": 55}
       ]
+    },
+    {
+      "date": "2026-11-05",
+      "week": "Week 10",
+      "weekend": "Nov 6-9, 2026",
+      "file": "2026-11-05-week10.html",
+      "note": "Bounce-back week: Iowa shut out Wisconsin 30-0 and is No. 19 in the FIRST CFP committee rankings (No. 21 AP); Iowa State won a 51-49 thriller (4-4). Vikings lost their first game at Detroit (6-1), host 6-1 Bills on MNF. Ankeny (8-2) into the 5A quarterfinals. GOTW #1 Miami @ #4 Notre Dame. First CFP rankings folded into the college playoff race.",
+      "picks": [
+        {"game": "Miami @ Notre Dame", "pick": "Notre Dame 31-27", "confidence": 55},
+        {"game": "Georgia @ Ole Miss", "pick": "Georgia 31-27", "confidence": 56},
+        {"game": "Alabama @ LSU", "pick": "LSU 27-23", "confidence": 55},
+        {"game": "Iowa @ Northwestern", "pick": "Iowa 24-20", "confidence": 55},
+        {"game": "Iowa State @ Baylor", "pick": "Iowa State 34-30", "confidence": 52},
+        {"game": "Bills @ Vikings (MNF)", "pick": "Vikings 27-24", "confidence": 52}
+      ]
     }
   ]
 }
