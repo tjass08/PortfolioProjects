@@ -381,6 +381,22 @@ footer{margin:40px 0 30px}
 .conf-fill{height:100%;background:var(--toss)}
 .proj-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--toss);margin-right:5px}
 .fact-note{font-size:10px;color:var(--muted);font-style:italic}
+
+/* Iowa CFP scoreboard watch */
+.watch{background:linear-gradient(180deg, color-mix(in srgb, var(--iowa-gold) 9%, var(--surface)), var(--surface)); border:1px solid var(--line); border-left:4px solid var(--iowa-gold); margin-bottom:16px}
+.watch .card-h{color:var(--accent-2)}
+.watch-intro{margin:0 0 12px; font-size:13.5px; color:var(--ink-soft); line-height:1.52}
+.watch-intro b{color:var(--ink)}
+.watch-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0}
+.watch-item{padding:9px 0; border-top:1px solid var(--line-soft)}
+.watch-item:first-child{border-top:0; padding-top:0}
+.wroot{font-size:13.5px; color:var(--ink); display:flex; align-items:baseline; gap:6px; flex-wrap:wrap}
+.wstar{color:var(--iowa-gold); -webkit-text-stroke:.6px var(--accent-2); font-size:13px; line-height:1}
+.wroot b{color:var(--ink); font-weight:700}
+.wday{font-family:var(--font-display); font-size:9.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-2); border:1px solid var(--line); border-radius:5px; padding:1px 6px; align-self:center}
+.wov{color:var(--muted); font-size:12.5px; font-weight:500}
+.wwy{font-size:12px; color:var(--ink-soft); line-height:1.45; margin-top:3px; padding-left:19px}
+.watch-note{font-size:11px; color:var(--muted); margin:13px 0 0; line-height:1.5; border-top:1px dashed var(--line); padding-top:10px}
 </style>
 </head>
 <body>
@@ -459,6 +475,21 @@ const DATA = {
       "<b>Ankeny (9–2, No. 5 seed)</b> plays No. 1 Johnston (10–1) in the 5A semifinal at the UNI-Dome (Fri 4:00 CT) — win and it's the state title game (Nov 20).",
       "The other 5A semifinal is all-metro too: <b>Southeast Polk vs Dowling Catholic</b> (Fri 7:00 CT).",
     ],
+  },
+
+  iowaWatch: {
+    title: "Iowa CFP Scoreboard Watch",
+    intro: "Iowa is <b>No. 15 in the CFP</b>. Step one is beating Purdue — then the Hawkeyes want losses above them to climb into the 12-team field. Who to root for this week, roughly most-helpful first:",
+    items: [
+      { day:"Fri", root:"Colorado", over:"No. 14 Houston (CFP)", why:"Houston sits one spot ahead of Iowa — a loss lets the Hawkeyes jump it." },
+      { day:"Sat", root:"Oklahoma State", over:"No. 12 Texas Tech (CFP)", why:"A loss by a team just above Iowa opens a direct path up the board." },
+      { day:"Sat", root:"SMU", over:"No. 13 Wake Forest (CFP)", why:"Another team ranked right ahead of Iowa, in a tricky road spot." },
+      { day:"Sat", root:"Florida", over:"No. 11 Kentucky (CFP)", why:"Knocks a two-loss team just ahead of Iowa down a peg." },
+      { day:"Sat", root:"Baylor", over:"No. 10 BYU (CFP)", why:"A BYU stumble drops another two-loss team back toward Iowa." },
+      { day:"Sat", root:"LSU", over:"No. 6 Texas (CFP)", why:"A third Texas loss would send the Longhorns tumbling down the rankings." },
+      { day:"Sat", root:"Arizona", over:"No. 2 Utah (CFP)", why:"Chaos at the very top reshuffles the whole bracket below it." },
+    ],
+    note: "Pulling for Indiana to beat USC (Sat) helps a little, but USC already sits behind Iowa (No. 18) — the real needle-movers are the teams ranked just ahead of Iowa losing. And none of it matters if the Hawkeyes don't handle Purdue first."
   },
 
   college: {
@@ -797,10 +828,20 @@ const DATA = {
     return `<div class="card"><div class="card-h">Kickoff Windows — All Times Central</div><div class="tl">${body}</div>
       <p class="po-note" style="border-top:0;padding-top:8px;margin-top:8px"><span class="lgdot college"></span> College <span class="lgdot nfl" style="margin-left:8px"></span> NFL <span class="lgdot hs" style="margin-left:8px"></span> Iowa HS · ★ = must-watch</p></div>`;
   }
+  function iowaWatchHTML(){
+    const w=DATA.iowaWatch; if(!w) return "";
+    return `<div class="card watch"><div class="card-h">${esc(w.title||"Iowa CFP Scoreboard Watch")}</div>
+      ${w.intro?`<p class="watch-intro">${w.intro}</p>`:""}
+      <ul class="watch-list">${(w.items||[]).map(i=>`<li class="watch-item">
+        <div class="wroot">${i.day?`<span class="wday">${esc(i.day)}</span>`:""}<span class="wstar">★</span> Root for <b>${esc(i.root)}</b>${i.over?` <span class="wov">over ${esc(i.over)}</span>`:""}</div>
+        ${i.why?`<div class="wwy">${esc(i.why)}</div>`:""}</li>`).join("")}</ul>
+      ${w.note?`<p class="watch-note">${w.note}</p>`:""}</div>`;
+  }
   function coverHTML(){
     const e=DATA.edition||{};
     return mastheadHTML()
       + (e.briefing?`<div class="card briefing" style="margin-bottom:16px"><div class="card-h">The Briefing</div><p>${e.briefing}</p></div>`:"")
+      + iowaWatchHTML()
       + `<div class="fp-grid"><div>${bigBoardHTML()}</div><div>${storylinesHTML()}</div></div>`
       + supersHTML()
       + `<div class="fp-grid"><div>${spotlightHTML()}</div><div>${timelineHTML()}</div></div>`;
