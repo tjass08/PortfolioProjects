@@ -58,6 +58,20 @@
         {"game": "Iowa State @ Baylor", "pick": "Iowa State 34-30", "confidence": 52},
         {"game": "Bills @ Vikings (MNF)", "pick": "Vikings 27-24", "confidence": 52}
       ]
+    },
+    {
+      "date": "2026-11-12",
+      "week": "Week 11",
+      "weekend": "Nov 13-16, 2026",
+      "file": "2026-11-12-week11.html",
+      "note": "Iowa (7-2) won 24-10 at Northwestern and jumped to No. 15 in the second CFP rankings; hosts Purdue. Iowa State (4-5) lost at Baylor, must win out; hosts Cincinnati. Vikings (6-2) lost two straight (fell to 3rd in NFC North), at Packers. Iowa HS 5A semifinals all-metro at the UNI-Dome: Ankeny (No. 5) vs No. 1 Johnston. GOTW Texas @ LSU.",
+      "picks": [
+        {"game": "Texas @ LSU", "pick": "Texas 27-23", "confidence": 54},
+        {"game": "Purdue @ Iowa", "pick": "Iowa 31-13", "confidence": 75},
+        {"game": "Cincinnati @ Iowa State", "pick": "Iowa State 38-34", "confidence": 53},
+        {"game": "Vikings @ Packers", "pick": "Packers 24-20", "confidence": 57},
+        {"game": "Ankeny vs Johnston (5A semi)", "pick": "Johnston (edge, No. 1 seed)", "confidence": 58}
+      ]
     }
   ]
 }
