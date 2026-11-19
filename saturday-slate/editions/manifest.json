@@ -72,6 +72,22 @@
         {"game": "Vikings @ Packers", "pick": "Packers 24-20", "confidence": 57},
         {"game": "Ankeny vs Johnston (5A semi)", "pick": "Johnston (edge, No. 1 seed)", "confidence": 58}
       ]
+    },
+    {
+      "date": "2026-11-19",
+      "week": "Week 12",
+      "weekend": "Nov 20-23, 2026",
+      "file": "2026-11-19-week12.html",
+      "note": "Iowa (8-2) routed Purdue 28-7 and HELD at No. 15 in the third CFP rankings (No. 13 AP); toughest remaining test is a road game at bowl-bound Illinois. Iowa State (5-5) rolled Cincinnati 41-13 and is one win from a bowl, Friday night at UCF. Vikings bounced back 30-10 over the Packers (7-2, three-way tie atop the NFC North) and headline Sunday Night Football in Mexico City vs the 8-1 49ers. Iowa HS: Ankeny's season ended in the 5A semifinals (lost 42-7 to Johnston, finished 9-3); Johnston vs defending champ Dowling Catholic for the 5A title (Nov 20). GOTW unbeaten No. 4 UCLA @ Michigan.",
+      "picks": [
+        {"game": "UCLA @ Michigan", "pick": "UCLA 23-20", "confidence": 54},
+        {"game": "Iowa @ Illinois", "pick": "Iowa 23-17", "confidence": 58},
+        {"game": "Ohio State @ Nebraska", "pick": "Ohio State 24-20", "confidence": 53},
+        {"game": "LSU @ Tennessee", "pick": "LSU 27-24", "confidence": 53},
+        {"game": "Iowa State @ UCF", "pick": "Iowa State 31-27", "confidence": 53},
+        {"game": "Vikings @ 49ers (Mexico City)", "pick": "49ers 24-21", "confidence": 54},
+        {"game": "Johnston vs Dowling (5A final)", "pick": "Johnston (edge)", "confidence": 54}
+      ]
     }
   ]
 }
