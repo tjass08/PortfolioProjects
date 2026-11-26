@@ -88,6 +88,21 @@
         {"game": "Vikings @ 49ers (Mexico City)", "pick": "49ers 24-21", "confidence": 54},
         {"game": "Johnston vs Dowling (5A final)", "pick": "Johnston (edge)", "confidence": 54}
       ]
+    },
+    {
+      "date": "2026-11-26",
+      "week": "Week 13",
+      "weekend": "Nov 27-30, 2026",
+      "file": "2026-11-26-week13.html",
+      "note": "Rivalry week. Iowa (9-2) beat Illinois 34-17 and climbed to No. 13 in the fourth CFP rankings (No. 13 AP) but sits just outside the 12-team bracket; hosts archrival Nebraska on Black Friday (Heroes Game) with its playoff life on the line. Iowa State (5-6) was routed 48-17 at UCF and must beat Kansas State in the finale to reach a bowl. Vikings routed 35-10 by the 49ers in Mexico City (7-3, third in the NFC North), host Atlanta. Iowa HS season complete: Dowling Catholic repeated as 5A champs, 31-24 over Johnston (Ankeny finished 9-3). GOTW Michigan @ Ohio State (The Game).",
+      "picks": [
+        {"game": "Nebraska @ Iowa (Heroes Game)", "pick": "Iowa 23-20", "confidence": 57},
+        {"game": "Michigan @ Ohio State (The Game)", "pick": "Ohio State 27-17", "confidence": 60},
+        {"game": "Washington @ Oregon", "pick": "Oregon 31-20", "confidence": 63},
+        {"game": "Auburn @ Alabama (Iron Bowl)", "pick": "Alabama 31-17", "confidence": 64},
+        {"game": "Kansas State @ Iowa State", "pick": "Iowa State 24-21", "confidence": 51},
+        {"game": "Falcons @ Vikings", "pick": "Vikings 27-20", "confidence": 58}
+      ]
     }
   ]
 }
